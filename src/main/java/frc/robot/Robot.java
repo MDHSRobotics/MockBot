@@ -61,11 +61,9 @@ public class Robot extends TimedRobot {
 
     // Subsystems
     public static MecDriver robotMecDriver;
-    public static Lighter robotLighter;
 
     public static Hatcher robotHatcher;
     public static Baller robotBaller;
-    public static Lever robotLever;
 
     public static BackPulley robotBackPulley;
     public static FrontPulley robotFrontPulley;
@@ -112,11 +110,9 @@ public class Robot extends TimedRobot {
 
         // Instantiate Subsystems FIFTH
         robotMecDriver = new MecDriver();
-        robotLighter = new Lighter();
 
         robotHatcher = new Hatcher();
         robotBaller = new Baller();
-        robotLever = new Lever();
 
         robotBackPulley = new BackPulley();
         robotFrontPulley = new FrontPulley();
