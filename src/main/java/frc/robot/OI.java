@@ -47,7 +47,7 @@ public class OI {
     public static void configureDriveXBoxButtons() {
         // Bind the "drive" xbox buttons to specific commands
         Devices.driveXboxBtnStart.whenPressed(new RobotGameModeDelivery());
-        Devices.driveXboxBtnBack.whenPressed(new RobotGameModeClimb());
+        Devices.driveXboxBtnBumperLeft.whenPressed(new RobotGameModeClimb());
         Devices.driveXboxBtnDpad.whileHeld(new MecDriveAlign());
         Devices.driveXboxBtnBumperLeft.whileHeld(new BallReset());
         Devices.driveXboxBtnBumperRight.whenPressed(new BallerToggleFlipperPosition());
@@ -61,8 +61,7 @@ public class OI {
     // Climb XBox Buttons
     public static void configureClimbXBoxButtons() {
         // Bind the "climb" xbox buttons to specific commands
-        Devices.climbXboxBtnStart.whenPressed(new RobotGameModeClimb());
-        Devices.climbXboxBtnBack.whenPressed(new RobotGameModeDelivery());
+        Devices.climbXboxBtnBumperLeft.whenPressed(new RobotGameModeClimb());
         Devices.climbXboxBtnX.whenPressed(new BackPulleyManual());
         Devices.climbXboxBtnB.whenPressed(new FrontPulleyManual());
     }

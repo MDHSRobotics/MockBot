@@ -100,7 +100,6 @@ public class Devices {
 
     public static final WPI_TalonSRX talonSrxLiftPulleyA = new WPI_TalonSRX(19); // 1 motor
     public static final WPI_TalonSRX talonSrxLiftPulleyB = new WPI_TalonSRX(14); // 1 motor
-    public static final WPI_TalonSRX talonSrxLiftPulleyC = new WPI_TalonSRX(15); // 1 motor
 
     public static final WPI_TalonSRX talonSrxFrontPulleyA = new WPI_TalonSRX(1); // 1 motor
     public static final WPI_TalonSRX talonSrxFrontPulleyB = new WPI_TalonSRX(2); // 1 motor
