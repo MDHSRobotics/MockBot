@@ -46,7 +46,7 @@ public class Devices {
     public static final JoystickButton driveXboxBtnY = new JoystickButton(driveXbox, 4);
     public static final JoystickButton driveXboxBtnBumperLeft = new JoystickButton(driveXbox, 5);
     public static final JoystickButton driveXboxBtnBumperRight = new JoystickButton(driveXbox, 6);
-    public static final JoystickButton driveXboxBtnBack = new JoystickButton(driveXbox, 7);
+    public static final JoystickButton driveXboxBtnLift = new JoystickButton(driveXbox, 7);
     public static final JoystickButton driveXboxBtnStart = new JoystickButton(driveXbox, 8);
     public static final JoystickButton driveXboxBtnStickLeft = new JoystickButton(driveXbox, 9);
     public static final JoystickButton driveXboxBtnStickRight = new JoystickButton(driveXbox, 10);
@@ -68,7 +68,7 @@ public class Devices {
     public static final JoystickButton climbXboxBtnY = new JoystickButton(climbXbox, 4);
     public static final JoystickButton climbXboxBtnBumperLeft = new JoystickButton(climbXbox, 5);
     public static final JoystickButton climbXboxBtnBumperRight = new JoystickButton(climbXbox, 6);
-    public static final JoystickButton climbXboxBtnBack = new JoystickButton(climbXbox, 7);
+    public static final JoystickButton climbXboxBtnLift = new JoystickButton(climbXbox, 7);
     public static final JoystickButton climbXboxBtnStart = new JoystickButton(climbXbox, 8);
     public static final JoystickButton climbXboxBtnStickLeft = new JoystickButton(climbXbox, 9);
     public static final JoystickButton climbXboxBtnStickRight = new JoystickButton(climbXbox, 10);
@@ -98,9 +98,9 @@ public class Devices {
     public static final WPI_TalonSRX talonSrxBaller = new WPI_TalonSRX(10); // 1 motor
     public static final WPI_TalonSRX talonSrxLever = new WPI_TalonSRX(12);
 
-    public static final WPI_TalonSRX talonSrxBackPulleyA = new WPI_TalonSRX(19); // 1 motor
-    public static final WPI_TalonSRX talonSrxBackPulleyB = new WPI_TalonSRX(14); // 1 motor
-    public static final WPI_TalonSRX talonSrxBackPulleyC = new WPI_TalonSRX(15); // 1 motor
+    public static final WPI_TalonSRX talonSrxLiftPulleyA = new WPI_TalonSRX(19); // 1 motor
+    public static final WPI_TalonSRX talonSrxLiftPulleyB = new WPI_TalonSRX(14); // 1 motor
+    public static final WPI_TalonSRX talonSrxLiftPulleyC = new WPI_TalonSRX(15); // 1 motor
 
     public static final WPI_TalonSRX talonSrxFrontPulleyA = new WPI_TalonSRX(1); // 1 motor
     public static final WPI_TalonSRX talonSrxFrontPulleyB = new WPI_TalonSRX(2); // 1 motor
@@ -111,7 +111,7 @@ public class Devices {
 
     // Constructor
     public Devices() {
-        // TODO: Investigate why these motor controllers have to be inverted. Are all TalonSRX Motor Controllers backwards?
+        // TODO: Investigate why these motor controllers have to be inverted. Are all TalonSRX Motor Controllers Lift
         talonSrxMecWheelFrontLeft.setInverted(true);
         talonSrxMecWheelRearLeft.setInverted(true);
         talonSrxMecWheelFrontRight.setInverted(true);
