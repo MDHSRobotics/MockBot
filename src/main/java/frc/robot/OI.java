@@ -5,6 +5,7 @@ import edu.wpi.first.wpilibj.GenericHID.Hand;
 
 import frc.robot.commands.instant.*;
 import frc.robot.commands.interactive.*;
+import frc.robot.commands.reactive.ClawWheelOpen;
 import frc.robot.consoles.Logger;
 import frc.robot.helpers.*;
 import frc.robot.Brain;
@@ -63,8 +64,9 @@ public class OI {
         // Bind the "climb" xbox buttons to specific commands
         Devices.climbXboxBtnStart.whenPressed(new RobotGameModeClimb());
         Devices.climbXboxBtnBack.whenPressed(new RobotGameModeDelivery());
-        Devices.climbXboxBtnX.whenPressed(new BackPulleyManual());
-        Devices.climbXboxBtnB.whenPressed(new FrontPulleyManual());
+
+        Devices.climbXboxBtnX.whenPressed(new ClawWheelOpen());
+        //Devices.climbXboxBtnB.whenPressed(new FrontPulleyManual());
     }
 
     //----------------------//
