@@ -14,7 +14,7 @@ public class BackPulleyManual extends Command {
     public BackPulleyManual() {
         Logger.setup("Constructing Command: BackPulleyManual...");
 
-        requires(Robot.robotBackPulley);
+        requires(Robot.robotLiftPulley);
     }
 
     @Override
@@ -25,7 +25,7 @@ public class BackPulleyManual extends Command {
     @Override
     protected void execute() {
         double speed = OI.getBackPulleyLiftSpeed();
-        Robot.robotBackPulley.setSpeed(speed);
+        Robot.robotLiftPulley.setSpeed(speed);
     }
 
     // This command continues until interrupted
@@ -36,12 +36,12 @@ public class BackPulleyManual extends Command {
 
     @Override
     protected void end() {
-        Logger.ending("Ending Command: BackPulleyManual...");
+        Logger.ending("Ending Command: LiftPulleyManual...");
     }
 
     @Override
     protected void interrupted() {
-        Logger.ending("Interrupting Command: BackPulleyManual...");
+        Logger.ending("Interrupting Command: LiftPulleyManual...");
     }
 
 }

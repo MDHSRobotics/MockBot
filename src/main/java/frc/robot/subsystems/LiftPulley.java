@@ -6,6 +6,7 @@ import frc.robot.commands.idle.LiftPulleyStop;
 import frc.robot.consoles.Logger;
 import frc.robot.Devices;
 
+
 public class LiftPulley extends Subsystem {
 
     private boolean m_talonsAreConnected = false;
@@ -24,11 +25,24 @@ public class LiftPulley extends Subsystem {
                 // TODO: Value of "1" needs to be replaced
                 Devices.talonSrxLiftPulleyA.configOpenloopRamp(1);
                 Devices.talonSrxLiftPulleyB.configOpenloopRamp(1);
-            
+                
+        
 
         }
     }
+    
+    @Override
+    public void initDefaultCommand() {
+        Logger.setup("Initializing Pulley DefaultCommand -> LiftPulleyStop...");
 
+        setDefaultCommand(new LiftPulleyStop());
 
+    
+    }
+    public void setSpeed(double speed) {
+        if (!m_talonsAreConnected) return;
+        Devices.talonSrxLiftPulleyA.set(speed);
+        Devices.talonSrxLiftPulleyB.set(speed);
+    }
 
 }
