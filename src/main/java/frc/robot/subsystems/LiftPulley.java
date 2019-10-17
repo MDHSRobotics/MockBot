@@ -21,6 +21,7 @@ public class LiftPulley extends Subsystem {
             Logger.error("Pulley talons not all connected! Disabling LiftPulley...");
             }
             else {
+                // TODO: Value of "1" needs to be replaced
                 Devices.talonSrxLiftPulleyA.configOpenloopRamp(1);
                 Devices.talonSrxLiftPulleyB.configOpenloopRamp(1);
             
