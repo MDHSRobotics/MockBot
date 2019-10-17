@@ -8,23 +8,23 @@ import frc.robot.OI;
 import frc.robot.Robot;
 
 
-// This command lifts the BackPulley manually
-public class BackPulleyManual extends Command {
+// This command lifts the LiftPulley manually
+public class LiftPulleyManual extends Command {
 
-    public BackPulleyManual() {
-        Logger.setup("Constructing Command: BackPulleyManual...");
+    public LiftPulleyManual() {
+        Logger.setup("Constructing Command: LiftPulleyManual...");
 
         requires(Robot.robotLiftPulley);
     }
 
     @Override
     protected void initialize() {
-        Logger.action("Initializing Command: BackPulleyManual...");
+        Logger.action("Initializing Command: LiftPulleyManual...");
     }
 
     @Override
     protected void execute() {
-        double speed = OI.getBackPulleyLiftSpeed();
+        double speed = OI.getLiftPulleyLiftSpeed();
         Robot.robotLiftPulley.setSpeed(speed);
     }
 

@@ -62,8 +62,7 @@ public class OI {
     public static void configureClimbXBoxButtons() {
         // Bind the "climb" xbox buttons to specific commands
         Devices.climbXboxBtnBumperLeft.whenPressed(new RobotGameModeClimb());
-        Devices.climbXboxBtnX.whenPressed(new BackPulleyManual());
-        Devices.climbXboxBtnB.whenPressed(new FrontPulleyManual());
+        Devices.climbXboxBtnX.whenPressed(new LiftPulleyManual());
     }
 
     //----------------------//
@@ -248,14 +247,8 @@ public class OI {
     //----------------------//
 
     // Gets the Pulley speed from the climb xbox controller's Left Thumbstick Y axis position
-    public static double getBackPulleyLiftSpeed() {
+    public static double getLiftPulleyLiftSpeed() {
         double y = Devices.climbXbox.getY(Hand.kLeft);
-        return y;
-    }
-
-    // Gets the Pulley speed from the climb xbox controller's Right Thumbstick Y axis position
-    public static double getFrontPulleyLiftSpeed() {
-        double y = Devices.climbXbox.getY(Hand.kRight);
         return y;
     }
 

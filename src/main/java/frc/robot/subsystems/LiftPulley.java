@@ -27,7 +27,6 @@ public class LiftPulley extends Subsystem {
 
         }
     }
-    
     @Override
     public void initDefaultCommand() {
         Logger.setup("Initializing Pulley DefaultCommand -> LiftPulleyStop...");
