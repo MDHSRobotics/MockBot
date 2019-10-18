@@ -104,6 +104,9 @@ public class Brain {
     public static double pulleyHAB2DistanceDefault = 120;
     public static double pulleyHAB3DistanceDefault = 240;
 
+    // Subsystem - Lift Pulley
+    public static double liftPulleyDistanceDefault = 100; // TODO: Find real distance
+
     //---------------------//
     // NetworkTableEntries //
     //---------------------//
@@ -172,7 +175,7 @@ public class Brain {
     // Distance 
     public static NetworkTableEntry distanceEntry;
 
-    // Subsystem - MecDriver
+    // Subsystem - MecDriver 
     public static NetworkTableEntry driveOrientationEntry;
     public static NetworkTableEntry alignFrontMagnitudeEntry;
     public static NetworkTableEntry alignSideMagnitudeEntry;
@@ -187,14 +190,17 @@ public class Brain {
     public static NetworkTableEntry hatchOpenAngleEntry;
     public static NetworkTableEntry hatchCloseAngleEntry;
 
-    // Subystem - Arm
+    // Subsystem - Arm
     public static NetworkTableEntry armHAB2AngleEntry;
     public static NetworkTableEntry armHAB3AngleEntry;
     public static NetworkTableEntry armFullAngleEntry;
 
-    // Subystem - Pulley
+    // Subsystem - Pulley
     public static NetworkTableEntry pulleyHAB2DistanceEntry;
     public static NetworkTableEntry pulleyHAB3DistanceEntry;
+
+    // Subsystem - Lift Pulley
+    public static NetworkTableEntry liftPulleyDistanceEntry;
 
     //---------//
     // Setters //
@@ -507,4 +513,7 @@ public class Brain {
         return pulleyHAB3DistanceEntry.getDouble(pulleyHAB3DistanceDefault);
     }
 
+    public static double getLiftPulleyDistance() {
+        return liftPulleyDistanceEntry.getDouble(liftPulleyDistanceDefault);
+    }
 }

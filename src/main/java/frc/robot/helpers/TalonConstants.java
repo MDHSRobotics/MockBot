@@ -53,9 +53,9 @@ public class TalonConstants {
     }
 
     // Computes the encoder ticks based on the desired distance in inches for a given winch diameter and gearbox ratio
-    public static double translateDistanceToTicks(double distance, double spoolDiameter, double gearRatio){
-        double spoolCircumerence = Math.PI * spoolDiameter;
-        double rotationCountGS = distance / spoolCircumerence; // Amount of rotations on the gearbox shaft
+    public static double translateDistanceToTicks(double distance, double sprocketDiameter, double gearRatio){
+        double sprocketCircumerence = Math.PI * sprocketDiameter;
+        double rotationCountGS = distance / sprocketCircumerence; // Amount of rotations on the gearbox shaft
         double rotationCountMS = rotationCountGS * gearRatio; // Amount of rotations on the motor shaft
         double rotationTicks = rotationCountMS * TalonConstants.ENCODER_TPR; // Amount of ticks to rotate
         return rotationTicks;
