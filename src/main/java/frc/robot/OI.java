@@ -65,6 +65,7 @@ public class OI {
         Devices.climbXboxBtnBack.whenPressed(new RobotGameModeDelivery());
         Devices.climbXboxBtnX.whenPressed(new BackPulleyManual());
         Devices.climbXboxBtnB.whenPressed(new FrontPulleyManual());
+        // TODO bind lift raise and lower commands to the triggers
     }
 
     //----------------------//
@@ -260,8 +261,14 @@ public class OI {
         return y;
     }
 
-    // Gets the Pulley speed from the drive Xbox controller's Right Thumbstick Y
+    // Gets the Ball toss speed from the climb Xbox controller's right trigger
     public static double getBallSpeed() {
+        double triggerAxis = Devices.driveXbox.getTriggerAxis(Hand.kRight);
+        return triggerAxis;
+    }
+
+    // Gets the Lift speed from the climb Xbox controller's right trigger
+    public static double getLiftSpeed() {
         double triggerAxis = Devices.driveXbox.getTriggerAxis(Hand.kRight);
         return triggerAxis;
     }

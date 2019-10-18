@@ -64,6 +64,7 @@ public class Robot extends TimedRobot {
 
     public static Hatcher robotHatcher;
     public static Baller robotBaller;
+    public static JuanLift robotJuanLift;
 
     public static BackPulley robotBackPulley;
     public static FrontPulley robotFrontPulley;
@@ -116,6 +117,8 @@ public class Robot extends TimedRobot {
 
         robotBackPulley = new BackPulley();
         robotFrontPulley = new FrontPulley();
+
+        robotJuanLift = new JuanLift();
 
         // Add the commands to the SmartDashboard
         Logger.setup("Adding AutoModes to SmartDashboard...");

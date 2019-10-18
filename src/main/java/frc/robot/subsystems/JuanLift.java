@@ -4,14 +4,12 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.SensorCollection;
-import edu.wpi.first.wpilibj.command.Subsystem;
 
-import frc.robot.commands.reactive.BallHold;
+import edu.wpi.first.wpilibj.command.Subsystem;
+import frc.robot.Devices;
+import frc.robot.commands.interactive.ReadLiftTriggers;
 import frc.robot.consoles.Logger;
 import frc.robot.helpers.TalonConstants;
-import frc.robot.Brain;
-import frc.robot.Devices;
-
 
 // JuanLift subsystem, for holding and tossing cargo balls
 public class JuanLift extends Subsystem {
@@ -82,7 +80,7 @@ public class JuanLift extends Subsystem {
     public void initDefaultCommand() {
         Logger.setup("Initializing JuanLift DefaultCommand");
 
-        setDefaultCommand(new BallHold()); //TODO change the command
+        setDefaultCommand(new ReadLiftTriggers()); //TODO change the command
     }
 
     // Stop the JuanLift motors
@@ -124,6 +122,11 @@ public class JuanLift extends Subsystem {
     public int getPosition() {
         if (!m_talonsAreConnected) return 0;
         return Devices.talonSrxLiftA.getSelectedSensorPosition();
+    }
+
+    public double getTriggerValue(double value) {
+        if (!m_talonsAreConnected) return 0;
+        return value;
     }
 
     //---------//
