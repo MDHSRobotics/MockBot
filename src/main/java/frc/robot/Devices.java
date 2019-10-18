@@ -14,7 +14,7 @@ import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.helpers.DPad;
 import frc.robot.helpers.DPadButton;
 import frc.robot.helpers.DPadButton.Direction;
-
+import Robot.robotjuanclawopen;
 
 // This class contains singleton constants, for human interface devices and robot components, and mappings for each
 public class Devices {
@@ -94,11 +94,11 @@ public class Devices {
     public static final WPI_TalonSRX talonSrxMecWheelFrontRight = new WPI_TalonSRX(6); // 1 motor
     public static final WPI_TalonSRX talonSrxMecWheelRearRight = new WPI_TalonSRX(8); // 1 motor
 
-    public static final WPI_TalonSRX talonSrxHatcher = new WPI_TalonSRX(9); // 1 motor
+    public static final WPI_TalonSRX talonSrxClawWheel = new WPI_TalonSRX(9); // 1 motor
     public static final WPI_TalonSRX talonSrxBaller = new WPI_TalonSRX(10); // 1 motor
     public static final WPI_TalonSRX talonSrxLever = new WPI_TalonSRX(12);
 
-    //public static final WPI_TalonSRX talonSrxRightClawWheel = new WPI_TalonSRX(3); // 1 motor
+    public static final WPI_TalonSRX talonSrxRightClawWheel = new WPI_TalonSRX(3); // 1 motor
     public static final WPI_TalonSRX talonSrxLeftClawWheel = new WPI_TalonSRX(3); // 1 motor
 
     // Drives
