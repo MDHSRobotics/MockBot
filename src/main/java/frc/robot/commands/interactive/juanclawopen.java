@@ -22,6 +22,50 @@ public class juanclawopen extends Subsystem {
     // The Talon connection state, to prevent watchdog warnings during testing
     private boolean m_talonsAreConnected = false;
 
+   public juanclawopen() {
+        Logger.setup("Constructing Subsystem: juanclawopen...");
+
+        m_talonsAreConnected = Devices.isConnected(Devices.talonSrxjuanclawopen);
+        if (!m_talonsAreConnected) {
+            Logger.error("juanclawopen talons not all connected! Disabling juanclawopen...");
+        }
+        else {
+            Devices.talonSrxjuanclawopen.configFactoryDefault();
+
+            Devices.talonSrxjuanclawopen.configPeakCurrentDuration(TalonConstants.PEAK_AMPERAGE_DURATION, TalonConstants.TIMEOUT_MS);
+            Devices.talonSrxjuanclawopen.configPeakCurrentLimit(TalonConstants.PEAK_AMPERAGE, TalonConstants.TIMEOUT_MS);
+            Devices.talonSrxjuanclawopen.configContinuousCurrentLimit(TalonConstants.CONTINUOUS_AMPERAGE_LIMIT, TalonConstants.TIMEOUT_MS);
+
+            Devices.talonSrxjuanclawopen.configNominalOutputForward(0);
+            Devices.talonSrxjuanclawopen.configNominalOutputReverse(0);
+            Devices.talonSrxjuanclawopen.configPeakOutputForward(0.5);
+            Devices.talonSrxjuanclawopen.configPeakOutputReverse(-0.5);
+
+            Devices.talonSrxjuanclawopen.configMotionAcceleration(3000, TalonConstants.TIMEOUT_MS);
+            Devices.talonSrxjuanclawopen.configMotionCruiseVelocity(8000, TalonConstants.TIMEOUT_MS);
+
+            // Config TalonSRX Redline encoder
+            Devices.talonSrxjuanclawopen.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, TalonConstants.PID_LOOP_PRIMARY, TalonConstants.TIMEOUT_MS);
+            Devices.talonSrxjuanclawopen.setSensorPhase(SENSOR_PHASE);
+            Devices.talonSrxjuanclawopen.setInverted(MOTOR_INVERT);
+            Devices.talonSrxjuanclawopen.configAllowableClosedloopError(0, TalonConstants.PID_LOOP_PRIMARY, TalonConstants.TIMEOUT_MS);
+
+            Devices.talonSrxjuanclawopen.config_kF(TalonConstants.PID_LOOP_PRIMARY, 0.0, TalonConstants.TIMEOUT_MS);
+            Devices.talonSrxjuanclawopen.config_kP(TalonConstants.PID_LOOP_PRIMARY, 0.32, TalonConstants.TIMEOUT_MS);
+            Devices.talonSrxjuanclawopen.config_kI(TalonConstants.PID_LOOP_PRIMARY, 0.0, TalonConstants.TIMEOUT_MS);
+            Devices.talonSrxjuanclawopen.config_kD(TalonConstants.PID_LOOP_PRIMARY, 0.0, TalonConstants.TIMEOUT_MS);
+
+            // Initialize current encoder position as zero 
+            Devices.talonSrxjuanclawopen.setSelectedSensorPosition(0, TalonConstants.PID_LOOP_PRIMARY, TalonConstants.TIMEOUT_MS);
+            SensorCollection sensorCol = Devices.talonSrxjuanclawopen.getSensorCollection();
+            int absolutePosition = sensorCol.getPulseWidthPosition();
+            absolutePosition &= 0xFFF;
+            if (SENSOR_PHASE) absolutePosition *= -1;
+            if (MOTOR_INVERT) absolutePosition *= -1;
+            // Set the quadrature (relative) sensor to match absolute
+            Devices.talonSrxjuanclawopen.setSelectedSensorPosition(absolutePosition, TalonConstants.PID_LOOP_PRIMARY, TalonConstants.TIMEOUT_MS);
+        }
+    }
 
 // To do: Button-Map commands for opening/closing bumpers and toggling wheels
 // to do: claw close: public static final JoystickButton climbXboxBtnBumperLeft = new JoystickButton(climbXbox, 5);

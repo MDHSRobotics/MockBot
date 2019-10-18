@@ -33,7 +33,7 @@ public class ClawWheel extends Subsystem {
         }
     }
 if (!m_talonsAreConnected) {
-            Logger.error("Hatcher talons not all connected! Disabling Hatcher...");
+            Logger.error("ClawWheel talons not all connected! Disabling ClawWheel...");
         }
         else {
             Devices.talonSrxHatcher.configFactoryDefault();
@@ -77,7 +77,7 @@ if (!m_talonsAreConnected) {
     public void initDefaultCommand() {
         Logger.setup("Initializing ClawWheel DefaultCommand -> ClawWheelOpen...");
 
-        setDefaultCommand(new HatcherStop());
+        setDefaultCommand(new ClawWheelStop());
     }
 
     // Stop the Hatcher claw motor

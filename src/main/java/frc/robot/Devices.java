@@ -104,6 +104,27 @@ public class Devices {
     // Drives
     public static MecanumDrive mecDrive = null;
 
+    //The Claw
+    public static final talonSrxjuanclawopen.configFactoryDefault();
+    public static final talonSrxjuanclawopen.configPeakCurrentDuration(TalonConstants.PEAK_AMPERAGE_DURATION, TalonConstants.TIMEOUT_MS);
+    public static final talonSrxjuanclawopen.configPeakCurrentLimit(TalonConstants.PEAK_AMPERAGE, TalonConstants.TIMEOUT_MS);
+    public static final talonSrxjuanclawopen.configContinuousCurrentLimit(TalonConstants.CONTINUOUS_AMPERAGE_LIMIT, TalonConstants.TIMEOUT_MS);
+    public static final talonSrxHatcher.setSelectedSensorPosition(0, TalonConstants.PID_LOOP_PRIMARY, TalonConstants.TIMEOUT_MS);
+    public static final talonSrxjuanclawopen.configNominalOutputForward(0);
+    public static final talonSrxjuanclawopen.configNominalOutputReverse(0);
+    public static final talonSrxjuanclawopen.configPeakOutputForward(0.5);
+    public static final talonSrxjuanclawopen.configPeakOutputReverse(-0.5);
+    public static final talonSrxjuanclawopen.configMotionAcceleration(3000, TalonConstants.TIMEOUT_MS);
+    public static final talonSrxjuanclawopen.configMotionCruiseVelocity(8000, TalonConstants.TIMEOUT_MS);
+    public static final talonSrxjuanclawopen.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, TalonConstants.PID_LOOP_PRIMARY, TalonConstants.TIMEOUT_MS);
+    public static final talonSrxjuanclawopen.setSensorPhase(SENSOR_PHASE);
+    public static final talonSrxjuanclawopen.setInverted(MOTOR_INVERT);
+    public static final talonSrxjuanclawopen.configAllowableClosedloopError(0, TalonConstants.PID_LOOP_PRIMARY, TalonConstants.TIMEOUT_MS);
+    public static final talonSrxjuanclawopen.config_kF(TalonConstants.PID_LOOP_PRIMARY, 0.0, TalonConstants.TIMEOUT_MS);
+    public static final talonSrxjuanclawopen.config_kP(TalonConstants.PID_LOOP_PRIMARY, 0.32, TalonConstants.TIMEOUT_MS);
+    public static final talonSrxjuanclawopen.config_kI(TalonConstants.PID_LOOP_PRIMARY, 0.0, TalonConstants.TIMEOUT_MS);
+    public static final talonSrxjuanclawopen.config_kD(TalonConstants.PID_LOOP_PRIMARY, 0.0, TalonConstants.TIMEOUT_MS);
+
     // Constructor
     public Devices() {
         // TODO: Investigate why these motor controllers have to be inverted. Are all TalonSRX Motor Controllers backwards?
