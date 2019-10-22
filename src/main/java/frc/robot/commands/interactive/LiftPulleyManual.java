@@ -25,7 +25,7 @@ public class LiftPulleyManual extends Command {
     @Override
     protected void execute() {
         double speed = OI.getLiftPulleyLiftSpeed();
-        Robot.robotLiftPulley.setSpeed(speed);
+        Robot.robotLiftPulley.setManualSpeed(speed);
     }
 
     // This command continues until interrupted

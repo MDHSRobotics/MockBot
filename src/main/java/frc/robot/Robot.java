@@ -65,7 +65,6 @@ public class Robot extends TimedRobot {
     public static Hatcher robotHatcher;
     public static Baller robotBaller;
 
-    public static FrontPulley robotFrontPulley;
     public static LiftPulley robotLiftPulley;
 
     // Sensors
@@ -114,7 +113,6 @@ public class Robot extends TimedRobot {
         robotHatcher = new Hatcher();
         robotBaller = new Baller();
 
-        robotFrontPulley = new FrontPulley();
         robotLiftPulley = new LiftPulley();
 
         // Add the commands to the SmartDashboard

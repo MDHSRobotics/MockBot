@@ -30,13 +30,13 @@ public class LiftPulley extends Subsystem {
 
         Logger.setup("Constructing Subsystem: LiftPulley...");
 
-        boolean talonAIsConnected = Devices.isConnected(Devices.talonSrxLiftPulleyA);
+        boolean talonAIsConnected = Devices.isConnected(Devices.talonSrxLiftPulley);
         m_talonsAreConnected = (talonAIsConnected);
         if (!m_talonsAreConnected) {
             Logger.error("Pulley talons not all connected! Disabling LiftPulley...");
             }
             else {
-                Devices.talonSrxLiftPulleyA.configFactoryDefault();
+                Devices.talonSrxLiftPulley.configFactoryDefault();
 
             Devices.talonSrxLiftPulley.configPeakCurrentDuration(TalonConstants.PEAK_AMPERAGE_DURATION, TalonConstants.TIMEOUT_MS);
             Devices.talonSrxLiftPulley.configPeakCurrentLimit(TalonConstants.PEAK_AMPERAGE, TalonConstants.TIMEOUT_MS);
@@ -84,12 +84,16 @@ public class LiftPulley extends Subsystem {
     public void setSpeed() {
         double distance = Brain.getLiftPulleyDistance();
         double ticks = TalonConstants.translateDistanceToTicks(distance, SPROCKET_DIAMETER, GEAR_RATIO);
-        Logger.info("Hatcher -> Motion Magic to OPEN: " + angle + " angle, " + ticks + " ticks");
+        Logger.info("Hatcher -> Motion Magic to OPEN: " + distance + " angle, " + ticks + " ticks");
 
         if (!m_talonsAreConnected) return;
         Devices.talonSrxLiftPulley.set(ControlMode.MotionMagic, ticks);
     }
-
+    public void setManualSpeed(double speed) {
+        
+        if (!m_talonsAreConnected) return;
+        Devices.talonSrxLiftPulley.set(speed);
+    }
     // Stop motors
     public void stop() {
         if (!m_talonsAreConnected) return;
