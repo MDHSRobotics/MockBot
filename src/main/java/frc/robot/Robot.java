@@ -54,6 +54,8 @@ public class Robot extends TimedRobot {
     public static DeliveryMode robotDeliveryMode = DeliveryMode.GET_HATCH;
     // Climb Mode tells the climb commands which system needs to be activated next
     public static ClimbMode robotClimbMode = ClimbMode.HAB2;
+    //value that switches the drive systems (1 - Omni, 2 - Tank, Default - Mecanum)
+    public static int driveMode = 1;
 
     // Core Classes
     public static Logger robotLogger;
@@ -61,6 +63,7 @@ public class Robot extends TimedRobot {
 
     // Subsystems
     public static MecDriver robotMecDriver;
+    public static OmniDriver robotOmniDriver;
 
     public static Hatcher robotHatcher;
     public static Baller robotBaller;
@@ -109,7 +112,15 @@ public class Robot extends TimedRobot {
         if (!Devices.gyro.isConnected()) Logger.error("Gyro not connected!");
 
         // Instantiate Subsystems FIFTH
-        robotMecDriver = new MecDriver();
+        switch(driveMode) {
+            case 1:
+                robotOmniDriver = new OmniDriver();
+            case 2:
+                //TODO add robotTankDriver
+            default:
+                robotMecDriver = new MecDriver();
+        }
+        
 
         robotHatcher = new Hatcher();
         robotBaller = new Baller();

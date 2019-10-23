@@ -99,6 +99,20 @@ public class OI {
         }
     }
 
+    // Determines the arcade movement (forward/backward speed, rotation speed, square inputs)
+    // from the active control stick position(s)
+    public static ArcadeMovement getArcadeMovement(boolean isYflipped) {
+        ControlStick cStick = Brain.getControlStick();
+        switch (cStick) {
+            case JOYSTICK:
+                return getArcadeMovementFromJoystick(isYflipped);
+            case XBOX:
+                return getArcadeMovementFromThumbsticks(isYflipped);
+            default:
+                return null;
+        }
+    }
+
     //----------//
     // Joystick //
     //----------//
@@ -119,6 +133,15 @@ public class OI {
         PolarMovement move = new PolarMovement(pos.xPosition, pos.yPosition, pos.zPosition);
         return move;
     }
+
+    // Determines the arcade movement (magnitude, rotation, square inputs)
+    // from the current joystick position
+    public static ArcadeMovement getArcadeMovementFromJoystick(boolean isYflipped) {
+        JoystickPosition pos = getJoystickPosition(isYflipped);
+        ArcadeMovement move = new ArcadeMovement(pos.xPosition, pos.zPosition, false);
+        return move;
+    }
+
 
     // Gets the joystick position and applies user-determined orientation, deadzones, and sensitivity
     private static JoystickPosition getJoystickPosition(boolean isYflipped) {
@@ -188,6 +211,14 @@ public class OI {
     public static PolarMovement getPolarMovementFromThumbsticks(boolean isYleftFlipped) {
         ThumbStickPosition pos = getThumbstickPosition(isYleftFlipped);
         PolarMovement move = new PolarMovement(pos.yLeftPosition, pos.xLeftPosition, pos.xRightPosition);
+        return move;
+    }
+
+    // Determines the arcade movement (magnitude, rotation, square inputs)
+    // from the current xbox thumbstick positions
+    public static ArcadeMovement getArcadeMovementFromThumbsticks(boolean isYleftFlipped) {
+        ThumbStickPosition pos = getThumbstickPosition(isYleftFlipped);
+        ArcadeMovement move = new ArcadeMovement(pos.yLeftPosition, pos.xRightPosition, false);
         return move;
     }
 
