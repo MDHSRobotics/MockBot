@@ -105,7 +105,7 @@ public class Brain {
     public static double pulleyHAB3DistanceDefault = 240;
 
     // Subsystem - Lift Pulley
-    public static double liftPulleyDistanceDefault = 100; // TODO: Find real distance
+    public static double liftPulleyDistanceDefault = 24; // TODO: Find real distance
 
     //---------------------//
     // NetworkTableEntries //

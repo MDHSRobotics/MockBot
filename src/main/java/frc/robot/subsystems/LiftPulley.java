@@ -15,7 +15,7 @@ import frc.robot.Devices;
 
 public class LiftPulley extends Subsystem {
 
-    private final double SPROCKET_DIAMETER = 10;
+    private final double SPROCKET_DIAMETER = 4;
 
     // Position constants
     private final double GEAR_RATIO = 16;

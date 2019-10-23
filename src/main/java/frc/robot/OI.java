@@ -60,13 +60,6 @@ public class OI {
         // Devices.driveXboxBtnY.whileHeld(new MecDriveSlowOrbitOutwardClockwise());
     }
 
-    // Climb XBox Buttons
-    public static void configureClimbXBoxButtons() {
-        // Bind the "climb" xbox buttons to specific commands
-        Devices.climbXboxBtnBumperLeft.whenPressed(new RobotGameModeClimb());
-        Devices.climbXboxBtnX.whenPressed(new LiftPulleyManual());
-    }
-
     //----------------------//
     // Active Control Stick //
     //----------------------//
