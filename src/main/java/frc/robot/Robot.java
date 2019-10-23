@@ -61,10 +61,6 @@ public class Robot extends TimedRobot {
 
     // Subsystems
     public static MecDriver robotMecDriver;
-
-    public static Hatcher robotHatcher;
-    public static Baller robotBaller;
-
     public static LiftPulley robotLiftPulley;
 
     // Sensors
@@ -109,10 +105,6 @@ public class Robot extends TimedRobot {
 
         // Instantiate Subsystems FIFTH
         robotMecDriver = new MecDriver();
-
-        robotHatcher = new Hatcher();
-        robotBaller = new Baller();
-
         robotLiftPulley = new LiftPulley();
 
         // Add the commands to the SmartDashboard
@@ -130,7 +122,7 @@ public class Robot extends TimedRobot {
 
         // Check which controllers are plugged in
         driveXBoxConnected = Devices.isDriveXboxConnected();
-        climbXBoxConnected = Devices.isClimbXboxConnected();
+        // climbXBoxConnected = Devices.isClimbXboxConnected();
     }
 
     /**
@@ -154,13 +146,13 @@ public class Robot extends TimedRobot {
                 driveXBoxConnected = true;
             }
         }
-        if (!climbXBoxConnected) {
-            if (Devices.isClimbXboxConnected()) {
-                // Climb XBox was not previously plugged in but now it is so set up buttons
-                Logger.setup("Climb XBox controller detected and configured");
-                climbXBoxConnected = true;
-            }
-        }
+        // if (!climbXBoxConnected) {
+        //     if (Devices.isClimbXboxConnected()) {
+        //         // Climb XBox was not previously plugged in but now it is so set up buttons
+        //         Logger.setup("Climb XBox controller detected and configured");
+        //         climbXBoxConnected = true;
+        //     }
+        // }
     }
 
     /**

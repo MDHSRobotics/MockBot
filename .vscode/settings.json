@@ -11,5 +11,7 @@
     ".project": true
   },
   "wpilib.online": true,
-  "editor.detectIndentation": false
+"editor.detectIndentation": false,
+"java.codeGeneration.generateComments": true,
+"java.completion.guessMethodArguments": true
 }

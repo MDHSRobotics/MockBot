@@ -30,8 +30,8 @@ public class LiftPulley extends Subsystem {
 
         Logger.setup("Constructing Subsystem: LiftPulley...");
 
-        boolean talonAIsConnected = Devices.isConnected(Devices.talonSrxLiftPulley);
-        m_talonsAreConnected = (talonAIsConnected);
+        boolean talonIsConnected = Devices.isConnected(Devices.talonSrxLiftPulley);
+        m_talonsAreConnected = (talonIsConnected);
         if (!m_talonsAreConnected) {
             Logger.error("Pulley talons not all connected! Disabling LiftPulley...");
             }
@@ -71,6 +71,7 @@ public class LiftPulley extends Subsystem {
             // Set the quadrature (relative) sensor to match absolute
             Devices.talonSrxLiftPulley.setSelectedSensorPosition(absolutePosition, TalonConstants.PID_LOOP_PRIMARY, TalonConstants.TIMEOUT_MS);
         }
+        
     }
     
     @Override

@@ -88,22 +88,6 @@ public class Brain {
     public static double alignZSpeedMinimumDefault = .25;
     public static double alignZToleranceDefault = 10;
 
-    // Subsystem - Baller
-    public static double ballTossAngleDefault = 40;
-
-    // Subsystem - Hatcher
-    public static double hatchOpenAngleDefault = 45;
-    public static double hatchCloseAngleDefault = 75;
-
-    // Subsystem - Arm
-    public static double armHAB2AngleDefault = 55;
-    public static double armHAB3AngleDefault = 110;
-    public static double armFullAngleDefault = 220;
-
-    // Subsystem - Pulley
-    public static double pulleyHAB2DistanceDefault = 120;
-    public static double pulleyHAB3DistanceDefault = 240;
-
     // Subsystem - Lift Pulley
     public static double liftPulleyDistanceDefault = 24; // TODO: Find real distance
 
@@ -182,22 +166,6 @@ public class Brain {
     public static NetworkTableEntry alignZSensitivityEntry;
     public static NetworkTableEntry alignZSpeedMinimumEntry;
     public static NetworkTableEntry alignZToleranceEntry;
-
-    // Subsystem - Baller
-    public static NetworkTableEntry ballTossAngleEntry;
-
-    // Subsystem - Hatcher
-    public static NetworkTableEntry hatchOpenAngleEntry;
-    public static NetworkTableEntry hatchCloseAngleEntry;
-
-    // Subsystem - Arm
-    public static NetworkTableEntry armHAB2AngleEntry;
-    public static NetworkTableEntry armHAB3AngleEntry;
-    public static NetworkTableEntry armFullAngleEntry;
-
-    // Subsystem - Pulley
-    public static NetworkTableEntry pulleyHAB2DistanceEntry;
-    public static NetworkTableEntry pulleyHAB3DistanceEntry;
 
     // Subsystem - Lift Pulley
     public static NetworkTableEntry liftPulleyDistanceEntry;
@@ -477,42 +445,7 @@ public class Brain {
         return alignZToleranceEntry.getDouble(alignZToleranceDefault);
     }
 
-    // Subsystems - Baller
-    public static double getBallTossAngle() {
-        return ballTossAngleEntry.getDouble(ballTossAngleDefault);
-    }
-
-    // Subsystems - Hatcher
-    public static double getHatchOpenAngle() {
-        return hatchOpenAngleEntry.getDouble(hatchOpenAngleDefault);
-    }
-
-    public static double getHatchCloseAngle() {
-        return hatchCloseAngleEntry.getDouble(hatchCloseAngleDefault);
-    }
-
-    // Subystems - Arm
-    public static double getArmHAB2Angle() {
-        return armHAB2AngleEntry.getDouble(armHAB2AngleDefault);
-    }
-
-    public static double getArmHAB3Angle() {
-        return armHAB3AngleEntry.getDouble(armHAB3AngleDefault);
-    }
-
-    public static double getArmFullAngle() {
-        return armFullAngleEntry.getDouble(armFullAngleDefault);
-    }
-
-    // Subystems - Pulley
-    public static double getPulleyHAB2Distance() {
-        return pulleyHAB2DistanceEntry.getDouble(pulleyHAB2DistanceDefault);
-    }
-
-    public static double getPulleyHAB3Distance() {
-        return pulleyHAB3DistanceEntry.getDouble(pulleyHAB3DistanceDefault);
-    }
-
+    // Subsytems - Lift Pulley
     public static double getLiftPulleyDistance() {
         return liftPulleyDistanceEntry.getDouble(liftPulleyDistanceDefault);
     }

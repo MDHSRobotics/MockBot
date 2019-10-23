@@ -43,8 +43,6 @@ public class OI {
         Devices.driveXboxBtnStart.whenPressed(new RobotGameModeDelivery());
         Devices.driveXboxBtnBumperLeft.whenPressed(new RobotGameModeClimb());
         Devices.driveXboxBtnDpad.whileHeld(new MecDriveAlign());
-        Devices.driveXboxBtnBumperLeft.whileHeld(new BallReset());
-        Devices.driveXboxBtnBumperRight.whenPressed(new BallerToggleFlipperPosition());
         Devices.driveXboxBtnA.whenPressed(new LiftPulleyRaise());
         Devices.driveXboxBtnB.whenPressed(new LiftPulleyLower());
         // Test drive commands
@@ -239,12 +237,6 @@ public class OI {
     public static double getLiftPulleyLiftSpeed() {
         double y = Devices.climbXbox.getY(Hand.kLeft);
         return y;
-    }
-
-    // Gets the Pulley speed from the drive Xbox controller's Right Thumbstick Y
-    public static double getBallSpeed() {
-        double triggerAxis = Devices.driveXbox.getTriggerAxis(Hand.kRight);
-        return triggerAxis;
     }
 
 }

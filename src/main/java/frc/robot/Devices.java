@@ -94,10 +94,6 @@ public class Devices {
     public static final WPI_TalonSRX talonSrxMecWheelFrontRight = new WPI_TalonSRX(60); // 1 motor
     public static final WPI_TalonSRX talonSrxMecWheelRearRight = new WPI_TalonSRX(8); // 1 motor
 
-    public static final WPI_TalonSRX talonSrxHatcher = new WPI_TalonSRX(9); // 1 motor
-    public static final WPI_TalonSRX talonSrxBaller = new WPI_TalonSRX(10); // 1 motor
-    public static final WPI_TalonSRX talonSrxLever = new WPI_TalonSRX(12);
-
     public static final WPI_TalonSRX talonSrxLiftPulley = new WPI_TalonSRX(6); // 1 motor (19)
 
     // Drives
@@ -132,11 +128,6 @@ public class Devices {
     // Determine if the Drive XBox controller is connected
     public static boolean isDriveXboxConnected() {
         return isStickConnected(DRIVE_XBOX_STICK_NUM);
-    }
-
-    // Determine if the Climb XBox controller is connected
-    public static boolean isClimbXboxConnected() {
-        return isStickConnected(CLIMB_XBOX_STICK_NUM);
     }
 
 }
