@@ -49,14 +49,14 @@ public class ClawWheel extends Subsystem {
 
     public void openWheel() {
         if (!m_talonsAreConnected) return;
-        Devices.talonSrxLeftClawWheel.set(0.3);
-        Devices.talonSrxRightClawWheel.set(0.3);
+        Devices.talonSrxLeftClawWheel.set(0.1);
+        Devices.talonSrxRightClawWheel.set(0.1);
     }
 
     public void closeWheel() {
         if (!m_talonsAreConnected) return;
-        Devices.talonSrxLeftClawWheel.set(-0.3);
-        Devices.talonSrxRightClawWheel.set(-0.3);
+        Devices.talonSrxLeftClawWheel.set(-0.1);
+        Devices.talonSrxRightClawWheel.set(-0.1);
     }
 
 }
