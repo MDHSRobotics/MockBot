@@ -157,7 +157,6 @@ public class Robot extends TimedRobot {
         if (!climbXBoxConnected) {
             if (Devices.isClimbXboxConnected()) {
                 // Climb XBox was not previously plugged in but now it is so set up buttons
-                OI.configureClimbXBoxButtons();
                 Logger.setup("Climb XBox controller detected and configured");
                 climbXBoxConnected = true;
             }
