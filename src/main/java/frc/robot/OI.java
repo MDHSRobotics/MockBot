@@ -31,12 +31,6 @@ public class OI {
             configureDriveXBoxButtons();
         }
 
-        if (!Devices.isClimbXboxConnected()) {
-            Logger.error("Climb XBox controller not plugged in!");
-        }
-        else {
-            configureClimbXBoxButtons();
-        }
     }
 
     //-------------------------//
