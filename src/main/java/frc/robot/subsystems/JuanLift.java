@@ -7,7 +7,7 @@ import com.ctre.phoenix.motorcontrol.SensorCollection;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.Devices;
-import frc.robot.commands.interactive.ReadLiftTriggers;
+import frc.robot.commands.interactive.MoveLift;
 import frc.robot.consoles.Logger;
 import frc.robot.helpers.TalonConstants;
 
@@ -77,10 +77,10 @@ public class JuanLift extends Subsystem {
     }
 
     @Override
+    
     public void initDefaultCommand() {
         Logger.setup("Initializing JuanLift DefaultCommand");
-
-        setDefaultCommand(new ReadLiftTriggers()); //TODO change the command
+        setDefaultCommand(new MoveLift()); 
     }
 
     // Stop the JuanLift motors
@@ -112,6 +112,12 @@ public class JuanLift extends Subsystem {
         Devices.talonSrxLiftA.set(ControlMode.Position, LOWER_POSITION);
     }
 
+    // Set JuanLift's move speed
+    public void setMoveSpeed(double moveSpeed) {
+        if (!m_talonsAreConnected) return;
+        Devices.talonSrxLiftA.set(moveSpeed);
+    }
+
     // Get the current JuanLift lift motor velocity
     public int getVelocity() {
         if (!m_talonsAreConnected) return 0;
@@ -122,11 +128,6 @@ public class JuanLift extends Subsystem {
     public int getPosition() {
         if (!m_talonsAreConnected) return 0;
         return Devices.talonSrxLiftA.getSelectedSensorPosition();
-    }
-
-    public double getTriggerValue(double value) {
-        if (!m_talonsAreConnected) return 0;
-        return value;
     }
 
     //---------//

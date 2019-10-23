@@ -267,10 +267,12 @@ public class OI {
         return triggerAxis;
     }
 
-    // Gets the Lift speed from the climb Xbox controller's right trigger
+    // Gets the Lift speed from the climb Xbox controller's triggers
     public static double getLiftSpeed() {
-        double triggerAxis = Devices.driveXbox.getTriggerAxis(Hand.kRight);
-        return triggerAxis;
+        double triggerAxisRight = Devices.driveXbox.getTriggerAxis(Hand.kRight);
+        double triggerAxisLeft = Devices.driveXbox.getTriggerAxis(Hand.kLeft);
+        double TriggerAxisNet = triggerAxisRight - triggerAxisLeft;
+        return TriggerAxisNet;
     }
 
 }
