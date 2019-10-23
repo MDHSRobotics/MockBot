@@ -9,9 +9,9 @@ import frc.robot.Robot;
 
 
 // This command lifts the LiftPulley manually
-public class LiftPulleyManual extends Command {
+public class LiftPulleyLower extends Command {
 
-    public LiftPulleyManual() {
+    public LiftPulleyLower() {
         Logger.setup("Constructing Command: LiftPulleyManual...");
 
         requires(Robot.robotLiftPulley);
@@ -24,8 +24,7 @@ public class LiftPulleyManual extends Command {
 
     @Override
     protected void execute() {
-        double speed = OI.getLiftPulleyLiftSpeed();
-        Robot.robotLiftPulley.setManualSpeed(speed);
+        Robot.robotLiftPulley.lower();
     }
 
     // This command continues until interrupted

@@ -80,8 +80,8 @@ public class LiftPulley extends Subsystem {
         setDefaultCommand(new LiftPulleyStop());
     }
     
-    // Set motor speed
-    public void setSpeed() {
+    // Raises claw assembly to delivery height
+    public void raise() {
         double distance = Brain.getLiftPulleyDistance();
         double ticks = TalonConstants.translateDistanceToTicks(distance, SPROCKET_DIAMETER, GEAR_RATIO);
         Logger.info("Hatcher -> Motion Magic to OPEN: " + distance + " angle, " + ticks + " ticks");
@@ -89,11 +89,13 @@ public class LiftPulley extends Subsystem {
         if (!m_talonsAreConnected) return;
         Devices.talonSrxLiftPulley.set(ControlMode.MotionMagic, ticks);
     }
-    public void setManualSpeed(double speed) {
-        
+
+    // Lowers claw assembly to rest height
+    public void lower() {
         if (!m_talonsAreConnected) return;
-        Devices.talonSrxLiftPulley.set(speed);
+        Devices.talonSrxLiftPulley.set(ControlMode.MotionMagic, 0);
     }
+
     // Stop motors
     public void stop() {
         if (!m_talonsAreConnected) return;
