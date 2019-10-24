@@ -11,7 +11,7 @@ import frc.robot.commands.interactive.MoveLift;
 import frc.robot.consoles.Logger;
 import frc.robot.helpers.TalonConstants;
 
-// JuanLift subsystem, for holding and tossing cargo balls
+// JuanLift subsystem, for raising and lowering boxes
 public class JuanLift extends Subsystem {
 
     // Position constants
@@ -28,6 +28,7 @@ public class JuanLift extends Subsystem {
 
     public JuanLift() {
         Logger.setup("Constructing Subsystem: JuanLift...");
+        
 
         boolean talonAIsConnected = Devices.isConnected(Devices.talonSrxLiftA);
         boolean talonBIsConnected = Devices.isConnected(Devices.talonSrxLiftB);
@@ -92,7 +93,7 @@ public class JuanLift extends Subsystem {
 
     public void resetPosition() {
         if (!m_talonsAreConnected) return;
-        Devices.talonSrxLiftA.set(-0.2);
+        Devices.talonSrxLiftA.set(0);
         Devices.talonSrxLiftA.setSelectedSensorPosition(0);
     }
 
@@ -113,10 +114,10 @@ public class JuanLift extends Subsystem {
     }
 
     // Set JuanLift's move speed
-    public void setMoveSpeed(double moveSpeed) {
+    public void setMovePower(double movePower) {
         if (!m_talonsAreConnected) return;
-        Devices.talonSrxLiftA.set(moveSpeed);
-    }
+        Devices.talonSrxLiftA.set(movePower);
+    } // TODO set an encoder stop
 
     // Get the current JuanLift lift motor velocity
     public int getVelocity() {

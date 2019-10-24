@@ -25,8 +25,8 @@ public class MoveLift extends Command {
 
     @Override
     protected void execute() {
-        double moveSpeed = OI.getLiftSpeed();
-        Robot.robotJuanLift.setMoveSpeed(moveSpeed);
+        double movePower = OI.getLiftSpeed();
+        Robot.robotJuanLift.setMovePower(movePower);
     }
 
     // This command continues until interrupted
