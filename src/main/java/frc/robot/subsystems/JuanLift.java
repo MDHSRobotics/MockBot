@@ -116,7 +116,23 @@ public class JuanLift extends Subsystem {
     // Set JuanLift's move speed
     public void setMovePower(double movePower) {
         if (!m_talonsAreConnected) return;
-        Devices.talonSrxLiftA.set(movePower);
+        int currentPosition = getPosition();
+
+        // Check whether the move is up or down 
+        boolean upwardDirection = movePower > 0;
+        if (upwardDirection) {
+            // Going upward should not exceed upward limit
+            if(currentPosition <= RAISE_POSITION) {
+                Devices.talonSrxLiftA.set(movePower);
+            }
+        }
+        else {
+            // Going downward should not exceed lower limit
+            if (currentPosition >= LOWER_POSITION) { 
+                Devices.talonSrxLiftA.set(movePower);
+        }
+    }
+    
     } // TODO set an encoder stop
 
     // Get the current JuanLift lift motor velocity

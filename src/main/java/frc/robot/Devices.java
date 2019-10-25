@@ -106,8 +106,8 @@ public class Devices {
     public static final WPI_TalonSRX talonSrxFrontPulleyB = new WPI_TalonSRX(2); // 1 motor
     public static final WPI_TalonSRX talonSrxFrontPulleyC = new WPI_TalonSRX(13); // 1 motor
 
-    public static final WPI_TalonSRX talonSrxLiftA = new WPI_TalonSRX(6); // 1 motor
-    public static final WPI_TalonSRX talonSrxLiftB = new WPI_TalonSRX(3); // 1 motor
+    public static final WPI_TalonSRX talonSrxLiftA = new WPI_TalonSRX(3); // 1 motor
+    public static final WPI_TalonSRX talonSrxLiftB = new WPI_TalonSRX(21); // 1 motor
 
     // Drives
     public static MecanumDrive mecDrive = null;
