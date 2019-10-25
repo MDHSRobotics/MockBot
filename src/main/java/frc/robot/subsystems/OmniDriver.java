@@ -4,6 +4,7 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 import frc.robot.commands.interactive.OmniDriveArcade;
+import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import frc.robot.consoles.Logger;
 import frc.robot.sensors.Gyro;
 import frc.robot.sensors.Vision;
@@ -28,14 +29,29 @@ public class OmniDriver extends Subsystem {
     // The Talon connection state, to prevent watchdog warnings during testing
     private boolean m_talonsAreConnected = false;
 
+    //define the omniDrive
+    public static DifferentialDrive omniDrive = null;
+
     public OmniDriver() {
         Logger.setup("Constructing Subsystem: OmniDriver...");
 
+        //invert the motors
+        Devices.talonSrxOmniWheelFrontLeft.setInverted(true);
+        Devices.talonSrxOmniWheelRearLeft.setInverted(true);
+        Devices.talonSrxOmniWheelFrontRight.setInverted(true);
+        Devices.talonSrxOmniWheelRearRight.setInverted(true);
+
+        Devices.talonSrxOmniWheelRearLeft.follow(Devices.talonSrxOmniWheelFrontLeft);
+        Devices.talonSrxOmniWheelRearRight.follow(Devices.talonSrxOmniWheelFrontRight);
+
+        omniDrive = new DifferentialDrive(Devices.talonSrxOmniWheelFrontLeft,
+                                          Devices.talonSrxOmniWheelFrontRight);
+       
         // Configure wheel speed controllers
-        boolean talonFrontLeftIsConnected = Devices.isConnected(Devices.talonSrxMecWheelFrontLeft);
-        boolean talonRearLeftIsConnected = Devices.isConnected(Devices.talonSrxMecWheelRearLeft);
-        boolean talonFrontRightIsConnected = Devices.isConnected(Devices.talonSrxMecWheelFrontRight);
-        boolean talonRearRightIsConnected = Devices.isConnected(Devices.talonSrxMecWheelRearRight);
+        boolean talonFrontLeftIsConnected = Devices.isConnected(Devices.talonSrxOmniWheelFrontLeft);
+        boolean talonRearLeftIsConnected = Devices.isConnected(Devices.talonSrxOmniWheelRearLeft);
+        boolean talonFrontRightIsConnected = Devices.isConnected(Devices.talonSrxOmniWheelFrontRight);
+        boolean talonRearRightIsConnected = Devices.isConnected(Devices.talonSrxOmniWheelRearRight);
         m_talonsAreConnected = (talonFrontLeftIsConnected &&
                                 talonRearLeftIsConnected && 
                                 talonFrontRightIsConnected && 
@@ -45,10 +61,10 @@ public class OmniDriver extends Subsystem {
             Logger.error("OmniDriver talons not all connected! Disabling OmniDriver...");
         }
         else {
-            Devices.talonSrxMecWheelFrontLeft.configOpenloopRamp(SECONDS_FROM_NEUTRAL_TO_FULL, TIMEOUT_MS);
-            Devices.talonSrxMecWheelRearLeft.configOpenloopRamp(SECONDS_FROM_NEUTRAL_TO_FULL, TIMEOUT_MS);
-            Devices.talonSrxMecWheelFrontRight.configOpenloopRamp(SECONDS_FROM_NEUTRAL_TO_FULL, TIMEOUT_MS);
-            Devices.talonSrxMecWheelRearRight.configOpenloopRamp(SECONDS_FROM_NEUTRAL_TO_FULL, TIMEOUT_MS);
+            Devices.talonSrxOmniWheelFrontLeft.configOpenloopRamp(SECONDS_FROM_NEUTRAL_TO_FULL, TIMEOUT_MS);
+            Devices.talonSrxOmniWheelRearLeft.configOpenloopRamp(SECONDS_FROM_NEUTRAL_TO_FULL, TIMEOUT_MS);
+            Devices.talonSrxOmniWheelFrontRight.configOpenloopRamp(SECONDS_FROM_NEUTRAL_TO_FULL, TIMEOUT_MS);
+            Devices.talonSrxOmniWheelRearRight.configOpenloopRamp(SECONDS_FROM_NEUTRAL_TO_FULL, TIMEOUT_MS);
         }
     }
 
@@ -80,49 +96,35 @@ public class OmniDriver extends Subsystem {
     // Stop all the drive motors
     public void stop() {
         if (!m_talonsAreConnected) {
-            Devices.omniDrive.feed();
+            omniDrive.feed();
             return;
         }
 
-        Devices.omniDrive.stopMotor();
-    }
-
-    // Drive with just the front two wheels at the given speed
-    public void frontWheelDrive(double speed){
-        if (!m_talonsAreConnected) {
-            Devices.omniDrive.feed();
-            return;
-        }
-
-        Devices.talonSrxMecWheelFrontLeft.set(speed);
-        Devices.talonSrxMecWheelFrontRight.set(speed);
-        Devices.talonSrxMecWheelRearLeft.set(0);
-        Devices.talonSrxMecWheelRearRight.set(0);
-        Devices.omniDrive.feed();
+        omniDrive.stopMotor();
     }
 
     // Drive straight at the given speed
-    public void driveStraight(double speed, double rotation) {
+    public void driveStraight(double speed) {
         if (!m_talonsAreConnected) {
-            Devices.omniDrive.feed();
+            omniDrive.feed();
             return;
         }
 
-        Devices.omniDrive.arcadeDrive(speed, rotation, false);
+        omniDrive.arcadeDrive(speed, 0, false);
     }
 
     // Rotate at the given speed
-    public void rotate(double speed, double rotation) {
+    public void rotate(double rotation) {
         if (!m_talonsAreConnected) {
-            Devices.omniDrive.feed();
+            omniDrive.feed();
             return;
         }
 
-        Devices.omniDrive.arcadeDrive(speed, rotation, false);
+        omniDrive.arcadeDrive(0, rotation, false);
     }
 
     public void arcadeDrive(double speed, double rotation, boolean squareInputs) {
-        arcadeDrive(speed, rotation, squareInputs);
+        omniDrive.arcadeDrive(speed, rotation, squareInputs);
     }
 
 }

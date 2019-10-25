@@ -4,8 +4,6 @@ package frc.robot;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
-import edu.wpi.first.wpilibj.drive.MecanumDrive;
-import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.Relay;
@@ -95,6 +93,11 @@ public class Devices {
     public static final WPI_TalonSRX talonSrxMecWheelFrontRight = new WPI_TalonSRX(6); // 1 motor
     public static final WPI_TalonSRX talonSrxMecWheelRearRight = new WPI_TalonSRX(8); // 1 motor
 
+    public static final WPI_TalonSRX talonSrxOmniWheelFrontLeft = new WPI_TalonSRX(5); // 1 motor
+    public static final WPI_TalonSRX talonSrxOmniWheelRearLeft = new WPI_TalonSRX(7); // 1 motor
+    public static final WPI_TalonSRX talonSrxOmniWheelFrontRight = new WPI_TalonSRX(6); // 1 motor
+    public static final WPI_TalonSRX talonSrxOmniWheelRearRight = new WPI_TalonSRX(8); // 1 motor
+
     public static final WPI_TalonSRX talonSrxHatcher = new WPI_TalonSRX(9); // 1 motor
     public static final WPI_TalonSRX talonSrxBaller = new WPI_TalonSRX(10); // 1 motor
     public static final WPI_TalonSRX talonSrxLever = new WPI_TalonSRX(12);
@@ -107,21 +110,8 @@ public class Devices {
     public static final WPI_TalonSRX talonSrxFrontPulleyB = new WPI_TalonSRX(2); // 1 motor
     public static final WPI_TalonSRX talonSrxFrontPulleyC = new WPI_TalonSRX(13); // 1 motor
 
-    // Drives
-    public static MecanumDrive mecDrive = null;
-    public static DifferentialDrive omniDrive = null;
-
     // Constructor
     public Devices() {
-        // TODO: Investigate why these motor controllers have to be inverted. Are all TalonSRX Motor Controllers backwards?
-        talonSrxMecWheelFrontLeft.setInverted(true);
-        talonSrxMecWheelRearLeft.setInverted(true);
-        talonSrxMecWheelFrontRight.setInverted(true);
-        talonSrxMecWheelRearRight.setInverted(true);
-        mecDrive = new MecanumDrive(talonSrxMecWheelFrontLeft,
-                                    talonSrxMecWheelRearLeft,
-                                    talonSrxMecWheelFrontRight,
-                                    talonSrxMecWheelRearRight);
     }
 
     // Determines if the Talon SRX is connected

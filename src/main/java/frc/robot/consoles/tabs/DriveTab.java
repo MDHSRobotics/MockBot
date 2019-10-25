@@ -8,6 +8,7 @@ import frc.robot.consoles.ShuffleLogger;
 import frc.robot.Brain;
 import frc.robot.Devices;
 // import frc.robot.Robot;
+import frc.robot.subsystems.MecDriver;
 
 
 // The Shuffleboard Drive Tab
@@ -56,7 +57,7 @@ public class DriveTab {
 
     // Create all other Widgets
     public void initialize() {
-        m_mecDriveWidget = m_tab.add("Mecanum Drive", Devices.mecDrive);
+        m_mecDriveWidget = m_tab.add("Mecanum Drive", MecDriver.mecDrive);
         // m_mecDriverWidget = m_tab.add("Mecanum Driver Subsystem", Robot.robotMecDriver);
         // m_mecDriveStraightCmdWidget = m_tab.add("Mecanum Drive Straight", new MecDriveStraightDistance());
     }
