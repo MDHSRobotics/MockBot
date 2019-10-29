@@ -3,22 +3,21 @@ package frc.robot;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.kauailabs.navx.frc.AHRS;
-import edu.wpi.first.wpilibj.buttons.JoystickButton;
-import edu.wpi.first.wpilibj.drive.MecanumDrive;
+
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.Relay;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.XboxController;
-
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import edu.wpi.first.wpilibj.drive.MecanumDrive;
 import frc.robot.helpers.DPad;
 import frc.robot.helpers.DPadButton;
 import frc.robot.helpers.DPadButton.Direction;
-import Robot.robotJuanClaw;
 
 // This class contains singleton constants, for human interface devices and robot components, and mappings for each
 public class Devices {
-    
+
     static private final int DRIVE_XBOX_STICK_NUM = 0;
     static private final int CLIMB_XBOX_STICK_NUM = 1;
     static private final int JSTICK_STICK_NUM = 2;

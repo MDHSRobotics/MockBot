@@ -2,13 +2,16 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID.Hand;
-
-import frc.robot.commands.instant.*;
-import frc.robot.commands.interactive.*;
+import frc.robot.commands.instant.RobotGameModeClimb;
+import frc.robot.commands.instant.RobotGameModeDelivery;
+import frc.robot.commands.interactive.MecDriveAlign;
+import frc.robot.commands.reactive.ClawWheelClose;
 import frc.robot.commands.reactive.ClawWheelOpen;
 import frc.robot.consoles.Logger;
-import frc.robot.helpers.*;
-import frc.robot.Brain;
+import frc.robot.helpers.CartesianMovement;
+import frc.robot.helpers.JoystickPosition;
+import frc.robot.helpers.PolarMovement;
+import frc.robot.helpers.ThumbStickPosition;
 
 
 /**
@@ -50,12 +53,10 @@ public class OI {
         Devices.driveXboxBtnStart.whenPressed(new RobotGameModeDelivery());
         Devices.driveXboxBtnBack.whenPressed(new RobotGameModeClimb());
         Devices.driveXboxBtnDpad.whileHeld(new MecDriveAlign());
-        Devices.driveXboxBtnBumperLeft.whileHeld(new BallReset());
-        Devices.driveXboxBtnBumperRight.whenPressed(new BallerToggleFlipperPosition());
         // Test drive commands
         // Devices.driveXboxBtnA.whileHeld(new MecDriveSlowForward());
-        // Devices.driveXboxBtnB.whileHeld(new MecDriveSlowTurnRight());
-        // Devices.driveXboxBtnX.whileHeld(new MecDriveSlowOrbitInwardClockwise());
+        Devices.driveXboxBtnB.whileHeld(new ClawWheelOpen());
+        Devices.driveXboxBtnX.whileHeld(new ClawWheelClose());
         // Devices.driveXboxBtnY.whileHeld(new MecDriveSlowOrbitOutwardClockwise());
     }
 
@@ -65,8 +66,8 @@ public class OI {
         Devices.climbXboxBtnStart.whenPressed(new RobotGameModeClimb());
         Devices.climbXboxBtnBack.whenPressed(new RobotGameModeDelivery());
 
-        Devices.climbXboxBtnX.whenPressed(new ClawWheelOpen());
-        //Devices.climbXboxBtnB.whenPressed(new FrontPulleyManual());
+        // Devices.climbXboxBtnX.whileHeld(new ClawWheelOpen());
+        // Devices.climbXboxBtnB.whenPressed(new FrontPulleyManual());
     }
 
     //----------------------//
