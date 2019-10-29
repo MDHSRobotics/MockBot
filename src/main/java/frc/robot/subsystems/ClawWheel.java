@@ -5,6 +5,9 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.Devices;
 import frc.robot.commands.idle.ClawWheelStop;
 import frc.robot.consoles.Logger;
+import frc.robot.helpers.TalonConstants;
+import com.ctre.phoenix.motorcontrol.SensorCollection;
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 
 
 // Claw Wheel Subsytem, for sucking in boxes and spitting them out thru the barrier
@@ -73,7 +76,7 @@ public class ClawWheel extends Subsystem {
             Devices.talonSrxRightClawWheel.setSelectedSensorPosition(absolutePosition, TalonConstants.PID_LOOP_PRIMARY, TalonConstants.TIMEOUT_MS);
         }
     //To do: press right bumper to open claw, press Left bumper to close claw, press A to spit out box
-
+    }
     @Override
     public void initDefaultCommand() {
         Logger.setup("Initializing ClawWheel DefaultCommand -> ClawWheelOpen...");
