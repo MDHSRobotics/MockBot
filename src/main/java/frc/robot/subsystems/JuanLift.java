@@ -96,23 +96,7 @@ public class JuanLift extends Subsystem {
         Devices.talonSrxLiftA.set(0);
         Devices.talonSrxLiftA.setSelectedSensorPosition(0);
     }
-
-    // Raise the JuanLift lift
-    public void raise() {
-        Logger.info("JuanLift -> RAISE " + RAISE_POSITION + " ticks");
-
-        if (!m_talonsAreConnected) return;
-        Devices.talonSrxLiftA.set(ControlMode.Position, RAISE_POSITION);
-    }
     
-    // Lower the JuanLift lift
-    public void lower() {
-        Logger.info("JuanLift -> LOWER " + LOWER_POSITION + " ticks");
-
-        if (!m_talonsAreConnected) return;
-        Devices.talonSrxLiftA.set(ControlMode.Position, LOWER_POSITION);
-    }
-
     // Set JuanLift's move speed
     public void setMovePower(double movePower) {
         if (!m_talonsAreConnected) return;
