@@ -5,6 +5,7 @@ import edu.wpi.first.wpilibj.GenericHID.Hand;
 
 import frc.robot.commands.instant.*;
 import frc.robot.commands.interactive.*;
+import frc.robot.commands.test.LiftTest;
 import frc.robot.consoles.Logger;
 import frc.robot.helpers.*;
 import frc.robot.Brain;
@@ -49,10 +50,10 @@ public class OI {
         Devices.driveXboxBtnStart.whenPressed(new RobotGameModeDelivery());
         Devices.driveXboxBtnBack.whenPressed(new RobotGameModeClimb());
         Devices.driveXboxBtnDpad.whileHeld(new MecDriveAlign());
-        Devices.driveXboxBtnBumperLeft.whileHeld(new BallReset());
-        Devices.driveXboxBtnBumperRight.whenPressed(new BallerToggleFlipperPosition());
+        // Devices.driveXboxBtnBumperLeft.whileHeld(new BallReset());
+        // Devices.driveXboxBtnBumperRight.whenPressed(new BallerToggleFlipperPosition());
         // Test drive commands
-        // Devices.driveXboxBtnA.whileHeld(new MecDriveSlowForward());
+         Devices.driveXboxBtnA.whenPressed(new LiftTest());
         // Devices.driveXboxBtnB.whileHeld(new MecDriveSlowTurnRight());
         // Devices.driveXboxBtnX.whileHeld(new MecDriveSlowOrbitInwardClockwise());
         // Devices.driveXboxBtnY.whileHeld(new MecDriveSlowOrbitOutwardClockwise());
@@ -63,8 +64,8 @@ public class OI {
         // Bind the "climb" xbox buttons to specific commands
         Devices.climbXboxBtnStart.whenPressed(new RobotGameModeClimb());
         Devices.climbXboxBtnBack.whenPressed(new RobotGameModeDelivery());
-        Devices.climbXboxBtnX.whenPressed(new BackPulleyManual());
-        Devices.climbXboxBtnB.whenPressed(new FrontPulleyManual());
+        // Devices.climbXboxBtnX.whenPressed(new BackPulleyManual());
+        // Devices.climbXboxBtnB.whenPressed(new FrontPulleyManual());
         // TODO bind lift raise and lower commands to the triggers
     }
 

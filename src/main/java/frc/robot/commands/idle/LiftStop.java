@@ -1,18 +1,19 @@
-package frc.robot.commands.interactive;
+package frc.robot.commands.idle;
 
 import edu.wpi.first.wpilibj.command.Command;
 
 import frc.robot.consoles.Logger;
 import frc.robot.helpers.CartesianMovement;
+import frc.robot.Devices;
 import frc.robot.OI;
 import frc.robot.Robot;
 
 
 // This command uses the joystick input to mecanum drive using the cartesian method
-public class MoveLift extends Command {
+public class LiftStop extends Command {
 
-    public MoveLift() {
-        Logger.setup("Constructing Command: MoveLift...");
+    public LiftStop() {
+        Logger.setup("Constructing Command: LiftStop...");
 
         // Declare subsystem dependencies
         requires(Robot.robotJuanLift);
@@ -20,13 +21,12 @@ public class MoveLift extends Command {
 
     @Override
     protected void initialize() {
-        Logger.action("Initializing Command: MoveLift...");
+        Logger.action("Initializing Command: LiftStop...");
     }
 
     @Override
     protected void execute() {
-        double movePower = OI.getLiftSpeed();
-        Robot.robotJuanLift.setMovePower(movePower);
+        Devices.talonSrxLiftA.set(0);
     }
 
     // This command continues until interrupted
@@ -37,13 +37,13 @@ public class MoveLift extends Command {
 
     @Override
     protected void end() {
-        Logger.ending("Ending Command: MoveLift...");
+        Logger.ending("Ending Command: LiftStop...");
     }
 
     @Override
     protected void interrupted() {
         System.out.println("--");
-        Logger.ending("Interrupting Command: MoveLift...");
+        Logger.ending("Interrupting Command: LiftStop...");
     }
 
 }

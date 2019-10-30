@@ -7,7 +7,7 @@ import com.ctre.phoenix.motorcontrol.SensorCollection;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.Devices;
-import frc.robot.commands.interactive.MoveLift;
+import frc.robot.commands.idle.LiftStop;
 import frc.robot.consoles.Logger;
 import frc.robot.helpers.TalonConstants;
 
@@ -73,7 +73,7 @@ public class JuanLift extends Subsystem {
             Devices.talonSrxLiftA.configMotionAcceleration(5000, 20);
             Devices.talonSrxLiftA.configMotionCruiseVelocity(10000, 20);
 
-            Devices.talonSrxLiftB.follow(Devices.talonSrxLiftA);
+            //Devices.talonSrxLiftB.follow(Devices.talonSrxLiftA);
         }
     }
 
@@ -81,7 +81,7 @@ public class JuanLift extends Subsystem {
     
     public void initDefaultCommand() {
         Logger.setup("Initializing JuanLift DefaultCommand");
-        setDefaultCommand(new MoveLift()); 
+        setDefaultCommand(new LiftStop()); 
     }
 
     // Stop the JuanLift motors
@@ -137,7 +137,7 @@ public class JuanLift extends Subsystem {
 
     public void testMotor() {
         if (!m_talonsAreConnected) return;
-        Devices.talonSrxLiftA.set(0.2);
+        Devices.talonSrxLiftA.set(0.5);
     }
 
 }
