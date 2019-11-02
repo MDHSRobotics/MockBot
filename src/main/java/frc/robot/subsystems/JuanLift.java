@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.Devices;
 import frc.robot.commands.idle.LiftStop;
 import frc.robot.consoles.Logger;
-import frc.robot.helpers.TalonConstants;
+import frc.robot.helpers.TalonUtils;
 
 // JuanLift subsystem, for raising and lowering boxes
 public class JuanLift extends Subsystem {
@@ -41,34 +41,34 @@ public class JuanLift extends Subsystem {
         else {
             Devices.talonSrxLiftA.configFactoryDefault();
 
-            Devices.talonSrxLiftA.configPeakCurrentDuration(TalonConstants.PEAK_AMPERAGE_DURATION, TalonConstants.TIMEOUT_MS);
-            Devices.talonSrxLiftA.configPeakCurrentLimit(TalonConstants.PEAK_AMPERAGE, TalonConstants.TIMEOUT_MS);
-            Devices.talonSrxLiftA.configContinuousCurrentLimit(TalonConstants.CONTINUOUS_AMPERAGE_LIMIT, TalonConstants.TIMEOUT_MS);
+            Devices.talonSrxLiftA.configPeakCurrentDuration(TalonUtils.PEAK_AMPERAGE_DURATION, TalonUtils.TIMEOUT_MS);
+            Devices.talonSrxLiftA.configPeakCurrentLimit(TalonUtils.PEAK_AMPERAGE, TalonUtils.TIMEOUT_MS);
+            Devices.talonSrxLiftA.configContinuousCurrentLimit(TalonUtils.CONTINUOUS_AMPERAGE_LIMIT, TalonUtils.TIMEOUT_MS);
 
             Devices.talonSrxLiftA.configNominalOutputForward(0);
             Devices.talonSrxLiftA.configNominalOutputReverse(0);
             Devices.talonSrxLiftA.configPeakOutputForward(0.4);
             Devices.talonSrxLiftA.configPeakOutputReverse(-0.3);
 
-            Devices.talonSrxLiftA.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, TalonConstants.PID_LOOP_PRIMARY, TalonConstants.TIMEOUT_MS);
+            Devices.talonSrxLiftA.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, TalonUtils.PID_LOOP_PRIMARY, TalonUtils.TIMEOUT_MS);
             Devices.talonSrxLiftA.setSensorPhase(SENSOR_PHASE);
             Devices.talonSrxLiftA.setInverted(MOTOR_INVERT);
-            Devices.talonSrxLiftA.configAllowableClosedloopError(0, TalonConstants.PID_LOOP_PRIMARY, TalonConstants.TIMEOUT_MS);
+            Devices.talonSrxLiftA.configAllowableClosedloopError(TalonUtils.PID_LOOP_PRIMARY, 0, TalonUtils.TIMEOUT_MS);
 
-            Devices.talonSrxLiftA.config_kF(TalonConstants.PID_LOOP_PRIMARY, 0.0, TalonConstants.TIMEOUT_MS);
-            Devices.talonSrxLiftA.config_kP(TalonConstants.PID_LOOP_PRIMARY, 0.2, TalonConstants.TIMEOUT_MS); 
-            Devices.talonSrxLiftA.config_kI(TalonConstants.PID_LOOP_PRIMARY, 0.0, TalonConstants.TIMEOUT_MS);
-            Devices.talonSrxLiftA.config_kD(TalonConstants.PID_LOOP_PRIMARY, 0.1, TalonConstants.TIMEOUT_MS);
+            Devices.talonSrxLiftA.config_kF(TalonUtils.PID_LOOP_PRIMARY, 0.0, TalonUtils.TIMEOUT_MS);
+            Devices.talonSrxLiftA.config_kP(TalonUtils.PID_LOOP_PRIMARY, 0.2, TalonUtils.TIMEOUT_MS); 
+            Devices.talonSrxLiftA.config_kI(TalonUtils.PID_LOOP_PRIMARY, 0.0, TalonUtils.TIMEOUT_MS);
+            Devices.talonSrxLiftA.config_kD(TalonUtils.PID_LOOP_PRIMARY, 0.1, TalonUtils.TIMEOUT_MS);
 
             // Reset Encoder Position 
-            Devices.talonSrxLiftA.setSelectedSensorPosition(0, TalonConstants.PID_SLOT_0, TalonConstants.TIMEOUT_MS);
+            Devices.talonSrxLiftA.setSelectedSensorPosition(0, TalonUtils.PID_SLOT_0, TalonUtils.TIMEOUT_MS);
             SensorCollection sensorCol = Devices.talonSrxLiftA.getSensorCollection();
             int absolutePosition = sensorCol.getPulseWidthPosition();
             absolutePosition &= 0xFFF;
             if (SENSOR_PHASE) absolutePosition *= -1;
             if (MOTOR_INVERT) absolutePosition *= -1;
             // Set the quadrature (relative) sensor to match absolute
-            Devices.talonSrxLiftA.setSelectedSensorPosition(absolutePosition, TalonConstants.PID_LOOP_PRIMARY, TalonConstants.TIMEOUT_MS);
+            Devices.talonSrxLiftA.setSelectedSensorPosition(absolutePosition, TalonUtils.PID_LOOP_PRIMARY, TalonUtils.TIMEOUT_MS);
             
             Devices.talonSrxLiftA.configMotionAcceleration(5000, 20);
             Devices.talonSrxLiftA.configMotionCruiseVelocity(10000, 20);
