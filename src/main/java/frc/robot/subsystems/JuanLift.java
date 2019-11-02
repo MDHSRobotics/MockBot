@@ -1,7 +1,7 @@
 
 package frc.robot.subsystems;
 
-import com.ctre.phoenix.motorcontrol.ControlMode;
+// import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.SensorCollection;
 
@@ -15,7 +15,7 @@ import frc.robot.helpers.TalonConstants;
 public class JuanLift extends Subsystem {
 
     // Position constants
-    private final double GEAR_RATIO = 16; //TODO change the gear ratio
+//  private final double GEAR_RATIO = 16; //TODO change the gear ratio
     private final double RAISE_POSITION = 50; //TODO change the raise position
     private final double LOWER_POSITION = 0;
 
@@ -56,7 +56,7 @@ public class JuanLift extends Subsystem {
             Devices.talonSrxLiftA.configAllowableClosedloopError(0, TalonConstants.PID_LOOP_PRIMARY, TalonConstants.TIMEOUT_MS);
 
             Devices.talonSrxLiftA.config_kF(TalonConstants.PID_LOOP_PRIMARY, 0.0, TalonConstants.TIMEOUT_MS);
-            Devices.talonSrxLiftA.config_kP(TalonConstants.PID_LOOP_PRIMARY, 0.2, TalonConstants.TIMEOUT_MS); //0.0125
+            Devices.talonSrxLiftA.config_kP(TalonConstants.PID_LOOP_PRIMARY, 0.2, TalonConstants.TIMEOUT_MS); 
             Devices.talonSrxLiftA.config_kI(TalonConstants.PID_LOOP_PRIMARY, 0.0, TalonConstants.TIMEOUT_MS);
             Devices.talonSrxLiftA.config_kD(TalonConstants.PID_LOOP_PRIMARY, 0.1, TalonConstants.TIMEOUT_MS);
 
@@ -114,10 +114,10 @@ public class JuanLift extends Subsystem {
             // Going downward should not exceed lower limit
             if (currentPosition >= LOWER_POSITION) { 
                 Devices.talonSrxLiftA.set(movePower);
+            }
         }
-    }
     
-    } // TODO set an encoder stop
+    }
 
     // Get the current JuanLift lift motor velocity
     public int getVelocity() {

@@ -3,9 +3,6 @@ package frc.robot.commands.idle;
 import edu.wpi.first.wpilibj.command.Command;
 
 import frc.robot.consoles.Logger;
-import frc.robot.helpers.CartesianMovement;
-import frc.robot.Devices;
-import frc.robot.OI;
 import frc.robot.Robot;
 
 
@@ -26,7 +23,7 @@ public class LiftStop extends Command {
 
     @Override
     protected void execute() {
-        Devices.talonSrxLiftA.set(0);
+        Robot.robotJuanLift.stop();
     }
 
     // This command continues until interrupted
