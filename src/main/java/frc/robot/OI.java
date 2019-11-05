@@ -195,11 +195,13 @@ public class OI {
     private static ThumbStickPosition getThumbstickPosition(boolean isYleftFlipped) {
         double yLeft = Devices.driveXbox.getY(Hand.kLeft); // Forward & backward, flipped
         double xLeft = Devices.driveXbox.getX(Hand.kLeft); // Strafe
+        double yRight = Devices.driveXbox.getY(Hand.kRight);
         double xRight = Devices.driveXbox.getX(Hand.kRight); // Rotate
 
         // Forward/backward direction is reversed from what is intuitive, so flip it
         yLeft = -yLeft;
-
+        // TODO mayble flip yRight also?
+        
         // User-determined flipping of forward/backward orientation
         if (isYleftFlipped) {
             yLeft = -yLeft;
@@ -209,10 +211,12 @@ public class OI {
         double yLeftDeadZone = Brain.getYleftDeadZone();
         double xLeftDeadZone = Brain.getXleftDeadZone();
         double xRightDeadZone = Brain.getXrightDeadZone();
+        double yRightDeadZone = Brain.getYrightDeadZone();
 
         if (Math.abs(yLeft) <= yLeftDeadZone) yLeft = 0;
         if (Math.abs(xLeft) <= xLeftDeadZone) xLeft = 0;
         if (Math.abs(xRight) <= xRightDeadZone) xRight = 0;
+        if (Math.abs(yRight) <= yRightDeadZone) yRight = 0;
 
         if (yLeft > 0) yLeft = yLeft - yLeftDeadZone;
         if (yLeft < 0) yLeft = yLeft + yLeftDeadZone;
@@ -220,17 +224,21 @@ public class OI {
         if (xLeft < 0) xLeft = xLeft + xLeftDeadZone;
         if (xRight > 0) xRight = xRight - xRightDeadZone;
         if (xRight < 0) xRight = xRight + xRightDeadZone;
+        if (yRight > 0) yRight = yRight - yRightDeadZone;
+        if (yRight < 0) yRight = yRight + yRightDeadZone;
 
         // Sensitivity
         double yLeftSensitivity = Brain.getYleftSensitivity();
         double xLeftSensitivity = Brain.getXleftSensitivity();
         double xRightSensitivity = Brain.getXrightSensitivity();
+        double yRightSensitivity = Brain.getYrightSensitivity();
 
         yLeft = yLeft * yLeftSensitivity;
         xLeft = xLeft * xLeftSensitivity;
         xRight = xRight * xRightSensitivity;
+        yRight = yRight * yRightSensitivity;
 
-        ThumbStickPosition pos = new ThumbStickPosition(yLeft, xLeft, xRight);
+        ThumbStickPosition pos = new ThumbStickPosition(yLeft, xLeft, xRight, yRight);
         return pos;
     }
 
