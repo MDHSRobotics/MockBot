@@ -11,17 +11,17 @@ import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 
 
 // Claw Wheel Subsytem, for sucking in boxes and spitting them out thru the barrier
-public class ClawWheel extends Subsystem {
+public class Claw extends Subsystem {
 
     // Encoder constants
     private final boolean SENSOR_PHASE = true; // So that Talon does not report sensor out of phase
     private final boolean MOTOR_INVERT = false; // Which direction you want to be positive; this does not affect motor invert
 
-    private final double WHEEL_POWER = 0.2;
+    private final double OPEN_POSITION = 0.2;
 
     private boolean m_talonsAreConnected = false;
     
-    public ClawWheel() {
+    public Claw() {
         Logger.setup("Constructing Subsystem: ClawWheel...");
 
         
@@ -62,12 +62,12 @@ public class ClawWheel extends Subsystem {
         Logger.setup("Wheel Motors Disconnected! Shutting down wheels...");
     }
 
-    public void ejectBox() {
+    public void openClaw() {
         if (!m_talonsAreConnected) return;
         Devices.talonSrxLeftClawWheel.set(WHEEL_POWER);
         Devices.talonSrxRightClawWheel.set(WHEEL_POWER);
     }
-    public void insertBox() {
+    public void closeClaw() {
         if (!m_talonsAreConnected) return;
         Devices.talonSrxLeftClawWheel.set(-WHEEL_POWER);
         Devices.talonSrxRightClawWheel.set(-WHEEL_POWER);

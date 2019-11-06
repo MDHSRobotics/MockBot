@@ -100,6 +100,8 @@ public class Devices {
     public static final WPI_TalonSRX talonSrxRightClawWheel = new WPI_TalonSRX(3); // 1 motor
     public static final WPI_TalonSRX talonSrxLeftClawWheel = new WPI_TalonSRX(4); // 1 motor
 
+    public static final WPI_TalonSRX talonSrxClaw = new WPI_TalonSRX(13); // TODO change talon ID
+
     // Drives
     public static MecanumDrive mecDrive = null;
 
