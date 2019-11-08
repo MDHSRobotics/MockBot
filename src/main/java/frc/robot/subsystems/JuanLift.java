@@ -4,7 +4,7 @@ package frc.robot.subsystems;
 // import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.SensorCollection;
-
+//import frc.robot.commands.interactive.MoveLift;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.Devices;
 import frc.robot.commands.idle.LiftStop;
@@ -138,6 +138,7 @@ public class JuanLift extends Subsystem {
     public void testMotor() {
         if (!m_talonsAreConnected) return;
         Devices.talonSrxLiftA.set(0.5);
+        
     }
 
 }
