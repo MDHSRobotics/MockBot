@@ -18,6 +18,7 @@ public class Claw extends Subsystem {
     private final boolean MOTOR_INVERT = false; // Which direction you want to be positive; this does not affect motor invert
 
     private final double OPEN_POSITION = 0.2;
+    private final double WHEEL_POWER = 0;
 
     private boolean m_talonsAreConnected = false;
     

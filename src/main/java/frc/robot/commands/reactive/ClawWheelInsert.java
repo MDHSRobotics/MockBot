@@ -7,11 +7,12 @@ import frc.robot.consoles.Logger;
 import frc.robot.Robot;
 
 
-// This command closes the Hatcher claw via encoder to release, or in preparating to grab, the hatch, and keeps it closed
-public class ClawWheelClose extends Command {
 
-    public ClawWheelClose() {
-        Logger.setup("Constructing Command: ClawWheelClose...");
+// This command closes the Hatcher claw via encoder to release, or in preparating to grab, the hatch, and keeps it closed
+public class ClawWheelInsert extends Command {
+
+    public ClawWheelInsert() {
+        Logger.setup("Constructing Command: ClawWheelInsert...");
 
         // Declare subsystem dependencies
         requires(Robot.robotClawWheel);
@@ -19,7 +20,7 @@ public class ClawWheelClose extends Command {
 
     @Override
     protected void initialize() {
-        Logger.action("Initializing Command: ClawWheelClose...");
+        Logger.action("Initializing Command: ClawWheelInsert...");
 
         // Set encoded position
         Robot.robotClawWheel.stop();
@@ -27,7 +28,7 @@ public class ClawWheelClose extends Command {
 
     @Override
     protected void execute() {
-        Robot.robotClawWheel.closeMotor();
+        Robot.robotClawWheel.insertBox();
     }
 
     // This command continues until interrupted
