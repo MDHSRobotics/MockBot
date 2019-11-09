@@ -5,7 +5,6 @@ import edu.wpi.first.wpilibj.GenericHID.Hand;
 
 import frc.robot.commands.instant.*;
 import frc.robot.commands.interactive.*;
-import frc.robot.commands.test.LiftTest;
 import frc.robot.consoles.Logger;
 import frc.robot.helpers.*;
 import frc.robot.Brain;
@@ -49,11 +48,9 @@ public class OI {
         // Bind the "drive" xbox buttons to specific commands
         Devices.driveXboxBtnStart.whenPressed(new RobotGameModeDelivery());
         Devices.driveXboxBtnBack.whenPressed(new RobotGameModeClimb());
-        Devices.driveXboxBtnDpad.whileHeld(new MecDriveAlign());
-        // Devices.driveXboxBtnBumperLeft.whileHeld(new BallReset());
-        // Devices.driveXboxBtnBumperRight.whenPressed(new BallerToggleFlipperPosition());
+        Devices.driveXboxBtnA.whenPressed(new MoveLift());
         // Test drive commands
-         Devices.driveXboxBtnA.whenPressed(new LiftTest());
+        // Devices.driveXboxBtnDpad.whileHeld(new MecDriveAlign());
         // Devices.driveXboxBtnB.whileHeld(new MecDriveSlowTurnRight());
         // Devices.driveXboxBtnX.whileHeld(new MecDriveSlowOrbitInwardClockwise());
         // Devices.driveXboxBtnY.whileHeld(new MecDriveSlowOrbitOutwardClockwise());
@@ -64,9 +61,6 @@ public class OI {
         // Bind the "climb" xbox buttons to specific commands
         Devices.climbXboxBtnStart.whenPressed(new RobotGameModeClimb());
         Devices.climbXboxBtnBack.whenPressed(new RobotGameModeDelivery());
-        // Devices.climbXboxBtnX.whenPressed(new BackPulleyManual());
-        // Devices.climbXboxBtnB.whenPressed(new FrontPulleyManual());
-        // TODO bind lift raise and lower commands to the triggers
     }
 
     //----------------------//
@@ -247,28 +241,10 @@ public class OI {
     // https://frc-pdr.readthedocs.io/en/latest/user_input/joystick.html
     
     //----------------------//
-    // Interactive Climbing //
+    //     Interactive      //
     //----------------------//
 
-    // Gets the Pulley speed from the climb xbox controller's Left Thumbstick Y axis position
-    public static double getBackPulleyLiftSpeed() {
-        double y = Devices.climbXbox.getY(Hand.kLeft);
-        return y;
-    }
-
-    // Gets the Pulley speed from the climb xbox controller's Right Thumbstick Y axis position
-    public static double getFrontPulleyLiftSpeed() {
-        double y = Devices.climbXbox.getY(Hand.kRight);
-        return y;
-    }
-
-    // Gets the Ball toss speed from the climb Xbox controller's right trigger
-    public static double getBallSpeed() {
-        double triggerAxis = Devices.driveXbox.getTriggerAxis(Hand.kRight);
-        return triggerAxis;
-    }
-
-    // Gets the Lift speed from the climb Xbox controller's triggers
+    // Gets the Lift speed from the drive Xbox controller's triggers
     public static double getLiftSpeed() {
         double triggerAxisRight = Devices.driveXbox.getTriggerAxis(Hand.kRight);
         double triggerAxisLeft = Devices.driveXbox.getTriggerAxis(Hand.kLeft);
