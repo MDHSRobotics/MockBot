@@ -5,6 +5,7 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
+import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.Relay;
@@ -94,6 +95,11 @@ public class Devices {
     public static final WPI_TalonSRX talonSrxMecWheelFrontRight = new WPI_TalonSRX(6); // 1 motor
     public static final WPI_TalonSRX talonSrxMecWheelRearRight = new WPI_TalonSRX(8); // 1 motor
 
+    public static final WPI_TalonSRX talonSrxTankWheelFrontLeft = new WPI_TalonSRX(5); // 1 motor
+    public static final WPI_TalonSRX talonSrxTankWheelRearLeft = new WPI_TalonSRX(7); // 1 motor
+    public static final WPI_TalonSRX talonSrxTankWheelFrontRight = new WPI_TalonSRX(6); // 1 motor
+    public static final WPI_TalonSRX talonSrxTankWheelRearRight = new WPI_TalonSRX(8); // 1 motor
+
     public static final WPI_TalonSRX talonSrxHatcher = new WPI_TalonSRX(9); // 1 motor
     public static final WPI_TalonSRX talonSrxBaller = new WPI_TalonSRX(10); // 1 motor
     public static final WPI_TalonSRX talonSrxLever = new WPI_TalonSRX(12);
@@ -108,6 +114,7 @@ public class Devices {
 
     // Drives
     public static MecanumDrive mecDrive = null;
+    public static DifferentialDrive tankDrive = null;
 
     // Constructor
     public Devices() {
@@ -120,6 +127,14 @@ public class Devices {
                                     talonSrxMecWheelRearLeft,
                                     talonSrxMecWheelFrontRight,
                                     talonSrxMecWheelRearRight);
+        talonSrxMecWheelFrontLeft.setInverted(true);
+        talonSrxMecWheelRearLeft.setInverted(true);
+        talonSrxMecWheelFrontRight.setInverted(true);
+        talonSrxMecWheelRearRight.setInverted(true);
+        mecDrive = new MecanumDrive(talonSrxTankWheelFrontLeft,
+                                    talonSrxTankWheelRearLeft,
+                                    talonSrxTankWheelFrontRight,
+                                    talonSrxTankWheelRearRight);
     }
 
     // Determines if the Talon SRX is connected
