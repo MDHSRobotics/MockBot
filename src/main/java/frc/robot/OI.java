@@ -5,8 +5,8 @@ import edu.wpi.first.wpilibj.GenericHID.Hand;
 import frc.robot.commands.instant.RobotGameModeClimb;
 import frc.robot.commands.instant.RobotGameModeDelivery;
 import frc.robot.commands.interactive.MecDriveAlign;
-import frc.robot.commands.reactive.ClawWheelClose;
-import frc.robot.commands.reactive.ClawWheelOpen;
+import frc.robot.commands.reactive.ClawWheelEject;
+import frc.robot.commands.reactive.ClawWheelInsert;
 import frc.robot.consoles.Logger;
 import frc.robot.helpers.CartesianMovement;
 import frc.robot.helpers.JoystickPosition;
@@ -55,8 +55,8 @@ public class OI {
         Devices.driveXboxBtnDpad.whileHeld(new MecDriveAlign());
         // Test drive commands
         // Devices.driveXboxBtnA.whileHeld(new MecDriveSlowForward());
-        Devices.driveXboxBtnB.whileHeld(new ClawWheelOpen());
-        Devices.driveXboxBtnX.whileHeld(new ClawWheelClose());
+        Devices.driveXboxBtnB.whileHeld(new ClawWheelEject());
+        Devices.driveXboxBtnX.whileHeld(new ClawWheelInsert());
         // Devices.driveXboxBtnY.whileHeld(new MecDriveSlowOrbitOutwardClockwise());
     }
 
