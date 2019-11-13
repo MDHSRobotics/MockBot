@@ -35,12 +35,6 @@ public class OmniDriver extends Subsystem {
     public OmniDriver() {
         Logger.setup("Constructing Subsystem: OmniDriver...");
 
-        //invert the motors
-        Devices.talonSrxOmniWheelFrontLeft.setInverted(true);
-        Devices.talonSrxOmniWheelRearLeft.setInverted(true);
-        Devices.talonSrxOmniWheelFrontRight.setInverted(true);
-        Devices.talonSrxOmniWheelRearRight.setInverted(true);
-
         Devices.talonSrxOmniWheelRearLeft.follow(Devices.talonSrxOmniWheelFrontLeft);
         Devices.talonSrxOmniWheelRearRight.follow(Devices.talonSrxOmniWheelFrontRight);
 
@@ -52,10 +46,14 @@ public class OmniDriver extends Subsystem {
         boolean talonRearLeftIsConnected = Devices.isConnected(Devices.talonSrxOmniWheelRearLeft);
         boolean talonFrontRightIsConnected = Devices.isConnected(Devices.talonSrxOmniWheelFrontRight);
         boolean talonRearRightIsConnected = Devices.isConnected(Devices.talonSrxOmniWheelRearRight);
+        boolean talonFrontIsConnected = Devices.isConnected(Devices.talonSrxOmniWheelFront);
+        boolean talonRearIsConnected = Devices.isConnected(Devices.talonSrxOmniWheelRear);
         m_talonsAreConnected = (talonFrontLeftIsConnected &&
                                 talonRearLeftIsConnected && 
                                 talonFrontRightIsConnected && 
-                                talonRearRightIsConnected);
+                                talonRearRightIsConnected &&
+                                talonFrontIsConnected &&
+                                talonRearIsConnected);
 
         if (!m_talonsAreConnected) {
             Logger.error("OmniDriver talons not all connected! Disabling OmniDriver...");
@@ -65,6 +63,8 @@ public class OmniDriver extends Subsystem {
             Devices.talonSrxOmniWheelRearLeft.configOpenloopRamp(SECONDS_FROM_NEUTRAL_TO_FULL, TIMEOUT_MS);
             Devices.talonSrxOmniWheelFrontRight.configOpenloopRamp(SECONDS_FROM_NEUTRAL_TO_FULL, TIMEOUT_MS);
             Devices.talonSrxOmniWheelRearRight.configOpenloopRamp(SECONDS_FROM_NEUTRAL_TO_FULL, TIMEOUT_MS);
+            Devices.talonSrxOmniWheelFront.configOpenloopRamp(SECONDS_FROM_NEUTRAL_TO_FULL, TIMEOUT_MS);
+            Devices.talonSrxOmniWheelRear.configOpenloopRamp(SECONDS_FROM_NEUTRAL_TO_FULL, TIMEOUT_MS);
         }
     }
 
@@ -123,8 +123,11 @@ public class OmniDriver extends Subsystem {
         omniDrive.arcadeDrive(0, rotation, false);
     }
 
-    public void arcadeDrive(double speed, double rotation, boolean squareInputs) {
+    public void arcadeDrive(double speed, double rotation, boolean squareInputs, double strafe) {
         omniDrive.arcadeDrive(speed, rotation, squareInputs);
+
+        Devices.talonSrxOmniWheelFront.set(strafe);
+        Devices.talonSrxOmniWheelRear.set(strafe);
     }
 
 }

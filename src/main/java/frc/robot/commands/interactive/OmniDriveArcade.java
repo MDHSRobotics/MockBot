@@ -28,6 +28,8 @@ public class OmniDriveArcade extends Command {
     protected void execute() {
         ArcadeMovement move = OI.getArcadeMovement(Robot.robotOmniDriver.controlStickDirectionFlipped);
         Robot.robotOmniDriver.arcadeDrive(move.speed, move.rotation, false);
+
+
     }
 
     // This command continues until interrupted

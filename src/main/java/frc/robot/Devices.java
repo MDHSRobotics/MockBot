@@ -97,12 +97,14 @@ public class Devices {
     public static final WPI_TalonSRX talonSrxOmniWheelRearLeft = new WPI_TalonSRX(7); // 1 motor
     public static final WPI_TalonSRX talonSrxOmniWheelFrontRight = new WPI_TalonSRX(6); // 1 motor
     public static final WPI_TalonSRX talonSrxOmniWheelRearRight = new WPI_TalonSRX(8); // 1 motor
+    public static final WPI_TalonSRX talonSrxOmniWheelFront = new WPI_TalonSRX(17); // 1 motor
+    public static final WPI_TalonSRX talonSrxOmniWheelRear = new WPI_TalonSRX(18); // 1 motor
 
     public static final WPI_TalonSRX talonSrxHatcher = new WPI_TalonSRX(9); // 1 motor
     public static final WPI_TalonSRX talonSrxBaller = new WPI_TalonSRX(10); // 1 motor
     public static final WPI_TalonSRX talonSrxLever = new WPI_TalonSRX(12);
 
-    public static final WPI_TalonSRX talonSrxBackPulleyA = new WPI_TalonSRX(19); // 1 motor
+    public static final WPI_TalonSRX talonSrxBackPulleyA = new WPI_TalonSRX(16); // 1 motor
     public static final WPI_TalonSRX talonSrxBackPulleyB = new WPI_TalonSRX(14); // 1 motor
     public static final WPI_TalonSRX talonSrxBackPulleyC = new WPI_TalonSRX(15); // 1 motor
 
