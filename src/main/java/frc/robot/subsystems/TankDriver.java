@@ -76,23 +76,6 @@ public class TankDriver extends Subsystem {
         return controlStickDirectionFlipped;
     }
 
-    // Toggle the drive orientation for the mecanum drive
-    // public DriveOrientation toggleDriveOrientation() {
-    //     Logger.action("Toggling MecDriver drive orientation...");
-
-    //     DriveOrientation orientation = Brain.getDriveOrientation();
-    //     if (orientation == DriveOrientation.FIELD) {
-    //         orientation = DriveOrientation.ROBOT;
-    //         Logger.info("MecDriver drive orientation is now ROBOT.");
-    //     }
-    //     else if (orientation == DriveOrientation.ROBOT) {
-    //         orientation = DriveOrientation.FIELD;
-    //         Logger.info("MecDriver drive orientation is now FIELD.");
-    //     }
-    //     Brain.setDriveOrientation(orientation);
-
-    //     return orientation;
-    // }
 
     // Stop all the drive motors
     public void stop() {
@@ -262,42 +245,6 @@ public class TankDriver extends Subsystem {
                 }
             }
         }
-
-        // Get the rotation speed to align the Robot with the target gyro yaw
-        double zRotation = (correction / 180) * Brain.getAlignZSensitivity();
-        boolean isCloseEnough = Math.abs(correction) < Brain.getAlignZTolerance();
-        if (!isCloseEnough) {
-            if (0 < zRotation && zRotation < Brain.getAlignZSpeedMinimum()) zRotation = Brain.getAlignZSpeedMinimum();
-            if (0 > zRotation && zRotation > -Brain.getAlignZSpeedMinimum()) zRotation = -Brain.getAlignZSpeedMinimum();
-        }
-
-        Logger.action("MecDriver -> Drive Polar: " + magnitude + ", " + angle + ", " + zRotation);
-        if (!m_talonsAreConnected) {
-            Devices.mecDrive.feed();
-        }
-        else {
-            // TODO: Need to test this, to balance the speeds to produce the fastest and most reliable simultaneous alignment
-            Devices.mecDrive.drivePolar(magnitude, angle, zRotation);
-        }
-        Logger.ending("^^");
-    }
-
-    // TODO: Use this to indicate to the driver that the Robot is aligned with the target (lights? Shuffleboard?)
-    public boolean isAligned(double targetAngle) {
-        boolean straight = Gyro.isYawAligned(targetAngle);
-        if (!straight) return false;
-
-        boolean detected = Vision.frontLineDetected();
-        if (!detected) {
-            Logger.info("MecDriver -> Robot is straight, but no front line detected to center on!");
-            return true;
-        }
-
-        boolean centered = Vision.isFrontCentered();
-        if (!centered) return false;
-
-        Logger.info("MecDriver -> Robot is straight, and centered, fully aligned!");
-        return true;
     }
 
 }
