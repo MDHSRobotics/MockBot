@@ -1,6 +1,8 @@
 
 package frc.robot.subsystems;
 
+import java.util.concurrent.TimeUnit;
+
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 import frc.robot.commands.interactive.MecDriveCartesian;
@@ -9,7 +11,6 @@ import frc.robot.sensors.Gyro;
 import frc.robot.sensors.Vision;
 import frc.robot.Brain;
 import frc.robot.Devices;
-
 
 // Mecanum driver subsystem
 public class MecDriver extends Subsystem {
@@ -145,6 +146,23 @@ public class MecDriver extends Subsystem {
             return;
         }
 
+        Devices.mecDrive.driveCartesian(0, 0, speed);
+    }
+
+    // Drive straight at the given speed
+    public void driveBox(double speed) {
+        if (!m_talonsAreConnected) {
+            Devices.mecDrive.feed();
+            return;
+        }
+
+        Devices.mecDrive.driveCartesian(0, speed, 0);
+        Devices.mecDrive.driveCartesian(0, 0, speed);
+        Devices.mecDrive.driveCartesian(0, speed, 0);
+        Devices.mecDrive.driveCartesian(0, 0, speed);
+        Devices.mecDrive.driveCartesian(0, speed, 0);
+        Devices.mecDrive.driveCartesian(0, 0, speed);
+        Devices.mecDrive.driveCartesian(0, speed, 0);
         Devices.mecDrive.driveCartesian(0, 0, speed);
     }
 

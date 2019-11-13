@@ -34,9 +34,9 @@ public class LiftPulley extends Subsystem {
         m_talonsAreConnected = (talonIsConnected);
         if (!m_talonsAreConnected) {
             Logger.error("Pulley talons not all connected! Disabling LiftPulley...");
-            }
-            else {
-                Devices.talonSrxLiftPulley.configFactoryDefault();
+        }
+        else {
+            Devices.talonSrxLiftPulley.configFactoryDefault();
 
             Devices.talonSrxLiftPulley.configPeakCurrentDuration(TalonConstants.PEAK_AMPERAGE_DURATION, TalonConstants.TIMEOUT_MS);
             Devices.talonSrxLiftPulley.configPeakCurrentLimit(TalonConstants.PEAK_AMPERAGE, TalonConstants.TIMEOUT_MS);
