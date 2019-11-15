@@ -138,7 +138,7 @@ public class OI {
     // from the current joystick position
     public static ArcadeMovement getArcadeMovementFromJoystick(boolean isYflipped) {
         JoystickPosition pos = getJoystickPosition(isYflipped);
-        ArcadeMovement move = new ArcadeMovement(pos.xPosition, pos.zPosition, false);
+        ArcadeMovement move = new ArcadeMovement(pos.xPosition, pos.zPosition, false, pos.yPosition);
         return move;
     }
 
@@ -218,15 +218,15 @@ public class OI {
     // from the current xbox thumbstick positions
     public static ArcadeMovement getArcadeMovementFromThumbsticks(boolean isYleftFlipped) {
         ThumbStickPosition pos = getThumbstickPosition(isYleftFlipped);
-        ArcadeMovement move = new ArcadeMovement(pos.yLeftPosition, pos.xRightPosition, false);
+        ArcadeMovement move = new ArcadeMovement(pos.yLeftPosition, pos.xLeftPosition, false, pos.xRightPosition);
         return move;
     }
 
     // Gets the xbox thumbstick positions and applies user-determined orientation, deadzones, and sensitivity
     private static ThumbStickPosition getThumbstickPosition(boolean isYleftFlipped) {
         double yLeft = Devices.driveXbox.getY(Hand.kLeft); // Forward & backward, flipped
-        double xLeft = Devices.driveXbox.getX(Hand.kLeft); // Strafe
-        double xRight = Devices.driveXbox.getX(Hand.kRight); // Rotate
+        double xRight = Devices.driveXbox.getX(Hand.kRight); // Strafe
+        double xLeft = Devices.driveXbox.getX(Hand.kLeft); // Rotate
 
         // Forward/backward direction is reversed from what is intuitive, so flip it
         yLeft = -yLeft;

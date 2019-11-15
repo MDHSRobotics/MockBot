@@ -35,8 +35,9 @@ public class OmniDriver extends Subsystem {
     public OmniDriver() {
         Logger.setup("Constructing Subsystem: OmniDriver...");
 
-        Devices.talonSrxOmniWheelRearLeft.follow(Devices.talonSrxOmniWheelFrontLeft);
+        //Devices.talonSrxOmniWheelRearLeft.follow(Devices.talonSrxOmniWheelFrontLeft);
         Devices.talonSrxOmniWheelRearRight.follow(Devices.talonSrxOmniWheelFrontRight);
+        Devices.talonSrxOmniWheelRear.follow(Devices.talonSrxOmniWheelFront);
 
         omniDrive = new DifferentialDrive(Devices.talonSrxOmniWheelFrontLeft,
                                           Devices.talonSrxOmniWheelFrontRight);
@@ -127,7 +128,6 @@ public class OmniDriver extends Subsystem {
         omniDrive.arcadeDrive(speed, rotation, squareInputs);
 
         Devices.talonSrxOmniWheelFront.set(strafe);
-        Devices.talonSrxOmniWheelRear.set(strafe);
     }
 
 }
