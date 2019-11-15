@@ -5,7 +5,6 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 
 import frc.robot.commands.interactive.MecDriveCartesian;
 import frc.robot.consoles.Logger;
-import frc.robot.sensors.Gyro;
 import frc.robot.sensors.Vision;
 import frc.robot.Brain;
 import frc.robot.Devices;
@@ -282,22 +281,5 @@ public class MecDriver extends Subsystem {
         Logger.ending("^^");
     }
 
-    // TODO: Use this to indicate to the driver that the Robot is aligned with the target (lights? Shuffleboard?)
-    public boolean isAligned(double targetAngle) {
-        boolean straight = Gyro.isYawAligned(targetAngle);
-        if (!straight) return false;
-
-        boolean detected = Vision.frontLineDetected();
-        if (!detected) {
-            Logger.info("MecDriver -> Robot is straight, but no front line detected to center on!");
-            return true;
-        }
-
-        boolean centered = Vision.isFrontCentered();
-        if (!centered) return false;
-
-        Logger.info("MecDriver -> Robot is straight, and centered, fully aligned!");
-        return true;
-    }
 
 }

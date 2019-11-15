@@ -2,14 +2,11 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
-
-import frc.robot.commands.interactive.TankDrive;
-import frc.robot.consoles.Logger;
-import frc.robot.sensors.Gyro;
-import frc.robot.sensors.Vision;
 import frc.robot.Brain;
 import frc.robot.Devices;
-
+import frc.robot.commands.interactive.TankDrive;
+import frc.robot.consoles.Logger;
+import frc.robot.sensors.Vision;
 
 // Mecanum driver subsystem
 public class TankDriver extends Subsystem {
@@ -42,7 +39,7 @@ public class TankDriver extends Subsystem {
                                 talonRearRightIsConnected);
 
         if (!m_talonsAreConnected) {
-            Logger.error("MecDriver talons not all connected! Disabling MecDriver...");
+            Logger.error("TankDriver talons not all connected! Disabling TankDriver...");
         }
         else {
             Devices.talonSrxTankWheelFrontLeft.configOpenloopRamp(SECONDS_FROM_NEUTRAL_TO_FULL, TIMEOUT_MS);
@@ -55,22 +52,22 @@ public class TankDriver extends Subsystem {
     // Initialize Default Command
     @Override
     public void initDefaultCommand() {
-        Logger.setup("Initializing MecDriver DefaultCommand -> MecDriveCartesian...");
+        Logger.setup("Initializing TankDriver DefaultCommand -> TankMovement...");
 
         setDefaultCommand(new TankDrive());
     }
 
     // Flip the control direction of the joystick in Y (or Y Left for Xbox thumbsticks)
     public Boolean flipControlStickDirection() {
-        Logger.action("Toggling MecDriver control stick direction...");
+        Logger.action("Toggling TankDriver control stick direction...");
 
         controlStickDirectionFlipped = !controlStickDirectionFlipped;
 
         if (controlStickDirectionFlipped) {
-            Logger.info("MecDriver control stick direction is now flipped.");
+            Logger.info("TankDriver control stick direction is now flipped.");
         }
         else {
-            Logger.info("MecDriver control stick direction is now standard (not flipped).");
+            Logger.info("TankDriver control stick direction is now standard (not flipped).");
         }
 
         return controlStickDirectionFlipped;
@@ -80,79 +77,22 @@ public class TankDriver extends Subsystem {
     // Stop all the drive motors
     public void stop() {
         if (!m_talonsAreConnected) {
-            Devices.mecDrive.feed();
+            Devices.tankDrive.feed();
             return;
         }
 
-        Devices.mecDrive.stopMotor();
+        Devices.tankDrive.stopMotor();
     }
 
-    // Drive with just the front two wheels at the given speed
-    public void frontWheelDrive(double speed){
-        if (!m_talonsAreConnected) {
-            Devices.mecDrive.feed();
-            return;
-        }
+    // // Drive straight at the given speed
+    // public void driveStraight(double speed) {
+    //     if (!m_talonsAreConnected) {
+    //         Devices.mecDrive.feed();
+    //         return;
+    //     }
 
-        Devices.talonSrxMecWheelFrontLeft.set(speed);
-        Devices.talonSrxMecWheelFrontRight.set(speed);
-        Devices.talonSrxMecWheelRearLeft.set(0);
-        Devices.talonSrxMecWheelRearRight.set(0);
-        Devices.mecDrive.feed();
-    }
-
-    // Strafe at the given speed
-    public void strafe(double speed) {
-        if (!m_talonsAreConnected) {
-            Devices.mecDrive.feed();
-            return;
-        }
-
-        Devices.mecDrive.driveCartesian(speed, 0, 0);
-    }
-
-    // Drive straight at the given speed
-    public void driveStraight(double speed) {
-        if (!m_talonsAreConnected) {
-            Devices.mecDrive.feed();
-            return;
-        }
-
-        Devices.mecDrive.driveCartesian(0, speed, 0);
-    }
-
-    // Rotate at the given speed
-    public void rotate(double speed) {
-        if (!m_talonsAreConnected) {
-            Devices.mecDrive.feed();
-            return;
-        }
-
-        Devices.mecDrive.driveCartesian(0, 0, speed);
-    }
-
-    // Orbit at the given speed, with the robot always looking inward
-    // Positive is clockwise, negative is counter-clockwise
-    public void orbitInward(double magnitude, double zRotation) {
-        if (!m_talonsAreConnected) {
-            Devices.mecDrive.feed();
-            return;
-        }
-
-        // TODO: Test that this does what the method description says it does
-        Devices.mecDrive.drivePolar(magnitude, -90, zRotation);
-    }
-
-    // Orbit at the given speed, with the robot always looking outward
-    public void orbitOutward(double magnitude, double zRotation) {
-        if (!m_talonsAreConnected) {
-            Devices.mecDrive.feed();
-            return;
-        }
-
-        // TODO: Test that this does what the method description says it does
-        Devices.mecDrive.drivePolar(magnitude, 90, zRotation);
-    }
+    //     Devices.mecDrive.driveCartesian(0, speed, 0);
+    // }
 
     // Drive using the cartesian method, using the current control orientation
     // public void driveCartesian(double ySpeed, double xSpeed, double zRotation) {
@@ -160,91 +100,86 @@ public class TankDriver extends Subsystem {
     //     driveCartesian(ySpeed, xSpeed, zRotation, orientation);
     // }
 
-    // Drive using the cartesian method, using the given control orientation
-    public void driveCartesian(double ySpeed, double xSpeed, double zRotation, DriveOrientation orientation) {
+    // Drive using the tank method, using the given control orientation
+    public void driveTank(double yLeft, double yRight) {
         if (!m_talonsAreConnected) {
             Devices.mecDrive.feed();
             return;
         }
-
-        if (orientation == DriveOrientation.ROBOT) {
-            // Logger.info("Cartesian Movement: " + ySpeed + ", " + xSpeed + ", " + zRotation);
-            Devices.mecDrive.driveCartesian(ySpeed, xSpeed, zRotation);
-        }
-        else if (orientation == DriveOrientation.FIELD) {
-            double gyroAngle = Devices.gyro.getYaw();
-            // Logger.info("Cartesian Movement: " + ySpeed + ", " + xSpeed + ", " + zRotation + ", " + gyroAngle);
-            Devices.mecDrive.driveCartesian(ySpeed, xSpeed, zRotation, gyroAngle);
-        }
-    }
-
-    // Drive using the polar method
-    public void drivePolar(double magnitude, double angle, double rotation) {
-        if (!m_talonsAreConnected) {
-            Devices.mecDrive.feed();
-            return;
+        //Drive Left side forward and backward
+        if (yLeft == 1) {
+            Devices.talonSrxTankWheelFrontLeft.set(0.5);
         }
 
-        // Logger.info("Polar Movement: " + magnitude + ", " + angle + ", " + rotation);
-        Devices.mecDrive.drivePolar(magnitude, angle, rotation);
+        if (yLeft == -1) {
+            Devices.talonSrxTankWheelFrontLeft.set(-0.5);
+        }
+        // Drive Right side forward and backward
+        if (yRight == 1) {
+            Devices.talonSrxTankWheelFrontRight.set(0.5);
+        }
+
+        if (yRight == -1) {
+            Devices.talonSrxTankWheelFrontRight.set(-0.5);
+        }
     }
 
     // Drive to align the Robot to a detected line at the given yaw
-    public void driveAlign(double targetYaw) {
-        Logger.setup("##");
+    // public void driveAlign(double targetYaw) {
+    //     Logger.setup("##");
 
-        // Get the correction yaw needed to align the Robot with the target yaw
-        double yaw = Devices.gyro.getYaw();
-        double correction = targetYaw - yaw;
-        if (correction > 180) correction = correction - 360;
-        if (correction < -180) correction = correction + 360;
-        Logger.info("MecDriver -> Gyro -> Target Yaw: " + targetYaw + "; Current Yaw: " + yaw + "; Correction: " + correction);
+    //     // Get the correction yaw needed to align the Robot with the target yaw
+    //     double yaw = Devices.gyro.getYaw();
+    //     double correction = targetYaw - yaw;
+    //     if (correction > 180) correction = correction - 360;
+    //     if (correction < -180) correction = correction + 360;
+    //     Logger.info("MecDriver -> Gyro -> Target Yaw: " + targetYaw + "; Current Yaw: " + yaw + "; Correction: " + correction);
 
-        // Get the drive polar magnitude and angle needed to align the Robot's center with the appropriate detected line
-        double magnitude = 0;
-        double angle = 0;
-        if (-45 <= correction && correction <= 45) {
-            // Our target in in front of us, so look for a line in front to use to start centering
-            boolean detected = Vision.frontLineDetected();
-            if (detected) {
-                boolean centered = Vision.isFrontCentered();
-                if (!centered) {
-                    double imageX = Vision.getFrontCorrectedX();
-                    angle = correction + 90;
-                    magnitude = Brain.getAlignFrontMagnitude();
-                    if (imageX < 0) magnitude = -magnitude;
-                    Logger.info("MecDriver -> Front Camera -> Pixels to correct: " + imageX + "; Magnitude: " + magnitude + "; Angle: " + angle);
-                }
-            }
-        }
-        else if (-135 < correction && correction < -45) {
-            // Our target is to the left, so look for a line to the left use to start centering
-            boolean detected = Vision.leftLineDetected();
-            if (detected) {
-                boolean centered = Vision.isLeftCentered();
-                if (!centered) {
-                    double imageX = Vision.getLeftCorrectedX();
-                    angle = correction + 90;
-                    magnitude = Brain.getAlignSideMagnitude();
-                    if (imageX < 0) magnitude = -magnitude;
-                    Logger.info("MecDriver -> Left Camera -> Pixels to correct: " + imageX + "; Magnitude: " + magnitude + "; Angle: " + angle);
-                }
-            }
-        }
-        else if (45 < correction && correction < 135) {
-            // Our target is to the right, so look for a line to the right use to start centering
-            boolean detected = Vision.rightLineDetected();
-            if (detected) {
-                boolean centered = Vision.isRightCentered();
-                if (!centered) {
-                    double imageX = Vision.getRightCorrectedX();
-                    angle = correction + 90;
-                    magnitude = Brain.getAlignSideMagnitude();
-                    if (imageX > 0) magnitude = -magnitude;
-                    Logger.info("MecDriver -> Right Camera -> Pixels to correct: " + imageX + "; Magnitude: " + magnitude + "; Angle: " + angle);
-                }
-            }
-        }
-    }
+    //     // Get the drive polar magnitude and angle needed to align the Robot's center with the appropriate detected line
+    //     double magnitude = 0;
+    //     double angle = 0;
+    //     if (-45 <= correction && correction <= 45) {
+    //         // Our target in in front of us, so look for a line in front to use to start centering
+    //         boolean detected = Vision.frontLineDetected();
+    //         if (detected) {
+    //             boolean centered = Vision.isFrontCentered();
+    //             if (!centered) {
+    //                 double imageX = Vision.getFrontCorrectedX();
+    //                 angle = correction + 90;
+    //                 magnitude = Brain.getAlignFrontMagnitude();
+    //                 if (imageX < 0) magnitude = -magnitude;
+    //                 Logger.info("MecDriver -> Front Camera -> Pixels to correct: " + imageX + "; Magnitude: " + magnitude + "; Angle: " + angle);
+    //             }
+    //         }
+    //     }
+    //     else if (-135 < correction && correction < -45) {
+    //         // Our target is to the left, so look for a line to the left use to start centering
+    //         boolean detected = Vision.leftLineDetected();
+    //         if (detected) {
+    //             boolean centered = Vision.isLeftCentered();
+    //             if (!centered) {
+    //                 double imageX = Vision.getLeftCorrectedX();
+    //                 angle = correction + 90;
+    //                 magnitude = Brain.getAlignSideMagnitude();
+    //                 if (imageX < 0) magnitude = -magnitude;
+    //                 Logger.info("MecDriver -> Left Camera -> Pixels to correct: " + imageX + "; Magnitude: " + magnitude + "; Angle: " + angle);
+    //             }
+    //         }
+    //     }
+    //     else if (45 < correction && correction < 135) {
+    //         // Our target is to the right, so look for a line to the right use to start centering
+    //         boolean detected = Vision.rightLineDetected();
+    //         if (detected) {
+    //             boolean centered = Vision.isRightCentered();
+    //             if (!centered) {
+    //                 double imageX = Vision.getRightCorrectedX();
+    //                 angle = correction + 90;
+    //                 magnitude = Brain.getAlignSideMagnitude();
+    //                 if (imageX > 0) magnitude = -magnitude;
+    //                 Logger.info("MecDriver -> Right Camera -> Pixels to correct: " + imageX + "; Magnitude: " + magnitude + "; Angle: " + angle);
+    //             }
+    //         }
+    //     }
+    // }
 
 }

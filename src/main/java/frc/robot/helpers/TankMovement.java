@@ -2,20 +2,18 @@
 package frc.robot.helpers;
 
 
-// The values needed to drive using cartesian coordinates
+// The values needed to drive using Tank
 public class TankMovement {
 
-    public double ySpeed = 0; // Side to Side
-    public double xSpeed = 0; // Forward & Backward
-    public double zRotation = 0; // Rotate
+    public double yLeftPosition = 0;
+    public double yRightPosition = 0;
 
     public TankMovement() {
     }
 
-    public TankMovement(double y, double x, double z) {
-        ySpeed = y;
-        xSpeed = x;
-        zRotation = z;
+    public TankMovement(double yLeft, double yRight) {
+        yLeftPosition = yLeft;
+        yRightPosition = yRight;
     }
 
 }

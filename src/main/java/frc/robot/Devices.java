@@ -127,14 +127,14 @@ public class Devices {
                                     talonSrxMecWheelRearLeft,
                                     talonSrxMecWheelFrontRight,
                                     talonSrxMecWheelRearRight);
-        talonSrxMecWheelFrontLeft.setInverted(true);
-        talonSrxMecWheelRearLeft.setInverted(true);
-        talonSrxMecWheelFrontRight.setInverted(true);
-        talonSrxMecWheelRearRight.setInverted(true);
-        mecDrive = new MecanumDrive(talonSrxTankWheelFrontLeft,
-                                    talonSrxTankWheelRearLeft,
-                                    talonSrxTankWheelFrontRight,
-                                    talonSrxTankWheelRearRight);
+        talonSrxTankWheelFrontLeft.setInverted(true);
+        talonSrxTankWheelRearLeft.setInverted(true);
+        talonSrxTankWheelFrontRight.setInverted(true);
+        talonSrxTankWheelRearRight.setInverted(true);
+        tankDrive= new DifferentialDrive(talonSrxTankWheelFrontLeft,
+                                         talonSrxTankWheelFrontRight);
+        Devices.talonSrxTankWheelRearLeft.follow(Devices.talonSrxTankWheelFrontLeft);
+        Devices.talonSrxTankWheelRearRight.follow(Devices.talonSrxTankWheelFrontRight);
     }
 
     // Determines if the Talon SRX is connected

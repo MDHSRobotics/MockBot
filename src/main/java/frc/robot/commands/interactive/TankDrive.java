@@ -6,12 +6,13 @@ import frc.robot.OI;
 import frc.robot.Robot;
 import frc.robot.consoles.Logger;
 import frc.robot.helpers.CartesianMovement;
+import frc.robot.helpers.TankMovement;
 
-// This command uses the joystick input to mecanum drive using the cartesian method
+// This command uses the joystick input to tank drive using the cartesian method
 public class TankDrive extends Command {
 
     public TankDrive() {
-        Logger.setup("Constructing Command: MecDriveCartesian...");
+        Logger.setup("Constructing Command: TankDriveCartesian...");
 
         // Declare subsystem dependencies
         requires(Robot.robotTankDriver);
@@ -19,13 +20,13 @@ public class TankDrive extends Command {
 
     @Override
     protected void initialize() {
-        Logger.action("Initializing Command: MecDriveCartesian...");
+        Logger.action("Initializing Command: TankDriveCartesian...");
     }
 
     @Override
     protected void execute() {
-        CartesianMovement move = OI.getCartesianMovement(Robot.robotMecDriver.controlStickDirectionFlipped);
-        Robot.robotMecDriver.driveCartesian(move.ySpeed, move.xSpeed, move.zRotation);
+        TankMovement move = OI.getTankMovementFromThumbsticks(Robot.robotTankDriver.controlStickDirectionFlipped);
+        Robot.robotTankDriver.driveTank(move.yLeftPosition, move.yRightPosition);
     }
 
     // This command continues until interrupted
@@ -36,13 +37,13 @@ public class TankDrive extends Command {
 
     @Override
     protected void end() {
-        Logger.ending("Ending Command: MecDriveCartesian...");
+        Logger.ending("Ending Command: TankDriveCartesian...");
     }
 
     @Override
     protected void interrupted() {
         System.out.println("--");
-        Logger.ending("Interrupting Command: MecDriveCartesian...");
+        Logger.ending("Interrupting Command: TankDriveCartesian...");
     }
 
 }

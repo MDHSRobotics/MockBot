@@ -99,6 +99,18 @@ public class OI {
         }
     }
 
+    // Determines the tank movement (up or down for Left, up or down for Right)
+    // from the active control stick position(s)
+    public static TankMovement getTankMovement(boolean isYflipped) {
+        ControlStick cStick = Brain.getControlStick();
+        switch (cStick) {
+            case XBOX:
+                return getTankMovementFromThumbsticks(isYflipped);
+            default:
+                return null;
+        }
+    }
+
     //----------//
     // Joystick //
     //----------//
@@ -191,14 +203,25 @@ public class OI {
         return move;
     }
 
+    // Determines the tank movement (up or down of Left, up or down of Right)
+    // from the current xbox thumbstick positions
+    public static TankMovement getTankMovementFromThumbsticks(boolean isYleftFlipped) {
+        ThumbStickPosition pos = getThumbstickPosition(isYleftFlipped);
+        TankMovement move = new TankMovement(pos.yLeftPosition, pos.yRightPosition);
+        // Logger.info("Xbox Cartesian Movement: " + pos.yLeftPosition + ", " + pos.xLeftPosition + ", " + pos.xRightPosition);
+        return move;
+    }
+
     // Gets the xbox thumbstick positions and applies user-determined orientation, deadzones, and sensitivity
     private static ThumbStickPosition getThumbstickPosition(boolean isYleftFlipped) {
         double yLeft = Devices.driveXbox.getY(Hand.kLeft); // Forward & backward, flipped
         double xLeft = Devices.driveXbox.getX(Hand.kLeft); // Strafe
         double xRight = Devices.driveXbox.getX(Hand.kRight); // Rotate
+        double yRight = Devices.driveXbox.getY(Hand.kRight);
 
         // Forward/backward direction is reversed from what is intuitive, so flip it
         yLeft = -yLeft;
+         // TODO mayble flip yRight also?
 
         // User-determined flipping of forward/backward orientation
         if (isYleftFlipped) {
@@ -209,10 +232,13 @@ public class OI {
         double yLeftDeadZone = Brain.getYleftDeadZone();
         double xLeftDeadZone = Brain.getXleftDeadZone();
         double xRightDeadZone = Brain.getXrightDeadZone();
+        double yRightDeadZone = Brain.getYrightDeadZone();
+    
 
         if (Math.abs(yLeft) <= yLeftDeadZone) yLeft = 0;
         if (Math.abs(xLeft) <= xLeftDeadZone) xLeft = 0;
         if (Math.abs(xRight) <= xRightDeadZone) xRight = 0;
+        if (Math.abs(yRight) <= yRightDeadZone) yRight = 0;
 
         if (yLeft > 0) yLeft = yLeft - yLeftDeadZone;
         if (yLeft < 0) yLeft = yLeft + yLeftDeadZone;
@@ -220,17 +246,21 @@ public class OI {
         if (xLeft < 0) xLeft = xLeft + xLeftDeadZone;
         if (xRight > 0) xRight = xRight - xRightDeadZone;
         if (xRight < 0) xRight = xRight + xRightDeadZone;
+        if (yRight > 0) yRight = yRight - yRightDeadZone;
+        if (yRight < 0) yRight = yRight + yRightDeadZone;
 
         // Sensitivity
         double yLeftSensitivity = Brain.getYleftSensitivity();
         double xLeftSensitivity = Brain.getXleftSensitivity();
         double xRightSensitivity = Brain.getXrightSensitivity();
+        double yRightSensitivity = Brain.getYrightSensitivity();
 
         yLeft = yLeft * yLeftSensitivity;
         xLeft = xLeft * xLeftSensitivity;
         xRight = xRight * xRightSensitivity;
+        yRight = yRight * yRightSensitivity;
 
-        ThumbStickPosition pos = new ThumbStickPosition(yLeft, xLeft, xRight);
+        ThumbStickPosition pos = new ThumbStickPosition(yLeft, xLeft, xRight, yRight);
         return pos;
     }
 
