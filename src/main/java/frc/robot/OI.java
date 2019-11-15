@@ -5,6 +5,7 @@ import edu.wpi.first.wpilibj.GenericHID.Hand;
 
 import frc.robot.commands.instant.*;
 import frc.robot.commands.interactive.*;
+import frc.robot.commands.reactive.*;
 import frc.robot.consoles.Logger;
 import frc.robot.helpers.*;
 import frc.robot.Brain;
@@ -31,12 +32,6 @@ public class OI {
             configureDriveXBoxButtons();
         }
 
-        if (!Devices.isClimbXboxConnected()) {
-            Logger.error("Climb XBox controller not plugged in!");
-        }
-        else {
-            configureClimbXBoxButtons();
-        }
     }
 
     //-------------------------//
@@ -47,7 +42,8 @@ public class OI {
     public static void configureDriveXBoxButtons() {
         // Bind the "drive" xbox buttons to specific commands
         Devices.driveXboxBtnStart.whenPressed(new RobotGameModeDelivery());
-        Devices.driveXboxBtnA.whenPressed(new RunMotorDry());
+        Devices.driveXboxBtnA.whenPressed(new TestMotorDry());
+        Devices.driveXboxBtnB.whenPressed(new TestProgramToggleEncoderRotations());
         // Test drive commands
         // Devices.driveXboxBtnDpad.whileHeld(new MecDriveAlign());
         // Devices.driveXboxBtnA.whileHeld(new MecDriveSlowForward());
@@ -244,18 +240,6 @@ public class OI {
     //----------------------//
     // Interactive Climbing //
     //----------------------//
-
-    // Gets the Pulley speed from the climb xbox controller's Left Thumbstick Y axis position
-    public static double getBackPulleyLiftSpeed() {
-        double y = Devices.climbXbox.getY(Hand.kLeft);
-        return y;
-    }
-
-    // Gets the Pulley speed from the climb xbox controller's Right Thumbstick Y axis position
-    public static double getFrontPulleyLiftSpeed() {
-        double y = Devices.climbXbox.getY(Hand.kRight);
-        return y;
-    }
 
     // Gets the Pulley speed from the drive Xbox controller's Right Thumbstick Y
     public static double getBallSpeed() {

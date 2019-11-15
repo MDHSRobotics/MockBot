@@ -180,22 +180,6 @@ public class Brain {
     public static NetworkTableEntry alignZSpeedMinimumEntry;
     public static NetworkTableEntry alignZToleranceEntry;
 
-    // Subsystem - Baller
-    public static NetworkTableEntry ballTossAngleEntry;
-
-    // Subsystem - Hatcher
-    public static NetworkTableEntry hatchOpenAngleEntry;
-    public static NetworkTableEntry hatchCloseAngleEntry;
-
-    // Subystem - Arm
-    public static NetworkTableEntry armHAB2AngleEntry;
-    public static NetworkTableEntry armHAB3AngleEntry;
-    public static NetworkTableEntry armFullAngleEntry;
-
-    // Subystem - Pulley
-    public static NetworkTableEntry pulleyHAB2DistanceEntry;
-    public static NetworkTableEntry pulleyHAB3DistanceEntry;
-
     //---------//
     // Setters //
     //---------//
@@ -469,42 +453,6 @@ public class Brain {
 
     public static double getAlignZTolerance() {
         return alignZToleranceEntry.getDouble(alignZToleranceDefault);
-    }
-
-    // Subsystems - Baller
-    public static double getBallTossAngle() {
-        return ballTossAngleEntry.getDouble(ballTossAngleDefault);
-    }
-
-    // Subsystems - Hatcher
-    public static double getHatchOpenAngle() {
-        return hatchOpenAngleEntry.getDouble(hatchOpenAngleDefault);
-    }
-
-    public static double getHatchCloseAngle() {
-        return hatchCloseAngleEntry.getDouble(hatchCloseAngleDefault);
-    }
-
-    // Subystems - Arm
-    public static double getArmHAB2Angle() {
-        return armHAB2AngleEntry.getDouble(armHAB2AngleDefault);
-    }
-
-    public static double getArmHAB3Angle() {
-        return armHAB3AngleEntry.getDouble(armHAB3AngleDefault);
-    }
-
-    public static double getArmFullAngle() {
-        return armFullAngleEntry.getDouble(armFullAngleDefault);
-    }
-
-    // Subystems - Pulley
-    public static double getPulleyHAB2Distance() {
-        return pulleyHAB2DistanceEntry.getDouble(pulleyHAB2DistanceDefault);
-    }
-
-    public static double getPulleyHAB3Distance() {
-        return pulleyHAB3DistanceEntry.getDouble(pulleyHAB3DistanceDefault);
     }
 
 }

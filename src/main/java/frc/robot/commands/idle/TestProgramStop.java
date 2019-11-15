@@ -8,23 +8,23 @@ import frc.robot.Robot;
 
 
 // This command stops the Hatcher motor
-public class HatcherStop extends Command {
+public class TestProgramStop extends Command {
 
-    public HatcherStop() {
-        Logger.setup("Constructing Command: HatcherStop...");
+    public TestProgramStop() {
+        Logger.setup("Constructing Command: TestProgramStop...");
 
         // Declare subsystem dependencies
-        requires(Robot.robotHatcher);
+        requires(Robot.testProgram);
     }
 
     @Override
     protected void initialize() {
-        Logger.action("Initializing Command: HatcherStop...");
+        Logger.action("Initializing Command: TestProgramStop...");
     }
 
     @Override
     protected void execute() {
-        Robot.robotHatcher.stop();
+        Robot.testProgram.stop();
     }
 
     // This command continues until interrupted
@@ -35,12 +35,12 @@ public class HatcherStop extends Command {
 
     @Override
     protected void end() {
-        Logger.ending("Ending Command: HatcherStop...");
+        Logger.ending("Ending Command: TestProgramStop...");
     }
 
     @Override
     protected void interrupted() {
-        Logger.ending("Interrupting Command: HatcherStop...");
+        Logger.ending("Interrupting Command: TestProgramStop...");
     }
 
 }

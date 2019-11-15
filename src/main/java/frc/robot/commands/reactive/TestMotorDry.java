@@ -8,10 +8,10 @@ import frc.robot.Robot;
 
 
 // This command opens the Hatcher claw via encoder to grab the hatch, and keeps it there
-public class RunMotorDry extends Command {
+public class TestMotorDry extends Command {
 
-    public () {
-        Logger.setup("Constructing Command: RunMotorDry...");
+    public TestMotorDry() {
+        Logger.setup("Constructing Command: TestMotorDry...");
 
         // Declare subsystem dependencies
         requires(Robot.testProgram);
@@ -19,13 +19,13 @@ public class RunMotorDry extends Command {
 
     @Override
     protected void initialize() {
-        Logger.action("Initializing Command: RunMotorDry...");
+        Logger.action("Initializing Command: TestMotorDry...");
 
     }
 
     @Override
     protected void execute() {
-        Robot.testProgram.testMotor();
+        Robot.testProgram.testMotorDry();
     }
 
     // This command continues until interrupted
@@ -36,12 +36,12 @@ public class RunMotorDry extends Command {
 
     @Override
     protected void end() {
-        Logger.ending("Ending Command: RunMotorDry...");
+        Logger.ending("Ending Command: TestMotorDry...");
     }
 
     @Override
     protected void interrupted() {
-        Logger.ending("Interrupting Command: RunMotorDry...");
+        Logger.ending("Interrupting Command: TestMotorDry...");
     }
 
 }
