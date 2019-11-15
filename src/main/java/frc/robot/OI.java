@@ -47,24 +47,13 @@ public class OI {
     public static void configureDriveXBoxButtons() {
         // Bind the "drive" xbox buttons to specific commands
         Devices.driveXboxBtnStart.whenPressed(new RobotGameModeDelivery());
-        Devices.driveXboxBtnBack.whenPressed(new RobotGameModeClimb());
-        Devices.driveXboxBtnDpad.whileHeld(new MecDriveAlign());
-        Devices.driveXboxBtnBumperLeft.whileHeld(new BallReset());
-        Devices.driveXboxBtnBumperRight.whenPressed(new BallerToggleFlipperPosition());
+        Devices.driveXboxBtnA.whenPressed(new RunMotorDry());
         // Test drive commands
+        // Devices.driveXboxBtnDpad.whileHeld(new MecDriveAlign());
         // Devices.driveXboxBtnA.whileHeld(new MecDriveSlowForward());
         // Devices.driveXboxBtnB.whileHeld(new MecDriveSlowTurnRight());
         // Devices.driveXboxBtnX.whileHeld(new MecDriveSlowOrbitInwardClockwise());
         // Devices.driveXboxBtnY.whileHeld(new MecDriveSlowOrbitOutwardClockwise());
-    }
-
-    // Climb XBox Buttons
-    public static void configureClimbXBoxButtons() {
-        // Bind the "climb" xbox buttons to specific commands
-        Devices.climbXboxBtnStart.whenPressed(new RobotGameModeClimb());
-        Devices.climbXboxBtnBack.whenPressed(new RobotGameModeDelivery());
-        Devices.climbXboxBtnX.whenPressed(new BackPulleyManual());
-        Devices.climbXboxBtnB.whenPressed(new FrontPulleyManual());
     }
 
     //----------------------//
