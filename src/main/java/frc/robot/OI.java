@@ -48,9 +48,12 @@ public class OI {
         // Bind the "drive" xbox buttons to specific commands
         Devices.driveXboxBtnStart.whenPressed(new RobotGameModeDelivery());
         Devices.driveXboxBtnBack.whenPressed(new RobotGameModeClimb());
+        // TODO Check drive mode before assigning this MecDrive command
         Devices.driveXboxBtnDpad.whileHeld(new MecDriveAlign());
         Devices.driveXboxBtnBumperLeft.whileHeld(new BallReset());
         Devices.driveXboxBtnBumperRight.whenPressed(new BallerToggleFlipperPosition());
+
+        // TODO It would be good to have similar test commands for Omni
         // Test drive commands
         // Devices.driveXboxBtnA.whileHeld(new MecDriveSlowForward());
         // Devices.driveXboxBtnB.whileHeld(new MecDriveSlowTurnRight());
