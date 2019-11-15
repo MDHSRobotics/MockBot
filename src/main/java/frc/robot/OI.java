@@ -9,6 +9,7 @@ import frc.robot.consoles.Logger;
 import frc.robot.helpers.*;
 import frc.robot.Brain;
 
+import frc.robot.commands.test.MecDriveBoxGroup;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -49,8 +50,9 @@ public class OI {
         Devices.driveXboxBtnStart.whenPressed(new RobotGameModeDelivery());
         Devices.driveXboxBtnBack.whenPressed(new RobotGameModeClimb());
         Devices.driveXboxBtnDpad.whileHeld(new MecDriveAlign());
-        Devices.driveXboxBtnBumperLeft.whileHeld(new BallReset());
-        Devices.driveXboxBtnBumperRight.whenPressed(new BallerToggleFlipperPosition());
+        Devices.driveXboxBtnA.whenPressed(new LiftPulleyRaise());
+        Devices.driveXboxBtnB.whenPressed(new LiftPulleyLower());
+        Devices.driveXboxBtnX.whenPressed(new MecDriveBoxGroup());
         // Test drive commands
         // Devices.driveXboxBtnA.whileHeld(new MecDriveSlowForward());
         // Devices.driveXboxBtnB.whileHeld(new MecDriveSlowTurnRight());
