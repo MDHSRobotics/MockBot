@@ -14,7 +14,7 @@ import frc.robot.Devices;
 
 
 // Hatcher subsystem, for grabbing and releasing hatches
-public class Hatcher extends Subsystem {
+public class TestProgram extends Subsystem {
 
     // The public property to determine the Hatcher's claw state
     public boolean clawIsClosed = false;
@@ -29,48 +29,48 @@ public class Hatcher extends Subsystem {
     // The Talon connection state, to prevent watchdog warnings during testing
     private boolean m_talonsAreConnected = false;
 
-    public Hatcher() {
+    public TestProgram() {
         Logger.setup("Constructing Subsystem: Hatcher...");
 
-        m_talonsAreConnected = Devices.isConnected(Devices.talonSrxHatcher);
+        m_talonsAreConnected = Devices.isConnected(Devices.talonTestBoard);
         if (!m_talonsAreConnected) {
-            Logger.error("Hatcher talons not all connected! Disabling Hatcher...");
+            Logger.error("TestProgram talons not all connected! Disabling Hatcher...");
         }
         else {
-            Devices.talonSrxHatcher.configFactoryDefault();
+            Devices.talonTestBoard.configFactoryDefault();
 
-            Devices.talonSrxHatcher.configPeakCurrentDuration(TalonConstants.PEAK_AMPERAGE_DURATION, TalonConstants.TIMEOUT_MS);
-            Devices.talonSrxHatcher.configPeakCurrentLimit(TalonConstants.PEAK_AMPERAGE, TalonConstants.TIMEOUT_MS);
-            Devices.talonSrxHatcher.configContinuousCurrentLimit(TalonConstants.CONTINUOUS_AMPERAGE_LIMIT, TalonConstants.TIMEOUT_MS);
+            Devices.talonTestBoard.configPeakCurrentDuration(TalonConstants.PEAK_AMPERAGE_DURATION, TalonConstants.TIMEOUT_MS);
+            Devices.talonTestBoard.configPeakCurrentLimit(TalonConstants.PEAK_AMPERAGE, TalonConstants.TIMEOUT_MS);
+            Devices.talonTestBoard.configContinuousCurrentLimit(TalonConstants.CONTINUOUS_AMPERAGE_LIMIT, TalonConstants.TIMEOUT_MS);
 
-            Devices.talonSrxHatcher.configNominalOutputForward(0);
-            Devices.talonSrxHatcher.configNominalOutputReverse(0);
-            Devices.talonSrxHatcher.configPeakOutputForward(0.5);
-            Devices.talonSrxHatcher.configPeakOutputReverse(-0.5);
+            Devices.talonTestBoard.configNominalOutputForward(0);
+            Devices.talonTestBoard.configNominalOutputReverse(0);
+            Devices.talonTestBoard.configPeakOutputForward(0.5);
+            Devices.talonTestBoard.configPeakOutputReverse(-0.5);
 
-            Devices.talonSrxHatcher.configMotionAcceleration(3000, TalonConstants.TIMEOUT_MS);
-            Devices.talonSrxHatcher.configMotionCruiseVelocity(8000, TalonConstants.TIMEOUT_MS);
+            Devices.talonTestBoard.configMotionAcceleration(3000, TalonConstants.TIMEOUT_MS);
+            Devices.talonTestBoard.configMotionCruiseVelocity(8000, TalonConstants.TIMEOUT_MS);
 
             // Config TalonSRX Redline encoder
-            Devices.talonSrxHatcher.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, TalonConstants.PID_LOOP_PRIMARY, TalonConstants.TIMEOUT_MS);
-            Devices.talonSrxHatcher.setSensorPhase(SENSOR_PHASE);
-            Devices.talonSrxHatcher.setInverted(MOTOR_INVERT);
-            Devices.talonSrxHatcher.configAllowableClosedloopError(0, TalonConstants.PID_LOOP_PRIMARY, TalonConstants.TIMEOUT_MS);
+            Devices.talonTestBoard.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, TalonConstants.PID_LOOP_PRIMARY, TalonConstants.TIMEOUT_MS);
+            Devices.talonTestBoard.setSensorPhase(SENSOR_PHASE);
+            Devices.talonTestBoard.setInverted(MOTOR_INVERT);
+            Devices.talonTestBoard.configAllowableClosedloopError(0, TalonConstants.PID_LOOP_PRIMARY, TalonConstants.TIMEOUT_MS);
 
-            Devices.talonSrxHatcher.config_kF(TalonConstants.PID_LOOP_PRIMARY, 0.0, TalonConstants.TIMEOUT_MS);
-            Devices.talonSrxHatcher.config_kP(TalonConstants.PID_LOOP_PRIMARY, 0.32, TalonConstants.TIMEOUT_MS);
-            Devices.talonSrxHatcher.config_kI(TalonConstants.PID_LOOP_PRIMARY, 0.0, TalonConstants.TIMEOUT_MS);
-            Devices.talonSrxHatcher.config_kD(TalonConstants.PID_LOOP_PRIMARY, 0.0, TalonConstants.TIMEOUT_MS);
+            Devices.talonTestBoard.config_kF(TalonConstants.PID_LOOP_PRIMARY, 0.0, TalonConstants.TIMEOUT_MS);
+            Devices.talonTestBoard.config_kP(TalonConstants.PID_LOOP_PRIMARY, 0.32, TalonConstants.TIMEOUT_MS);
+            Devices.talonTestBoard.config_kI(TalonConstants.PID_LOOP_PRIMARY, 0.0, TalonConstants.TIMEOUT_MS);
+            Devices.talonTestBoard.config_kD(TalonConstants.PID_LOOP_PRIMARY, 0.0, TalonConstants.TIMEOUT_MS);
 
             // Initialize current encoder position as zero 
-            Devices.talonSrxHatcher.setSelectedSensorPosition(0, TalonConstants.PID_LOOP_PRIMARY, TalonConstants.TIMEOUT_MS);
-            SensorCollection sensorCol = Devices.talonSrxHatcher.getSensorCollection();
+            Devices.talonTestBoard.setSelectedSensorPosition(0, TalonConstants.PID_LOOP_PRIMARY, TalonConstants.TIMEOUT_MS);
+            SensorCollection sensorCol = Devices.talonTestBoard.getSensorCollection();
             int absolutePosition = sensorCol.getPulseWidthPosition();
             absolutePosition &= 0xFFF;
             if (SENSOR_PHASE) absolutePosition *= -1;
             if (MOTOR_INVERT) absolutePosition *= -1;
             // Set the quadrature (relative) sensor to match absolute
-            Devices.talonSrxHatcher.setSelectedSensorPosition(absolutePosition, TalonConstants.PID_LOOP_PRIMARY, TalonConstants.TIMEOUT_MS);
+            Devices.talonTestBoard.setSelectedSensorPosition(absolutePosition, TalonConstants.PID_LOOP_PRIMARY, TalonConstants.TIMEOUT_MS);
         }
     }
 
@@ -89,7 +89,7 @@ public class Hatcher extends Subsystem {
     // Stop the Hatcher claw motor
     public void stop() {
         if (!m_talonsAreConnected) return;
-        Devices.talonSrxHatcher.stopMotor();
+        Devices.talonTestBoard.stopMotor();
     }
 
     // Open the Hatcher claw
@@ -99,7 +99,7 @@ public class Hatcher extends Subsystem {
         Logger.info("Hatcher -> Motion Magic to OPEN: " + angle + " angle, " + ticks + " ticks");
 
         if (!m_talonsAreConnected) return;
-        Devices.talonSrxHatcher.set(ControlMode.MotionMagic, ticks);
+        Devices.talonTestBoard.set(ControlMode.MotionMagic, ticks);
     }
 
     // Close the Hatcher claw
@@ -109,19 +109,19 @@ public class Hatcher extends Subsystem {
         Logger.info("Hatcher -> Motion Magic to CLOSE: " + angle + " angle, " + ticks + " ticks");
 
         if (!m_talonsAreConnected) return;
-        Devices.talonSrxHatcher.set(ControlMode.MotionMagic, ticks);
+        Devices.talonTestBoard.set(ControlMode.MotionMagic, ticks);
     }
 
     // Get the current Hatcher claw motor velocity
     public int getVelocity() {
         if (!m_talonsAreConnected) return 0;
-        return Devices.talonSrxHatcher.getSelectedSensorVelocity();
+        return Devices.talonTestBoard.getSelectedSensorVelocity();
     }
 
     // Get the current Hatcher claw motor position
     public int getPosition() {
         if (!m_talonsAreConnected) return 0;
-        return Devices.talonSrxHatcher.getSelectedSensorPosition();
+        return Devices.talonTestBoard.getSelectedSensorPosition();
     }
 
     //---------//
@@ -130,7 +130,7 @@ public class Hatcher extends Subsystem {
 
     public void testMotor() {
         if (!m_talonsAreConnected) return;
-        Devices.talonSrxHatcher.set(0.2);
+        Devices.talonTestBoard.set(0.5);
     }
 
 }
