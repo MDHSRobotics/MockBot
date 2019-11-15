@@ -115,10 +115,12 @@ public class Robot extends TimedRobot {
         switch(driveMode) {
             case 1:
                 robotOmniDriver = new OmniDriver();
+                break;
             case 2:
                 //TODO add robotTankDriver
             default:
                 robotMecDriver = new MecDriver();
+                break;
         }
         
 
