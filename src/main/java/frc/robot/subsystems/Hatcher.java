@@ -9,7 +9,6 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.commands.idle.HatcherStop;
 import frc.robot.consoles.Logger;
 import frc.robot.helpers.TalonUtils;
-import frc.robot.Brain;
 import frc.robot.Devices;
 
 
@@ -92,26 +91,6 @@ public class Hatcher extends Subsystem {
         Devices.talonSrxHatcher.stopMotor();
     }
 
-    // Open the Hatcher claw
-    public void openClaw() {
-        double angle = Brain.getHatchOpenAngle();
-        double ticks = TalonUtils.translateAngleToTicks(angle, GEAR_RATIO);
-        Logger.info("Hatcher -> Motion Magic to OPEN: " + angle + " angle, " + ticks + " ticks");
-
-        if (!m_talonsAreConnected) return;
-        Devices.talonSrxHatcher.set(ControlMode.MotionMagic, ticks);
-    }
-
-    // Close the Hatcher claw
-    public void closeClaw() {
-        double angle = Brain.getHatchCloseAngle();
-        double ticks = TalonUtils.translateAngleToTicks(angle, GEAR_RATIO);
-        Logger.info("Hatcher -> Motion Magic to CLOSE: " + angle + " angle, " + ticks + " ticks");
-
-        if (!m_talonsAreConnected) return;
-        Devices.talonSrxHatcher.set(ControlMode.MotionMagic, ticks);
-    }
-
     // Get the current Hatcher claw motor velocity
     public int getVelocity() {
         if (!m_talonsAreConnected) return 0;
@@ -123,10 +102,6 @@ public class Hatcher extends Subsystem {
         if (!m_talonsAreConnected) return 0;
         return Devices.talonSrxHatcher.getSelectedSensorPosition();
     }
-
-    //---------//
-    // Testing //
-    //---------//
 
     public void testMotor() {
         if (!m_talonsAreConnected) return;
