@@ -20,7 +20,6 @@ import frc.robot.helpers.DPadButton.Direction;
 public class Devices {
     
     static private final int DRIVE_XBOX_STICK_NUM = 0;
-    static private final int CLIMB_XBOX_STICK_NUM = 1;
     static private final int JSTICK_STICK_NUM = 2;
 
     // Joysticks

@@ -51,6 +51,7 @@ public class TestProgram extends Subsystem {
 
             Devices.talonTestBoard.configMotionAcceleration(3000, TalonUtils.TIMEOUT_MS);
             Devices.talonTestBoard.configMotionCruiseVelocity(8000, TalonUtils.TIMEOUT_MS);
+            Devices.talonTestBoard.configMotionSCurveStrength(4, TalonUtils.TIMEOUT_MS);
 
             // Config TalonSRX Redline encoder
             Devices.talonTestBoard.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, TalonUtils.PID_LOOP_PRIMARY, TalonUtils.TIMEOUT_MS);
@@ -82,7 +83,7 @@ public class TestProgram extends Subsystem {
         setDefaultCommand(new TestProgramStop());
     }
 
-    // Toggle the clawIsClosed state
+    // Toggle the rotationIsBackward state
     public void togglePosition() {
         rotationIsBackward = !rotationIsBackward;
     }
@@ -93,11 +94,14 @@ public class TestProgram extends Subsystem {
         Devices.talonTestBoard.stopMotor();
     }
 
+    // Runs motor at a static power percentage
     public void testMotorDry() {
         if (!m_talonsAreConnected) return;
         Devices.talonTestBoard.set(0.5);
+        Logger.info("TestProgram -> Running motor at 50% power");
     }
 
+    // Rotates motor forward to designated position
     public void testMotorEncoderForward() {
         double ticks = TalonUtils.translateRotationsToTicks(ROTATIONS, GEAR_RATIO);
         Logger.info("TestProgram -> Motion Magic to FORWARD: " + ROTATIONS + " rotations, " + ticks + " ticks");
@@ -106,6 +110,7 @@ public class TestProgram extends Subsystem {
         Devices.talonTestBoard.set(ControlMode.MotionMagic, ticks);
     }
 
+    // Rotates motor back to original position
     public void testMotorEncoderBackward() {
         Logger.info("TestProgram -> Motion Magic to BACKWARD: " + -ROTATIONS);
 
