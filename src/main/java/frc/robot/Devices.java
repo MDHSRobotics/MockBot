@@ -10,6 +10,8 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.Relay;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.Compressor;
+import edu.wpi.first.wpilibj.Solenoid;
 
 import frc.robot.helpers.DPad;
 import frc.robot.helpers.DPadButton;
@@ -87,6 +89,13 @@ public class Devices {
 
     // Relays
     public static final Relay lighterRelay = new Relay(1);
+
+    // Pneumatics Controller
+    public static final Compressor pcm = new Compressor(0);
+
+    // Solenoids
+    public static final Solenoid testSolenoid = new Solenoid(0);
+
 
     // Motor Controllers
     public static final WPI_TalonSRX talonSrxMecWheelFrontLeft = new WPI_TalonSRX(5); // 1 motor

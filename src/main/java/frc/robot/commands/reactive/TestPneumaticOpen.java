@@ -8,21 +8,21 @@ import frc.robot.Robot;
 
 
 // This command closes the Hatcher claw via encoder to release, or in preparating to grab, the hatch, and keeps it closed
-public class HatchClawClose extends Command {
+public class TestPneumaticOpen extends Command {
 
-    public HatchClawClose() {
-        Logger.setup("Constructing Command: HatchClawClose...");
+    public TestPneumaticOpen() {
+        Logger.setup("Constructing Command: TestPneumaticOpen...");
 
         // Declare subsystem dependencies
-        requires(Robot.robotHatcher);
+        requires(Robot.testPneumatic);
     }
 
     @Override
     protected void initialize() {
-        Logger.action("Initializing Command: HatchClawClose...");
+        Logger.action("Initializing Command: TestPneumaticOpen...");
 
         // Set encoded position
-        Robot.robotHatcher.closeClaw();
+        Robot.testPneumatic.open();
     }
 
     @Override
@@ -40,12 +40,12 @@ public class HatchClawClose extends Command {
 
     @Override
     protected void end() {
-        Logger.ending("Ending Command: HatchClawClose...");
+        Logger.ending("Ending Command: TestPneumaticOpen...");
     }
 
     @Override
     protected void interrupted() {
-        Logger.ending("Interrupting Command: HatchClawClose...");
+        Logger.ending("Interrupting Command: TestPneumaticOpen...");
     }
 
 }

@@ -60,13 +60,7 @@ public class Robot extends TimedRobot {
     public static Devices robotDevices;
 
     // Subsystems
-    public static MecDriver robotMecDriver;
-
-    public static Hatcher robotHatcher;
-    public static Baller robotBaller;
-
-    public static BackPulley robotBackPulley;
-    public static FrontPulley robotFrontPulley;
+    public static TestPneumatic testPneumatic;
 
     // Sensors
     public static Gyro robotGyo;
@@ -96,43 +90,18 @@ public class Robot extends TimedRobot {
 
         // Instantiate Devices SECOND
         robotDevices = new Devices();
-
-        // Pre-intialize the Shuffler THIRD
-        robotShuffler = new Shuffler();
-        robotShuffler.preInitialize();
-
-        // Initialize Sensors FOURTH
-        boolean cam0connected = Cameras.testConnection(0);
-        if (cam0connected) robotCameraSight = Cameras.captureCamera(0);
-
+        
         // Ensure that the gyro is connected
         if (!Devices.gyro.isConnected()) Logger.error("Gyro not connected!");
 
         // Instantiate Subsystems FIFTH
-        robotMecDriver = new MecDriver();
-
-        robotHatcher = new Hatcher();
-        robotBaller = new Baller();
-
-        robotBackPulley = new BackPulley();
-        robotFrontPulley = new FrontPulley();
-
-        // Add the commands to the SmartDashboard
-        Logger.setup("Adding AutoModes to SmartDashboard...");
-        autoCommandChooser = new SendableChooser<>();
-
-        autoCommandChooser.setDefaultOption("MecDrive - Cartesian", new MecDriveCartesian());
-
-        SmartDashboard.putData("AutoMode", autoCommandChooser);
+        testPneumatic = new TestPneumatic();
 
         // Intialize and configure the shuffler, and instantiate OI, in that order, LAST
-        robotShuffler.initialize();
-        robotShuffler.configure();
         robotOI = new OI();
 
         // Check which controllers are plugged in
         driveXBoxConnected = Devices.isDriveXboxConnected();
-        climbXBoxConnected = Devices.isClimbXboxConnected();
     }
 
     /**
@@ -145,7 +114,6 @@ public class Robot extends TimedRobot {
      */
     @Override
     public void robotPeriodic() {
-        robotShuffler.update();
 
         // Detect whether a controller has been plugged in after start-up
         if (!driveXBoxConnected) {
@@ -154,14 +122,6 @@ public class Robot extends TimedRobot {
                 OI.configureDriveXBoxButtons();
                 Logger.setup("Drive XBox controller detected and configured");
                 driveXBoxConnected = true;
-            }
-        }
-        if (!climbXBoxConnected) {
-            if (Devices.isClimbXboxConnected()) {
-                // Climb XBox was not previously plugged in but now it is so set up buttons
-                OI.configureClimbXBoxButtons();
-                Logger.setup("Climb XBox controller detected and configured");
-                climbXBoxConnected = true;
             }
         }
     }
