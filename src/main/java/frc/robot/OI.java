@@ -50,8 +50,8 @@ public class OI {
         Devices.driveXboxBtnStart.whenPressed(new RobotGameModeDelivery());
         Devices.driveXboxBtnBack.whenPressed(new RobotGameModeClimb());
         Devices.driveXboxBtnDpad.whileHeld(new MecDriveAlign());
-        Devices.driveXboxBtnA.whenPressed(new LiftPulleyRaise());
-        Devices.driveXboxBtnB.whenPressed(new LiftPulleyLower());
+        // Devices.driveXboxBtnA.whenPressed(new LiftPulleyRaise());
+        // Devices.driveXboxBtnB.whenPressed(new LiftPulleyLower());
         Devices.driveXboxBtnX.whenPressed(new MecDriveBoxGroup());
         // Test drive commands
         // Devices.driveXboxBtnA.whileHeld(new MecDriveSlowForward());
