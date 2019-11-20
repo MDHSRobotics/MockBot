@@ -13,25 +13,23 @@ import frc.robot.commands.idle.MecDriverStop;
 
 
 public class MecDriveBoxGroup extends CommandGroup {
-  /**
-   * Add your docs here.
-   */
+
   public MecDriveBoxGroup() {
-      addSequential(new MecDriveStraightDistance());
-      addSequential(new MecDriverStop());
-      addSequential(new MecDriveRotateAngle());
-      addSequential(new MecDriverStop());
-      addSequential(new MecDriveStraightDistance());
-      addSequential(new MecDriverStop());
-      addSequential(new MecDriveRotateAngle());
-      addSequential(new MecDriverStop());
-      addSequential(new MecDriveStraightDistance());
-      addSequential(new MecDriverStop());
-      addSequential(new MecDriveRotateAngle());
-      addSequential(new MecDriverStop());
-      addSequential(new MecDriveStraightDistance());
-      addSequential(new MecDriverStop());
-      addSequential(new MecDriveRotateAngle());
-      addSequential(new MecDriverStop());
+    addSequential(new MecDriveStraightDistance());
+    addSequential(new MecDriverStop());
+    addSequential(new MecDriveRotateAngle(90., 0.1));
+    addSequential(new MecDriverStop());
+    addSequential(new MecDriveStraightDistance());
+    addSequential(new MecDriverStop());
+    addSequential(new MecDriveRotateAngle(90., 0.1));
+    addSequential(new MecDriverStop());
+    addSequential(new MecDriveStraightDistance());
+    addSequential(new MecDriverStop());
+    addSequential(new MecDriveRotateAngle(90., 0.1));
+    addSequential(new MecDriverStop());
+    addSequential(new MecDriveStraightDistance());
+    addSequential(new MecDriverStop());
+    addSequential(new MecDriveRotateAngle(90., 0.1));
+    addSequential(new MecDriverStop());
   }
 }
