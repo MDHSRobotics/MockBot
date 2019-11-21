@@ -22,7 +22,7 @@ public class TestPneumaticClose extends Command {
         Logger.action("Initializing Command: TestPneumaticClose...");
 
         // Set encoded position
-        Robot.testPneumatic.close();
+        Robot.testPneumatic.closeSolenoid();
     }
 
     @Override

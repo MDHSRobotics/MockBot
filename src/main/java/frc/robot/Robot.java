@@ -10,7 +10,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 // import frc.robot.commands.idle.*;
 // import frc.robot.commands.instant.*;
-import frc.robot.commands.interactive.MecDriveCartesian;
 // import frc.robot.commands.test.*;
 import frc.robot.consoles.*;
 import frc.robot.sensors.*;
@@ -69,7 +68,6 @@ public class Robot extends TimedRobot {
     // Consoles
     public static SendableChooser<Command> autoCommandChooser;
     private Command m_autoCmd;
-    public static Shuffler robotShuffler;
 
     // OI
     public static OI robotOI;

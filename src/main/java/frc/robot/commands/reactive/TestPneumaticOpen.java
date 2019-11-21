@@ -22,7 +22,7 @@ public class TestPneumaticOpen extends Command {
         Logger.action("Initializing Command: TestPneumaticOpen...");
 
         // Set encoded position
-        Robot.testPneumatic.open();
+        Robot.testPneumatic.openSolenoid();
     }
 
     @Override

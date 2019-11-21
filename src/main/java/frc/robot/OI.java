@@ -3,13 +3,10 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID.Hand;
 
-import frc.robot.commands.instant.*;
-import frc.robot.commands.interactive.*;
+import frc.robot.commands.idle.*;
+import frc.robot.commands.reactive.*;
 import frc.robot.consoles.Logger;
 import frc.robot.helpers.*;
-import frc.robot.Brain;
-
-import frc.robot.commands.test.MecDriveBoxGroup;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -31,13 +28,6 @@ public class OI {
         else {
             configureDriveXBoxButtons();
         }
-
-        if (!Devices.isClimbXboxConnected()) {
-            Logger.error("Climb XBox controller not plugged in!");
-        }
-        else {
-            configureClimbXBoxButtons();
-        }
     }
 
     //-------------------------//
@@ -47,9 +37,9 @@ public class OI {
     // Drive XBox Buttons
     public static void configureDriveXBoxButtons() {
         // Bind the "drive" xbox buttons to specific commands
-        Devices.driveXboxBtnStart.whenPressed(new RobotGameModeDelivery());
-        Devices.driveXboxBtnBack.whenPressed(new RobotGameModeClimb());
-        Devices.driveXboxBtnDpad.whileHeld(new MecDriveAlign());
+        //Devices.driveXboxBtnStart.whenPressed(new RobotGameModeDelivery());
+        //Devices.driveXboxBtnBack.whenPressed(new RobotGameModeClimb());
+        //Devices.driveXboxBtnDpad.whileHeld(new MecDriveAlign());
         // Devices.driveXboxBtnA.whenPressed(new LiftPulleyRaise());
         // Devices.driveXboxBtnB.whenPressed(new LiftPulleyLower());
         Devices.driveXboxBtnA.whenPressed(new TestPneumaticOpen());
