@@ -2,11 +2,10 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
-import frc.robot.Brain;
 import frc.robot.Devices;
 import frc.robot.commands.interactive.TankDrive;
 import frc.robot.consoles.Logger;
-import frc.robot.sensors.Vision;
+
 
 // Mecanum driver subsystem
 public class TankDriver extends Subsystem {
@@ -26,7 +25,7 @@ public class TankDriver extends Subsystem {
     private boolean m_talonsAreConnected = false;
 
     public TankDriver() {
-        Logger.setup("Constructing Subsystem: MecDriver...");
+        Logger.setup("Constructing Subsystem: TankDriver...");
 
         // Configure wheel speed controllers
         boolean talonFrontLeftIsConnected = Devices.isConnected(Devices.talonSrxTankWheelFrontLeft);

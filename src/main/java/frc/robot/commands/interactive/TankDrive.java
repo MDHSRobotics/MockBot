@@ -5,7 +5,6 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.OI;
 import frc.robot.Robot;
 import frc.robot.consoles.Logger;
-import frc.robot.helpers.CartesianMovement;
 import frc.robot.helpers.TankMovement;
 
 // This command uses the joystick input to tank drive using the cartesian method
