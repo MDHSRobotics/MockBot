@@ -57,7 +57,9 @@ public class MecDriveStraightDistance extends Command {
 		m_elapsedTime = 0;
 		m_timer.reset();
 		m_timer.start();
-		Logger.info("Target = " + m_targetDistanceInFeet + " feet" + "; Speed = " + m_speed);
+        Logger.info("Target = " + m_targetDistanceInFeet + " feet" + "; Speed = " + m_speed);
+        
+        System.out.println("Command Initialized");
     }
 
     @Override

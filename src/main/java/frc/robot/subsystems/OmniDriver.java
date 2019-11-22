@@ -35,7 +35,7 @@ public class OmniDriver extends Subsystem {
     public OmniDriver() {
         Logger.setup("Constructing Subsystem: OmniDriver...");
 
-        //Devices.talonSrxOmniWheelRearLeft.follow(Devices.talonSrxOmniWheelFrontLeft);
+        Devices.talonSrxOmniWheelRearLeft.follow(Devices.talonSrxOmniWheelFrontLeft);
         Devices.talonSrxOmniWheelRearRight.follow(Devices.talonSrxOmniWheelFrontRight);
         Devices.talonSrxOmniWheelRear.follow(Devices.talonSrxOmniWheelFront);
 
