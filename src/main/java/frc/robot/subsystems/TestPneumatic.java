@@ -41,13 +41,17 @@ public class TestPneumatic extends Subsystem {
         Devices.pcm.stop();
     }
 
-    public void openSolenoid(){
+    public void start() {
         Devices.pcm.start();
+    }
+
+    public void openSolenoid(){
+    //    Devices.pcm.start();
         Devices.testSolenoid.set(true);
     }
 
     public void closeSolenoid(){
-        Devices.pcm.start();
+    //    Devices.pcm.start();
         Devices.testSolenoid.set(false);
     }
 }

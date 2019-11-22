@@ -44,6 +44,7 @@ public class OI {
         // Devices.driveXboxBtnB.whenPressed(new LiftPulleyLower());
         Devices.driveXboxBtnA.whenPressed(new TestPneumaticOpen());
         Devices.driveXboxBtnB.whenPressed(new TestPneumaticClose());
+        Devices.driveXboxBtnY.whenPressed(new TestPneumaticStart());
 
         // Test drive commands
         // Devices.driveXboxBtnA.whileHeld(new MecDriveSlowForward());
