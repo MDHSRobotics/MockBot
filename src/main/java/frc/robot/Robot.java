@@ -1,18 +1,12 @@
 
 package frc.robot;
 
-import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-// import frc.robot.commands.idle.*;
-// import frc.robot.commands.instant.*;
-// import frc.robot.commands.test.*;
 import frc.robot.consoles.*;
-import frc.robot.sensors.*;
 import frc.robot.subsystems.*;
 
 
@@ -61,10 +55,6 @@ public class Robot extends TimedRobot {
     // Subsystems
     public static TestPneumatic testPneumatic;
 
-    // Sensors
-    public static Gyro robotGyo;
-    public static UsbCamera robotCameraSight;
-
     // Consoles
     public static SendableChooser<Command> autoCommandChooser;
     private Command m_autoCmd;
@@ -72,7 +62,6 @@ public class Robot extends TimedRobot {
     // OI
     public static OI robotOI;
     public boolean driveXBoxConnected = false;
-    public boolean climbXBoxConnected = false;
 
     /**
      * This function is run when the robot is first started up and should be
