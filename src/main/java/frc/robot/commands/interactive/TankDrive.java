@@ -11,7 +11,7 @@ import frc.robot.helpers.TankMovement;
 public class TankDrive extends Command {
 
     public TankDrive() {
-        Logger.setup("Constructing Command: TankDriveCartesian...");
+        Logger.setup("Constructing Command: TankDriveTank...");
 
         // Declare subsystem dependencies
         requires(Robot.robotTankDriver);
@@ -19,7 +19,7 @@ public class TankDrive extends Command {
 
     @Override
     protected void initialize() {
-        Logger.action("Initializing Command: TankDriveCartesian...");
+        Logger.action("Initializing Command: TankDriveTank...");
     }
 
     @Override

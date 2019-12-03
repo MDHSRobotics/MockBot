@@ -128,11 +128,9 @@ public class Devices {
                                     talonSrxMecWheelFrontRight,
                                     talonSrxMecWheelRearRight);
         talonSrxTankWheelFrontLeft.setInverted(true);
-        talonSrxTankWheelRearLeft.setInverted(true);
         talonSrxTankWheelFrontRight.setInverted(true);
-        talonSrxTankWheelRearRight.setInverted(true);
-        tankDrive= new DifferentialDrive(talonSrxTankWheelFrontLeft,
-                                         talonSrxTankWheelFrontRight);
+        tankDrive = new DifferentialDrive(talonSrxTankWheelFrontLeft,
+                                          talonSrxTankWheelFrontRight);
         Devices.talonSrxTankWheelRearLeft.follow(Devices.talonSrxTankWheelFrontLeft);
         Devices.talonSrxTankWheelRearRight.follow(Devices.talonSrxTankWheelFrontRight);
     }

@@ -51,7 +51,7 @@ public class OI {
         Devices.driveXboxBtnDpad.whileHeld(new MecDriveAlign());
         Devices.driveXboxBtnBumperLeft.whileHeld(new BallReset());
         Devices.driveXboxBtnBumperRight.whenPressed(new BallerToggleFlipperPosition());
-        Devices.driveXboxBtnA.whenPressed(new TankDrive());
+        Devices.driveXboxBtnA.whenPressed(new TankDriver());
         // Test drive commands
         // Devices.driveXboxBtnA.whileHeld(new MecDriveSlowForward());
         // Devices.driveXboxBtnB.whileHeld(new MecDriveSlowTurnRight());
