@@ -1,6 +1,7 @@
 
 package frc.robot;
 
+import frc.robot.commands.idle.TestPneumaticStop;
 import frc.robot.commands.reactive.*;
 import frc.robot.consoles.Logger;
 
@@ -34,6 +35,7 @@ public class OI {
     public static void configureDriveXBoxButtons() {
         // Bind the "drive" xbox buttons to specific commands
         Devices.driveXboxBtnA.whenPressed(new TestPneumaticOpen());
+        Devices.driveXboxBtnX.whenPressed(new TestPneumaticStop());
         Devices.driveXboxBtnB.whenPressed(new TestPneumaticClose());
         Devices.driveXboxBtnY.whenPressed(new TestPneumaticStart());
     }
