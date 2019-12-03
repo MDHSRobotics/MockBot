@@ -28,6 +28,23 @@ public class MecDriver extends Subsystem {
     // The Talon connection state, to prevent watchdog warnings during testing
     private boolean m_talonsAreConnected = false;
 
+    //PathWeaver constants
+    private static final int k_ticks_per_rev = 1024; //encoder ticks per wheel revolution
+    private static final double k_wheel_diameter = 6; //diameter of wheels
+    private static final double k_max_velocity = 10; //max velocity, ft/s
+
+    private static final int k_left_channel = 0; //port for left talon
+    private static final int k_right_channel = 1; //port for right talon
+
+    private static final int k_left_encoder_port_a = 0;
+    private static final int k_left_encoder_port_b = 1;
+    private static final int k_right_encoder_port_a = 2;
+    private static final int k_right_encoder_port_b = 3;
+
+    private static final int k_gyro_port = 0; //analog input for the gyro
+
+    private static final String k_path_name = "place cargo"; //path for the file
+
     public MecDriver() {
         Logger.setup("Constructing Subsystem: MecDriver...");
 
