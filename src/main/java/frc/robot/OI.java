@@ -34,10 +34,14 @@ public class OI {
     // Drive XBox Buttons
     public static void configureDriveXBoxButtons() {
         // Bind the "drive" xbox buttons to specific commands
-        Devices.driveXboxBtnA.whenPressed(new TestPneumaticOpen());
+        Devices.driveXboxBtnA.whenPressed(new TestPneumaticOpen2());
         Devices.driveXboxBtnX.whenPressed(new TestPneumaticStop());
-        Devices.driveXboxBtnB.whenPressed(new TestPneumaticClose());
+        Devices.driveXboxBtnB.whenPressed(new TestPneumaticClose2());
         Devices.driveXboxBtnY.whenPressed(new TestPneumaticStart());
+
+        Devices.driveXboxBtnBumperLeft.whenPressed(new TestPneumaticOpen());
+        Devices.driveXboxBtnBumperRight.whenPressed(new TestPneumaticClose());
+
     }
 
 }

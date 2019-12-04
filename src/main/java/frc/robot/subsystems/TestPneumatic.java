@@ -2,6 +2,8 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
+
 
 import frc.robot.commands.idle.TestPneumaticStop;
 import frc.robot.consoles.Logger;
@@ -40,6 +42,7 @@ public class TestPneumatic extends Subsystem {
     public void stop() {
         if(m_pcmIsNotConnected) return;
         Devices.pcm.stop();
+        Devices.testDoubleSolenoid.set(DoubleSolenoid.Value.kOff);
     }
 
     // Start the compressor
@@ -58,6 +61,27 @@ public class TestPneumatic extends Subsystem {
     public void closeSolenoid(){
         if(m_pcmIsNotConnected) return;
         Devices.testSolenoid.set(false);
+    }
+
+    // Extend the solenoid2
+    public void openSolenoid2(){
+        if(m_pcmIsNotConnected) return;
+        Devices.testSolenoid2.set(true);
+    }
+
+    // Retract the solenoid2
+    public void closeSolenoid2(){
+        if(m_pcmIsNotConnected) return;
+        Devices.testSolenoid2.set(false);
+    }
+    public void openDoubleSolenoid(){
+        if(m_pcmIsNotConnected) return;
+        Devices.testDoubleSolenoid.set(DoubleSolenoid.Value.kForward);
+    }
+
+    public void closeDoubleSolenoid(){
+        if(m_pcmIsNotConnected) return;
+        Devices.testDoubleSolenoid.set(DoubleSolenoid.Value.kReverse);
     }
 
     public boolean isUnderPressure(){

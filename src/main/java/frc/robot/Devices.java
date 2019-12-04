@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.Relay;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.Compressor;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Solenoid;
 
 import frc.robot.helpers.DPad;
@@ -95,6 +96,8 @@ public class Devices {
 
     // Solenoids
     public static final Solenoid testSolenoid = new Solenoid(0);
+    public static final Solenoid testSolenoid2 = new Solenoid(1);
+    public static final DoubleSolenoid testDoubleSolenoid = new DoubleSolenoid(5, 6);
 
 
     // Motor Controllers
