@@ -7,11 +7,13 @@ import frc.robot.Robot;
 import frc.robot.consoles.Logger;
 import frc.robot.helpers.TankMovement;
 
+
+
 // This command uses the joystick input to tank drive using the cartesian method
 public class TankDrive extends Command {
 
     public TankDrive() {
-        Logger.setup("Constructing Command: TankDriveTank...");
+        Logger.setup("Constructing Command: TankDrive...");
 
         // Declare subsystem dependencies
         requires(Robot.robotTankDriver);
@@ -19,7 +21,7 @@ public class TankDrive extends Command {
 
     @Override
     protected void initialize() {
-        Logger.action("Initializing Command: TankDriveTank...");
+        Logger.action("Initializing Command: TankDrive...");
     }
 
     @Override
@@ -36,13 +38,13 @@ public class TankDrive extends Command {
 
     @Override
     protected void end() {
-        Logger.ending("Ending Command: TankDriveCartesian...");
+        Logger.ending("Ending Command: TankDrive...");
     }
 
     @Override
     protected void interrupted() {
         System.out.println("--");
-        Logger.ending("Interrupting Command: TankDriveCartesian...");
+        Logger.ending("Interrupting Command: TankDrive...");
     }
 
 }

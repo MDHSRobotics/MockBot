@@ -102,12 +102,12 @@ public class TankDriver extends Subsystem {
     // Drive using the tank method, using the given control orientation
     public void driveTank(double yLeft, double yRight) {
         if (!m_talonsAreConnected) {
-            Devices.mecDrive.feed();
+            Devices.tankDrive.feed();
             return;
         }
         //Drive Left side forward and backward
         if (yLeft == 1) {
-            Devices.talonSrxTankWheelFrontLeft.set(0.5);
+            Devices.tankDrive.TankDrive(yLeft, yRight);
         }
 
         if (yLeft == -1) {

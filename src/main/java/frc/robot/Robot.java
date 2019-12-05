@@ -111,10 +111,11 @@ public class Robot extends TimedRobot {
 
         // Instantiate Subsystems FIFTH
         robotMecDriver = new MecDriver();
-
+        robotTankDriver = new TankDriver();
+        
         robotHatcher = new Hatcher();
         robotBaller = new Baller();
-
+        
         robotBackPulley = new BackPulley();
         robotFrontPulley = new FrontPulley();
 
