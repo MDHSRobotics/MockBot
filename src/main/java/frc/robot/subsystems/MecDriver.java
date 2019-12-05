@@ -10,6 +10,13 @@ import frc.robot.sensors.Vision;
 import frc.robot.Brain;
 import frc.robot.Devices;
 
+//pathweaver imports
+import edu.wpi.first.wpilibj.Notifier;
+import jaci.pathfinder.Pathfinder;
+import jaci.pathfinder.PathfinderFRC;
+import jaci.pathfinder.Trajectory;
+import jaci.pathfinder.followers.EncoderFollower;
+import java.io.IOException;
 
 // Mecanum driver subsystem
 public class MecDriver extends Subsystem {
@@ -33,17 +40,13 @@ public class MecDriver extends Subsystem {
     private static final double k_wheel_diameter = 6; //diameter of wheels
     private static final double k_max_velocity = 10; //max velocity, ft/s
 
-    private static final int k_left_channel = 0; //port for left talon
-    private static final int k_right_channel = 1; //port for right talon
+    private EncoderFollower m_left_follower;
+    private EncoderFollower m_right_follower;
 
-    private static final int k_left_encoder_port_a = 0;
-    private static final int k_left_encoder_port_b = 1;
-    private static final int k_right_encoder_port_a = 2;
-    private static final int k_right_encoder_port_b = 3;
-
-    private static final int k_gyro_port = 0; //analog input for the gyro
-
-    private static final String k_path_name = "place cargo"; //path for the file
+    private Notifier m_follower_notifier;
+    
+    private static final String k_path_name_left = "/home/lvuser/deploy/paths/place cargo.left.pf1.csv"; //folder on roboRIO
+    private static final String k_path_name_right = "/home/lvuser/deploy/paths/place cargo.right.pf1.csv"; //folder on roboRIO
 
     public MecDriver() {
         Logger.setup("Constructing Subsystem: MecDriver...");
@@ -223,6 +226,43 @@ public class MecDriver extends Subsystem {
         Devices.mecDrive.drivePolar(magnitude, angle, rotation);
     }
 
+    public void autonomousInit() throws IOException { //TODO: error when "throws IOException" is not included
+        Trajectory left_trajectory = PathfinderFRC.getTrajectory(k_path_name_left + ".left");
+        Trajectory right_trajectory = PathfinderFRC.getTrajectory(k_path_name_right + ".right");
+
+        m_left_follower = new EncoderFollower(left_trajectory);
+        m_right_follower = new EncoderFollower(right_trajectory);
+
+        m_left_follower.configureEncoder(Devices.talonSrxMecWheelFrontLeft.getSelectedSensorPosition(), k_ticks_per_rev, k_wheel_diameter);
+        // You must tune the PID values on the following line!
+        m_left_follower.configurePIDVA(1.0, 0.0, 0.0, 1 / k_max_velocity, 0);
+
+        m_right_follower.configureEncoder(Devices.talonSrxMecWheelFrontRight.getSelectedSensorPosition(), k_ticks_per_rev, k_wheel_diameter);
+        // You must tune the PID values on the following line!
+        m_right_follower.configurePIDVA(1.0, 0.0, 0.0, 1 / k_max_velocity, 0);
+    
+        m_follower_notifier = new Notifier(this::followPath);
+        m_follower_notifier.startPeriodic(left_trajectory.get(0).dt);
+
+    }
+
+    private void followPath() {
+        if (m_left_follower.isFinished() || m_right_follower.isFinished()) {
+          m_follower_notifier.stop();
+        } 
+        
+        else {
+          double left_speed = m_left_follower.calculate(Devices.talonSrxMecWheelFrontLeft.getSelectedSensorPosition());
+          double right_speed = m_right_follower.calculate(Devices.talonSrxMecWheelFrontRight.getSelectedSensorPosition());
+          double heading = Devices.gyro.getAngle();
+          double desired_heading = Pathfinder.r2d(m_left_follower.getHeading());
+          double heading_difference = Pathfinder.boundHalfDegrees(desired_heading - heading);
+          double turn =  0.8 * (-1.0/80.0) * heading_difference;
+          Devices.talonSrxMecWheelFrontLeft.set(left_speed + turn);
+          Devices.talonSrxMecWheelFrontRight.set(right_speed - turn);
+        }
+      }
+    
     // Drive to align the Robot to a detected line at the given yaw
     public void driveAlign(double targetYaw) {
         Logger.setup("##");
