@@ -227,18 +227,20 @@ public class MecDriver extends Subsystem {
     }
 
     public void autonomousInit() throws IOException { //TODO: error when "throws IOException" is not included
-        Trajectory left_trajectory = PathfinderFRC.getTrajectory(k_path_name_left + ".left");
-        Trajectory right_trajectory = PathfinderFRC.getTrajectory(k_path_name_right + ".right");
+
+        //PathWeaver v2019.2.1 = right and left swapped, will be fixed in v2019.3.1
+        Trajectory left_trajectory = PathfinderFRC.getTrajectory(k_path_name_left + ".right");
+        Trajectory right_trajectory = PathfinderFRC.getTrajectory(k_path_name_right + ".left");
 
         m_left_follower = new EncoderFollower(left_trajectory);
         m_right_follower = new EncoderFollower(right_trajectory);
 
         m_left_follower.configureEncoder(Devices.talonSrxMecWheelFrontLeft.getSelectedSensorPosition(), k_ticks_per_rev, k_wheel_diameter);
-        // You must tune the PID values on the following line!
+        // Tune the PID values on the following line
         m_left_follower.configurePIDVA(1.0, 0.0, 0.0, 1 / k_max_velocity, 0);
 
         m_right_follower.configureEncoder(Devices.talonSrxMecWheelFrontRight.getSelectedSensorPosition(), k_ticks_per_rev, k_wheel_diameter);
-        // You must tune the PID values on the following line!
+        // Tune the PID values on the following line
         m_right_follower.configurePIDVA(1.0, 0.0, 0.0, 1 / k_max_velocity, 0);
     
         m_follower_notifier = new Notifier(this::followPath);
