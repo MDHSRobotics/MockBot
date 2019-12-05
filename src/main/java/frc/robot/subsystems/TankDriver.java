@@ -105,22 +105,7 @@ public class TankDriver extends Subsystem {
             Devices.tankDrive.feed();
             return;
         }
-        //Drive Left side forward and backward
-        if (yLeft == 1) {
-            Devices.tankDrive.TankDrive(yLeft, yRight);
-        }
-
-        if (yLeft == -1) {
-            Devices.talonSrxTankWheelFrontLeft.set(-0.5);
-        }
-        // Drive Right side forward and backward
-        if (yRight == 1) {
-            Devices.talonSrxTankWheelFrontRight.set(0.5);
-        }
-
-        if (yRight == -1) {
-            Devices.talonSrxTankWheelFrontRight.set(-0.5);
-        }
+        Devices.tankDrive.tankDrive(yLeft, yRight, false);
     }
 
     // Drive to align the Robot to a detected line at the given yaw
