@@ -23,6 +23,7 @@ public class TestPneumaticClose extends Command {
 
         // Set encoded position
         Robot.testPneumatic.closeSolenoid();
+
     }
 
     @Override

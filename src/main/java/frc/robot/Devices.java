@@ -23,7 +23,6 @@ import frc.robot.helpers.DPadButton.Direction;
 public class Devices {
     
     static private final int DRIVE_XBOX_STICK_NUM = 0;
-    static private final int CLIMB_XBOX_STICK_NUM = 1;
     static private final int JSTICK_STICK_NUM = 2;
 
     // Joysticks
@@ -63,28 +62,6 @@ public class Devices {
     public static final DPadButton driveXboxBtnDpadDownLeft = new DPadButton(driveXbox, Direction.DOWN_LEFT);
     public static final DPadButton driveXboxBtnDpadDownRight = new DPadButton(driveXbox, Direction.DOWN_RIGHT);
 
-    // Xbox Controller - Climb
-    public static final XboxController climbXbox = new XboxController(CLIMB_XBOX_STICK_NUM);
-    public static final JoystickButton climbXboxBtnA = new JoystickButton(climbXbox, 1);
-    public static final JoystickButton climbXboxBtnB = new JoystickButton(climbXbox, 2);
-    public static final JoystickButton climbXboxBtnX = new JoystickButton(climbXbox, 3);
-    public static final JoystickButton climbXboxBtnY = new JoystickButton(climbXbox, 4);
-    public static final JoystickButton climbXboxBtnBumperLeft = new JoystickButton(climbXbox, 5);
-    public static final JoystickButton climbXboxBtnBumperRight = new JoystickButton(climbXbox, 6);
-    public static final JoystickButton climbXboxBtnBack = new JoystickButton(climbXbox, 7);
-    public static final JoystickButton climbXboxBtnStart = new JoystickButton(climbXbox, 8);
-    public static final JoystickButton climbXboxBtnStickLeft = new JoystickButton(climbXbox, 9);
-    public static final JoystickButton climbXboxBtnStickRight = new JoystickButton(climbXbox, 10);
-    public static final DPad climbXboxBtnDpad = new DPad(climbXbox);
-    public static final DPadButton climbXboxBtnDpadUp = new DPadButton(climbXbox, Direction.UP);
-    public static final DPadButton climbXboxBtnDpadDown = new DPadButton(climbXbox, Direction.DOWN);
-    public static final DPadButton climbXboxBtnDpadLeft = new DPadButton(climbXbox, Direction.LEFT);
-    public static final DPadButton climbXboxBtnDpadRight = new DPadButton(climbXbox, Direction.RIGHT);
-    public static final DPadButton climbXboxBtnDpadUpLeft = new DPadButton(climbXbox, Direction.UP_LEFT);
-    public static final DPadButton climbXboxBtnDpadUpRight = new DPadButton(climbXbox, Direction.UP_RIGHT);
-    public static final DPadButton climbXboxBtnDpadDownLeft = new DPadButton(climbXbox, Direction.DOWN_LEFT);
-    public static final DPadButton climbXboxBtnDpadDownRight = new DPadButton(climbXbox, Direction.DOWN_RIGHT);
-
     // Gyros
     public static final AHRS gyro = new AHRS(SPI.Port.kMXP);
 
@@ -100,38 +77,12 @@ public class Devices {
     public static final DoubleSolenoid testDoubleSolenoid = new DoubleSolenoid(5, 6);
 
 
-    // Motor Controllers
-    public static final WPI_TalonSRX talonSrxMecWheelFrontLeft = new WPI_TalonSRX(5); // 1 motor
-    public static final WPI_TalonSRX talonSrxMecWheelRearLeft = new WPI_TalonSRX(7); // 1 motor
-    public static final WPI_TalonSRX talonSrxMecWheelFrontRight = new WPI_TalonSRX(6); // 1 motor
-    public static final WPI_TalonSRX talonSrxMecWheelRearRight = new WPI_TalonSRX(8); // 1 motor
-
-    public static final WPI_TalonSRX talonSrxHatcher = new WPI_TalonSRX(9); // 1 motor
-    public static final WPI_TalonSRX talonSrxBaller = new WPI_TalonSRX(10); // 1 motor
-    public static final WPI_TalonSRX talonSrxLever = new WPI_TalonSRX(12);
-
-    public static final WPI_TalonSRX talonSrxBackPulleyA = new WPI_TalonSRX(19); // 1 motor
-    public static final WPI_TalonSRX talonSrxBackPulleyB = new WPI_TalonSRX(14); // 1 motor
-    public static final WPI_TalonSRX talonSrxBackPulleyC = new WPI_TalonSRX(15); // 1 motor
-
-    public static final WPI_TalonSRX talonSrxFrontPulleyA = new WPI_TalonSRX(1); // 1 motor
-    public static final WPI_TalonSRX talonSrxFrontPulleyB = new WPI_TalonSRX(2); // 1 motor
-    public static final WPI_TalonSRX talonSrxFrontPulleyC = new WPI_TalonSRX(13); // 1 motor
-
     // Drives
     public static MecanumDrive mecDrive = null;
 
     // Constructor
     public Devices() {
-        // TODO: Investigate why these motor controllers have to be inverted. Are all TalonSRX Motor Controllers backwards?
-        talonSrxMecWheelFrontLeft.setInverted(true);
-        talonSrxMecWheelRearLeft.setInverted(true);
-        talonSrxMecWheelFrontRight.setInverted(true);
-        talonSrxMecWheelRearRight.setInverted(true);
-        mecDrive = new MecanumDrive(talonSrxMecWheelFrontLeft,
-                                    talonSrxMecWheelRearLeft,
-                                    talonSrxMecWheelFrontRight,
-                                    talonSrxMecWheelRearRight);
+
     }
 
     // Determines if the Talon SRX is connected
@@ -150,11 +101,6 @@ public class Devices {
     // Determine if the Drive XBox controller is connected
     public static boolean isDriveXboxConnected() {
         return isStickConnected(DRIVE_XBOX_STICK_NUM);
-    }
-
-    // Determine if the Climb XBox controller is connected
-    public static boolean isClimbXboxConnected() {
-        return isStickConnected(CLIMB_XBOX_STICK_NUM);
     }
 
 }

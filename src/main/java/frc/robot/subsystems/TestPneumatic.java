@@ -10,7 +10,7 @@ import frc.robot.consoles.Logger;
 import frc.robot.Devices;
 
 
-// TestPneumatic subsystem, for testing solenoid actuation
+// TestPneumatic subsystem, for testing solenoid actuation and compressors
 public class TestPneumatic extends Subsystem {
 
     private boolean m_pcmIsNotConnected = false;
@@ -38,6 +38,8 @@ public class TestPneumatic extends Subsystem {
         setDefaultCommand(new TestPneumaticStop());
     }
 
+    //----------// Compressor
+
     // Stop the compressor
     public void stop() {
         if(m_pcmIsNotConnected) return;
@@ -51,13 +53,15 @@ public class TestPneumatic extends Subsystem {
         Devices.pcm.start();
     }
 
-    // Extend the solenoid
+    //----------// Single Solenoids
+
+    // Extend solenoid1
     public void openSolenoid(){
         if(m_pcmIsNotConnected) return;
         Devices.testSolenoid.set(true);
     }
 
-    // Retract the solenoid
+    // Retract solenoid1
     public void closeSolenoid(){
         if(m_pcmIsNotConnected) return;
         Devices.testSolenoid.set(false);
@@ -74,15 +78,22 @@ public class TestPneumatic extends Subsystem {
         if(m_pcmIsNotConnected) return;
         Devices.testSolenoid2.set(false);
     }
+
+    //----------// Double Solenoid
+
+    // Extend solenoid1 and retract solenoid2
     public void openDoubleSolenoid(){
         if(m_pcmIsNotConnected) return;
         Devices.testDoubleSolenoid.set(DoubleSolenoid.Value.kForward);
     }
 
+    // Extend solenoid2 and restract solenoid1
     public void closeDoubleSolenoid(){
         if(m_pcmIsNotConnected) return;
         Devices.testDoubleSolenoid.set(DoubleSolenoid.Value.kReverse);
     }
+
+    //----------// Sensors
 
     public boolean isUnderPressure(){
         return Devices.pcm.getPressureSwitchValue();

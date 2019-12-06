@@ -39,8 +39,8 @@ public class OI {
         Devices.driveXboxBtnB.whenPressed(new TestPneumaticClose2());
         Devices.driveXboxBtnY.whenPressed(new TestPneumaticStart());
 
-        Devices.driveXboxBtnBumperLeft.whenPressed(new TestPneumaticOpen());
-        Devices.driveXboxBtnBumperRight.whenPressed(new TestPneumaticClose());
+        // Devices.driveXboxBtnBumperLeft.whenPressed(new TestPneumaticOpen());
+        // Devices.driveXboxBtnBumperRight.whenPressed(new TestPneumaticClose());
 
     }
 

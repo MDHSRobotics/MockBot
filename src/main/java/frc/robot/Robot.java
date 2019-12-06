@@ -78,9 +78,6 @@ public class Robot extends TimedRobot {
         // Instantiate Devices SECOND
         robotDevices = new Devices();
         
-        // Ensure that the gyro is connected
-        if (!Devices.gyro.isConnected()) Logger.error("Gyro not connected!");
-
         // Instantiate Subsystems FIFTH
         testPneumatic = new TestPneumatic();
 
