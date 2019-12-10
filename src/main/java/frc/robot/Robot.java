@@ -7,6 +7,7 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.subsystems.MecDriver;
 
 // import frc.robot.commands.idle.*;
 // import frc.robot.commands.instant.*;
@@ -231,6 +232,11 @@ public class Robot extends TimedRobot {
     public void teleopInit() {
         System.out.println("--");
         Logger.action("Initializing Teleop...");
+
+        // stopping PathWeaver
+        MecDriver.m_follower_notifier.stop();
+        Devices.talonSrxMecWheelFrontLeft.set(0);
+        Devices.talonSrxMecWheelFrontRight.set(0);
 
         // This makes sure that the autonomous stops running when
         // teleop starts running. If you want the autonomous to

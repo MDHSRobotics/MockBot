@@ -43,7 +43,7 @@ public class MecDriver extends Subsystem {
     private EncoderFollower m_left_follower;
     private EncoderFollower m_right_follower;
 
-    private Notifier m_follower_notifier;
+    public static Notifier m_follower_notifier;
     
     private static final String k_path_name_left = "/home/lvuser/deploy/paths/place cargo.left.pf1.csv"; //folder on roboRIO
     private static final String k_path_name_right = "/home/lvuser/deploy/paths/place cargo.right.pf1.csv"; //folder on roboRIO
@@ -228,7 +228,7 @@ public class MecDriver extends Subsystem {
 
     public void autonomousInit() throws IOException { //TODO: error when "throws IOException" is not included
 
-        //PathWeaver v2019.2.1 = right and left swapped, will be fixed in v2019.3.1
+        //PathWeaver v2019.3.06 = right and left swapped, will be fixed in v2019.3.1
         Trajectory left_trajectory = PathfinderFRC.getTrajectory(k_path_name_left + ".right");
         Trajectory right_trajectory = PathfinderFRC.getTrajectory(k_path_name_right + ".left");
 
