@@ -2,7 +2,7 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
-
+import frc.robot.commands.idle.MecDriverStop;
 import frc.robot.commands.interactive.MecDriveCartesian;
 import frc.robot.consoles.Logger;
 import frc.robot.sensors.Vision;
@@ -56,7 +56,7 @@ public class MecDriver extends Subsystem {
     public void initDefaultCommand() {
         Logger.setup("Initializing MecDriver DefaultCommand -> MecDriveCartesian...");
 
-        setDefaultCommand(new MecDriveCartesian());
+        setDefaultCommand(new MecDriverStop());
     }
 
     // Flip the control direction of the joystick in Y (or Y Left for Xbox thumbsticks)

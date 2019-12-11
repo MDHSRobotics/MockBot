@@ -13,7 +13,7 @@ import frc.robot.helpers.TankMovement;
 public class DiffDriveTank extends Command {
 
     public DiffDriveTank() {
-        Logger.setup("Constructing Command: TankDrive...");
+        Logger.setup("Constructing Command: DiffDriveTank...");
 
         // Declare subsystem dependencies
         requires(Robot.robotDiffDriver);
@@ -21,7 +21,7 @@ public class DiffDriveTank extends Command {
 
     @Override
     protected void initialize() {
-        Logger.action("Initializing Command: TankDrive...");
+        Logger.action("Initializing Command: DiffDriveTank...");
     }
 
     @Override
@@ -38,13 +38,13 @@ public class DiffDriveTank extends Command {
 
     @Override
     protected void end() {
-        Logger.ending("Ending Command: TankDrive...");
+        Logger.ending("Ending Command: DiffDriveTank...");
     }
 
     @Override
     protected void interrupted() {
         System.out.println("--");
-        Logger.ending("Interrupting Command: TankDrive...");
+        Logger.ending("Interrupting Command: DiffDriveTank...");
     }
 
 }

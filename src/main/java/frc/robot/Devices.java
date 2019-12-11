@@ -90,27 +90,27 @@ public class Devices {
     public static final Relay lighterRelay = new Relay(1);
 
     // Motor Controllers
-    public static final WPI_TalonSRX talonSrxMecWheelFrontLeft = new WPI_TalonSRX(5); // 1 motor
-    public static final WPI_TalonSRX talonSrxMecWheelRearLeft = new WPI_TalonSRX(7); // 1 motor
-    public static final WPI_TalonSRX talonSrxMecWheelFrontRight = new WPI_TalonSRX(6); // 1 motor
-    public static final WPI_TalonSRX talonSrxMecWheelRearRight = new WPI_TalonSRX(8); // 1 motor
+    public static final WPI_TalonSRX talonSrxMecWheelFrontLeft = new WPI_TalonSRX(50); // 1 motor
+    public static final WPI_TalonSRX talonSrxMecWheelRearLeft = new WPI_TalonSRX(70); // 1 motor
+    public static final WPI_TalonSRX talonSrxMecWheelFrontRight = new WPI_TalonSRX(60); // 1 motor
+    public static final WPI_TalonSRX talonSrxMecWheelRearRight = new WPI_TalonSRX(80); // 1 motor
 
-    public static final WPI_TalonSRX talonSrxDiffWheelFrontLeft = new WPI_TalonSRX(7); // 1 motor
-    public static final WPI_TalonSRX talonSrxDiffWheelRearLeft = new WPI_TalonSRX(10); // 1 motor
-    public static final WPI_TalonSRX talonSrxDiffWheelFrontRight = new WPI_TalonSRX(5); // 1 motor
-    public static final WPI_TalonSRX talonSrxDiffWheelRearRight = new WPI_TalonSRX(6); // 1 motor
+    public static final WPI_TalonSRX talonSrxDiffWheelFrontLeft = new WPI_TalonSRX(12); // 1 motor
+    public static final WPI_TalonSRX talonSrxDiffWheelRearLeft = new WPI_TalonSRX(4); // 1 motor
+    public static final WPI_TalonSRX talonSrxDiffWheelFrontRight = new WPI_TalonSRX(14); // 1 motor
+    public static final WPI_TalonSRX talonSrxDiffWheelRearRight = new WPI_TalonSRX(13); // 1 motor
 
-    public static final WPI_TalonSRX talonSrxHatcher = new WPI_TalonSRX(9); // 1 motor
-    public static final WPI_TalonSRX talonSrxBaller = new WPI_TalonSRX(10); // 1 motor
-    public static final WPI_TalonSRX talonSrxLever = new WPI_TalonSRX(12);
+    public static final WPI_TalonSRX talonSrxHatcher = new WPI_TalonSRX(90); // 1 motor
+    public static final WPI_TalonSRX talonSrxBaller = new WPI_TalonSRX(100); // 1 motor
+    public static final WPI_TalonSRX talonSrxLever = new WPI_TalonSRX(120);
 
-    public static final WPI_TalonSRX talonSrxBackPulleyA = new WPI_TalonSRX(19); // 1 motor
-    public static final WPI_TalonSRX talonSrxBackPulleyB = new WPI_TalonSRX(14); // 1 motor
-    public static final WPI_TalonSRX talonSrxBackPulleyC = new WPI_TalonSRX(15); // 1 motor
+    public static final WPI_TalonSRX talonSrxBackPulleyA = new WPI_TalonSRX(190); // 1 motor
+    public static final WPI_TalonSRX talonSrxBackPulleyB = new WPI_TalonSRX(140); // 1 motor
+    public static final WPI_TalonSRX talonSrxBackPulleyC = new WPI_TalonSRX(150); // 1 motor
 
-    public static final WPI_TalonSRX talonSrxFrontPulleyA = new WPI_TalonSRX(1); // 1 motor
-    public static final WPI_TalonSRX talonSrxFrontPulleyB = new WPI_TalonSRX(2); // 1 motor
-    public static final WPI_TalonSRX talonSrxFrontPulleyC = new WPI_TalonSRX(13); // 1 motor
+    public static final WPI_TalonSRX talonSrxFrontPulleyA = new WPI_TalonSRX(10); // 1 motor
+    public static final WPI_TalonSRX talonSrxFrontPulleyB = new WPI_TalonSRX(20); // 1 motor
+    public static final WPI_TalonSRX talonSrxFrontPulleyC = new WPI_TalonSRX(130); // 1 motor
 
     // Drives
     public static MecanumDrive mecDrive = null;
@@ -129,10 +129,12 @@ public class Devices {
                                     talonSrxMecWheelRearRight);
         talonSrxDiffWheelFrontLeft.setInverted(true);
         talonSrxDiffWheelFrontRight.setInverted(true);
+        talonSrxDiffWheelRearLeft.setInverted(true);
+        talonSrxDiffWheelRearRight.setInverted(true);
         diffDrive = new DifferentialDrive(talonSrxDiffWheelFrontLeft,
                                           talonSrxDiffWheelFrontRight);
-        Devices.talonSrxDiffWheelRearLeft.follow(Devices.talonSrxDiffWheelFrontLeft);
-        Devices.talonSrxDiffWheelRearRight.follow(Devices.talonSrxDiffWheelFrontRight);
+        talonSrxDiffWheelRearLeft.follow(talonSrxDiffWheelFrontLeft);
+        talonSrxDiffWheelRearRight.follow(talonSrxDiffWheelFrontRight);
     }
 
     // Determines if the Talon SRX is connected
