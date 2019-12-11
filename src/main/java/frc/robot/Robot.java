@@ -234,7 +234,7 @@ public class Robot extends TimedRobot {
         Logger.action("Initializing Teleop...");
 
         // stopping PathWeaver
-        MecDriver.m_follower_notifier.stop();
+        Robot.robotMecDriver.follower_notifier.stop();
         Devices.talonSrxMecWheelFrontLeft.set(0);
         Devices.talonSrxMecWheelFrontRight.set(0);
 

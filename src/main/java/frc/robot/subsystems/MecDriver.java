@@ -35,7 +35,7 @@ public class MecDriver extends Subsystem {
     // The Talon connection state, to prevent watchdog warnings during testing
     private boolean m_talonsAreConnected = false;
 
-    //PathWeaver constants
+    //PathWeaver variables
     private static final int k_ticks_per_rev = 1024; //encoder ticks per wheel revolution
     private static final double k_wheel_diameter = 6; //diameter of wheels
     private static final double k_max_velocity = 10; //max velocity, ft/s
@@ -43,7 +43,7 @@ public class MecDriver extends Subsystem {
     private EncoderFollower m_left_follower;
     private EncoderFollower m_right_follower;
 
-    public static Notifier m_follower_notifier;
+    public Notifier follower_notifier;
     
     private static final String k_path_name_left = "/home/lvuser/deploy/paths/place cargo.left.pf1.csv"; //folder on roboRIO
     private static final String k_path_name_right = "/home/lvuser/deploy/paths/place cargo.right.pf1.csv"; //folder on roboRIO
@@ -227,6 +227,10 @@ public class MecDriver extends Subsystem {
     }
 
     public void autonomousInit() throws IOException { //TODO: error when "throws IOException" is not included
+        if (!m_talonsAreConnected) {
+            Devices.mecDrive.feed();
+            return;
+        }
 
         //PathWeaver v2019.3.06 = right and left swapped, will be fixed in v2019.3.1
         Trajectory left_trajectory = PathfinderFRC.getTrajectory(k_path_name_left + ".right");
@@ -243,14 +247,19 @@ public class MecDriver extends Subsystem {
         // Tune the PID values on the following line
         m_right_follower.configurePIDVA(1.0, 0.0, 0.0, 1 / k_max_velocity, 0);
     
-        m_follower_notifier = new Notifier(this::followPath);
-        m_follower_notifier.startPeriodic(left_trajectory.get(0).dt);
+        follower_notifier = new Notifier(this::followPath);
+        follower_notifier.startPeriodic(left_trajectory.get(0).dt);
 
     }
 
     private void followPath() {
+        if (!m_talonsAreConnected) {
+            Devices.mecDrive.feed();
+            return;
+        }
+
         if (m_left_follower.isFinished() || m_right_follower.isFinished()) {
-          m_follower_notifier.stop();
+          follower_notifier.stop();
         } 
         
         else {
