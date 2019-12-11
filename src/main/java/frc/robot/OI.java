@@ -51,7 +51,7 @@ public class OI {
         Devices.driveXboxBtnDpad.whileHeld(new MecDriveAlign());
         Devices.driveXboxBtnBumperLeft.whileHeld(new BallReset());
         Devices.driveXboxBtnBumperRight.whenPressed(new BallerToggleFlipperPosition());
-        Devices.driveXboxBtnA.whenPressed(new TankDrive());
+        Devices.driveXboxBtnA.whenPressed(new DiffDriveTank());
         // Test drive commands
         // Devices.driveXboxBtnA.whileHeld(new MecDriveSlowForward());
         // Devices.driveXboxBtnB.whileHeld(new MecDriveSlowTurnRight());
@@ -72,34 +72,6 @@ public class OI {
     // Active Control Stick //
     //----------------------//
 
-    // Determines the cartesian movement (forward/backward speed, side to side speed, rotation speed)
-    // from the active control stick position(s)
-    public static CartesianMovement getCartesianMovement(boolean isYflipped) {
-        ControlStick cStick = Brain.getControlStick();
-        switch (cStick) {
-            case JOYSTICK:
-                return getCartesianMovementFromJoystick(isYflipped);
-            case XBOX:
-                return getCartesianMovementFromThumbsticks(isYflipped);
-            default:
-                return null;
-        }
-    }
-
-    // Determines the polar movement (magnitude, angle, rotation)
-    // from the active control stick position(s)
-    public static PolarMovement getPolarMovement(boolean isYflipped) {
-        ControlStick cStick = Brain.getControlStick();
-        switch (cStick) {
-            case JOYSTICK:
-                return getPolarMovementFromJoystick(isYflipped);
-            case XBOX:
-                return getPolarMovementFromThumbsticks(isYflipped);
-            default:
-                return null;
-        }
-    }
-
     // Determines the tank movement (up or down for Left, up or down for Right)
     // from the active control stick position(s)
     public static TankMovement getTankMovement(boolean isYflipped) {
@@ -107,6 +79,16 @@ public class OI {
         switch (cStick) {
             case XBOX:
                 return getTankMovementFromThumbsticks(isYflipped);
+            default:
+                return null;
+        }
+    }
+
+    public static CartesianMovement getCartesianMovement(boolean isYflipped) {
+        ControlStick cStick = Brain.getControlStick();
+        switch (cStick) {
+            case XBOX:
+                return getCartesianMovementFromThumbsticks(isYflipped);
             default:
                 return null;
         }
@@ -187,46 +169,39 @@ public class OI {
         return triggerAxis;
     }
 
+    // Determines the tank movement (up or down of Left, up or down of Right)
+    // from the current xbox thumbstick positions
+    public static TankMovement getTankMovementFromThumbsticks(boolean isYflipped) {
+        ThumbStickPosition pos = getThumbstickPosition(isYflipped);
+        TankMovement move = new TankMovement(pos.yLeftPosition, pos.yRightPosition);
+        //Logger.info("Xbox Tankrtesian Movement: " + pos.yLeftPosition + ", " + pos.yRightPosition);
+       return move;
+    }
+
     // Determines the cartesian movement (forward/backward speed, side to side speed, rotation speed)
     // from the current xbox thumbstick positions
-    public static CartesianMovement getCartesianMovementFromThumbsticks(boolean isYleftFlipped) {
-        ThumbStickPosition pos = getThumbstickPosition(isYleftFlipped);
+    public static CartesianMovement getCartesianMovementFromThumbsticks(boolean isYflipped) {
+        ThumbStickPosition pos = getThumbstickPosition(isYflipped);
         CartesianMovement move = new CartesianMovement(pos.xLeftPosition, pos.yLeftPosition, pos.xRightPosition);
         // Logger.info("Xbox Cartesian Movement: " + pos.yLeftPosition + ", " + pos.xLeftPosition + ", " + pos.xRightPosition);
         return move;
     }
 
-    // Determines the polar movement (magnitude, angle, rotation)
-    // from the current xbox thumbstick positions
-    public static PolarMovement getPolarMovementFromThumbsticks(boolean isYleftFlipped) {
-        ThumbStickPosition pos = getThumbstickPosition(isYleftFlipped);
-        PolarMovement move = new PolarMovement(pos.yLeftPosition, pos.xLeftPosition, pos.xRightPosition);
-        return move;
-    }
-
-    // Determines the tank movement (up or down of Left, up or down of Right)
-    // from the current xbox thumbstick positions
-    public static TankMovement getTankMovementFromThumbsticks(boolean isYleftFlipped) {
-        ThumbStickPosition pos = getThumbstickPosition(isYleftFlipped);
-        TankMovement move = new TankMovement(pos.yLeftPosition, pos.yRightPosition);
-        // Logger.info("Xbox Cartesian Movement: " + pos.yLeftPosition + ", " + pos.xLeftPosition + ", " + pos.xRightPosition);
-        return move;
-    }
-
     // Gets the xbox thumbstick positions and applies user-determined orientation, deadzones, and sensitivity
-    private static ThumbStickPosition getThumbstickPosition(boolean isYleftFlipped) {
+    private static ThumbStickPosition getThumbstickPosition(boolean isYflipped) {
         double yLeft = Devices.driveXbox.getY(Hand.kLeft); // Forward & backward, flipped
         double xLeft = Devices.driveXbox.getX(Hand.kLeft); // Strafe
         double xRight = Devices.driveXbox.getX(Hand.kRight); // Rotate
         double yRight = Devices.driveXbox.getY(Hand.kRight);
-
+    
         // Forward/backward direction is reversed from what is intuitive, so flip it
         yLeft = -yLeft;
-         // TODO mayble flip yRight also?
+        yRight = -yRight;
 
         // User-determined flipping of forward/backward orientation
-        if (isYleftFlipped) {
+        if (isYflipped) {
             yLeft = -yLeft;
+            yRight = -yRight;
         }
 
         // Deadzones

@@ -3,16 +3,12 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.Devices;
-import frc.robot.commands.interactive.TankDrive;
+import frc.robot.commands.interactive.DiffDriveTank;
 import frc.robot.consoles.Logger;
 
 
-// Mecanum driver subsystem
-public class TankDriver extends Subsystem {
-
-    public enum DriveOrientation {
-        ROBOT, FIELD
-    }
+// Diff driver subsystem
+public class DiffDriver extends Subsystem {
 
     // The direction of forward/backward via the controller
     public boolean controlStickDirectionFlipped = false;
@@ -24,49 +20,47 @@ public class TankDriver extends Subsystem {
     // The Talon connection state, to prevent watchdog warnings during testing
     private boolean m_talonsAreConnected = false;
 
-    public TankDriver() {
-        Logger.setup("Constructing Subsystem: TankDriver...");
+    public DiffDriver() {
+        Logger.setup("Constructing Subsystem: DiffDriver...");
 
         // Configure wheel speed controllers
-        boolean talonFrontLeftIsConnected = Devices.isConnected(Devices.talonSrxTankWheelFrontLeft);
-        boolean talonRearLeftIsConnected = Devices.isConnected(Devices.talonSrxTankWheelRearLeft);
-        boolean talonFrontRightIsConnected = Devices.isConnected(Devices.talonSrxTankWheelFrontRight);
-        boolean talonRearRightIsConnected = Devices.isConnected(Devices.talonSrxTankWheelRearRight);
+        boolean talonFrontLeftIsConnected = Devices.isConnected(Devices.talonSrxDiffWheelFrontLeft);
+        boolean talonRearLeftIsConnected = Devices.isConnected(Devices.talonSrxDiffWheelRearLeft);
+        boolean talonFrontRightIsConnected = Devices.isConnected(Devices.talonSrxDiffWheelFrontRight);
+        boolean talonRearRightIsConnected = Devices.isConnected(Devices.talonSrxDiffWheelRearRight);
         m_talonsAreConnected = (talonFrontLeftIsConnected &&
                                 talonRearLeftIsConnected && 
                                 talonFrontRightIsConnected && 
                                 talonRearRightIsConnected);
 
         if (!m_talonsAreConnected) {
-            Logger.error("TankDriver talons not all connected! Disabling TankDriver...");
+            Logger.error("DiffDriver talons not all connected! Disabling DiffDriver...");
         }
         else {
-            Devices.talonSrxTankWheelFrontLeft.configOpenloopRamp(SECONDS_FROM_NEUTRAL_TO_FULL, TIMEOUT_MS);
-            Devices.talonSrxTankWheelRearLeft.configOpenloopRamp(SECONDS_FROM_NEUTRAL_TO_FULL, TIMEOUT_MS);
-            Devices.talonSrxTankWheelFrontRight.configOpenloopRamp(SECONDS_FROM_NEUTRAL_TO_FULL, TIMEOUT_MS);
-            Devices.talonSrxTankWheelRearRight.configOpenloopRamp(SECONDS_FROM_NEUTRAL_TO_FULL, TIMEOUT_MS);
+            Devices.talonSrxDiffWheelFrontLeft.configOpenloopRamp(SECONDS_FROM_NEUTRAL_TO_FULL, TIMEOUT_MS);
+            Devices.talonSrxDiffWheelRearLeft.configOpenloopRamp(SECONDS_FROM_NEUTRAL_TO_FULL, TIMEOUT_MS);
+            Devices.talonSrxDiffWheelFrontRight.configOpenloopRamp(SECONDS_FROM_NEUTRAL_TO_FULL, TIMEOUT_MS);
+            Devices.talonSrxDiffWheelRearRight.configOpenloopRamp(SECONDS_FROM_NEUTRAL_TO_FULL, TIMEOUT_MS);
         }
     }
 
     // Initialize Default Command
     @Override
     public void initDefaultCommand() {
-        Logger.setup("Initializing TankDriver DefaultCommand -> TankMovement...");
-
-        setDefaultCommand(new TankDrive());
+        setDefaultCommand(new DiffDriveTank());
     }
 
     // Flip the control direction of the joystick in Y (or Y Left for Xbox thumbsticks)
     public Boolean flipControlStickDirection() {
-        Logger.action("Toggling TankDriver control stick direction...");
+        Logger.action("Toggling DiffDriver control stick direction...");
 
         controlStickDirectionFlipped = !controlStickDirectionFlipped;
 
         if (controlStickDirectionFlipped) {
-            Logger.info("TankDriver control stick direction is now flipped.");
+            Logger.info("DiffDriver control stick direction is now flipped.");
         }
         else {
-            Logger.info("TankDriver control stick direction is now standard (not flipped).");
+            Logger.info("DiffDriver control stick direction is now standard (not flipped).");
         }
 
         return controlStickDirectionFlipped;
@@ -76,14 +70,14 @@ public class TankDriver extends Subsystem {
     // Stop all the drive motors
     public void stop() {
         if (!m_talonsAreConnected) {
-            Devices.tankDrive.feed();
+            Devices.diffDrive.feed();
             return;
         }
-
-        Devices.tankDrive.stopMotor();
+        
+        Devices.diffDrive.stopMotor();
     }
 
-    // // Drive straight at the given speed
+    // Drive straight at the given speed
     // public void driveStraight(double speed) {
     //     if (!m_talonsAreConnected) {
     //         Devices.mecDrive.feed();
@@ -93,19 +87,13 @@ public class TankDriver extends Subsystem {
     //     Devices.mecDrive.driveCartesian(0, speed, 0);
     // }
 
-    // Drive using the cartesian method, using the current control orientation
-    // public void driveCartesian(double ySpeed, double xSpeed, double zRotation) {
-    //     DriveOrientation orientation = Brain.getDriveOrientation();
-    //     driveCartesian(ySpeed, xSpeed, zRotation, orientation);
-    // }
-
-    // Drive using the tank method, using the given control orientation
+    // Drive using the tank method
     public void driveTank(double yLeft, double yRight) {
         if (!m_talonsAreConnected) {
-            Devices.tankDrive.feed();
+            Devices.diffDrive.feed();
             return;
         }
-        Devices.tankDrive.tankDrive(yLeft, yRight, false);
+        Devices.diffDrive.tankDrive(yLeft, yRight);
     }
 
     // Drive to align the Robot to a detected line at the given yaw

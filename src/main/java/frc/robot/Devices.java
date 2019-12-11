@@ -95,10 +95,10 @@ public class Devices {
     public static final WPI_TalonSRX talonSrxMecWheelFrontRight = new WPI_TalonSRX(6); // 1 motor
     public static final WPI_TalonSRX talonSrxMecWheelRearRight = new WPI_TalonSRX(8); // 1 motor
 
-    public static final WPI_TalonSRX talonSrxTankWheelFrontLeft = new WPI_TalonSRX(7); // 1 motor
-    public static final WPI_TalonSRX talonSrxTankWheelRearLeft = new WPI_TalonSRX(10); // 1 motor
-    public static final WPI_TalonSRX talonSrxTankWheelFrontRight = new WPI_TalonSRX(5); // 1 motor
-    public static final WPI_TalonSRX talonSrxTankWheelRearRight = new WPI_TalonSRX(6); // 1 motor
+    public static final WPI_TalonSRX talonSrxDiffWheelFrontLeft = new WPI_TalonSRX(7); // 1 motor
+    public static final WPI_TalonSRX talonSrxDiffWheelRearLeft = new WPI_TalonSRX(10); // 1 motor
+    public static final WPI_TalonSRX talonSrxDiffWheelFrontRight = new WPI_TalonSRX(5); // 1 motor
+    public static final WPI_TalonSRX talonSrxDiffWheelRearRight = new WPI_TalonSRX(6); // 1 motor
 
     public static final WPI_TalonSRX talonSrxHatcher = new WPI_TalonSRX(9); // 1 motor
     public static final WPI_TalonSRX talonSrxBaller = new WPI_TalonSRX(10); // 1 motor
@@ -114,7 +114,7 @@ public class Devices {
 
     // Drives
     public static MecanumDrive mecDrive = null;
-    public static DifferentialDrive tankDrive = null;
+    public static DifferentialDrive diffDrive = null;
 
     // Constructor
     public Devices() {
@@ -127,12 +127,12 @@ public class Devices {
                                     talonSrxMecWheelRearLeft,
                                     talonSrxMecWheelFrontRight,
                                     talonSrxMecWheelRearRight);
-        talonSrxTankWheelFrontLeft.setInverted(true);
-        talonSrxTankWheelFrontRight.setInverted(true);
-        tankDrive = new DifferentialDrive(talonSrxTankWheelFrontLeft,
-                                          talonSrxTankWheelFrontRight);
-        Devices.talonSrxTankWheelRearLeft.follow(Devices.talonSrxTankWheelFrontLeft);
-        Devices.talonSrxTankWheelRearRight.follow(Devices.talonSrxTankWheelFrontRight);
+        talonSrxDiffWheelFrontLeft.setInverted(true);
+        talonSrxDiffWheelFrontRight.setInverted(true);
+        diffDrive = new DifferentialDrive(talonSrxDiffWheelFrontLeft,
+                                          talonSrxDiffWheelFrontRight);
+        Devices.talonSrxDiffWheelRearLeft.follow(Devices.talonSrxDiffWheelFrontLeft);
+        Devices.talonSrxDiffWheelRearRight.follow(Devices.talonSrxDiffWheelFrontRight);
     }
 
     // Determines if the Talon SRX is connected

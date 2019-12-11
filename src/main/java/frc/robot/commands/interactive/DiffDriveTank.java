@@ -9,14 +9,14 @@ import frc.robot.helpers.TankMovement;
 
 
 
-// This command uses the joystick input to tank drive using the cartesian method
-public class TankDrive extends Command {
+// This command uses the xbox input to diff drive using the tank drive method
+public class DiffDriveTank extends Command {
 
-    public TankDrive() {
+    public DiffDriveTank() {
         Logger.setup("Constructing Command: TankDrive...");
 
         // Declare subsystem dependencies
-        requires(Robot.robotTankDriver);
+        requires(Robot.robotDiffDriver);
     }
 
     @Override
@@ -26,8 +26,8 @@ public class TankDrive extends Command {
 
     @Override
     protected void execute() {
-        TankMovement move = OI.getTankMovementFromThumbsticks(Robot.robotTankDriver.controlStickDirectionFlipped);
-        Robot.robotTankDriver.driveTank(move.yLeftPosition, move.yRightPosition);
+        TankMovement move = OI.getTankMovementFromThumbsticks(Robot.robotDiffDriver.controlStickDirectionFlipped);
+        Robot.robotDiffDriver.driveTank(move.yLeftPosition, move.yRightPosition);
     }
 
     // This command continues until interrupted

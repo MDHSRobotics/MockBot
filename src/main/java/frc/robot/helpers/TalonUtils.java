@@ -2,8 +2,7 @@
 package frc.robot.helpers;
 
 import java.lang.Math;
-// TODO change name to "TalonUtils"
-public class TalonConstants {
+public class TalonUtils {
     
     //number of miliseconds that the talon can stay at peak current
     public static final int PEAK_AMPERAGE_DURATION = 40;
@@ -48,7 +47,7 @@ public class TalonConstants {
     public static double translateAngleToTicks(double angle, double gearRatio){
         double rotationCountGS = angle / 360; // Amount of rotations on the gearbox shaft
         double rotationCountMS = rotationCountGS * gearRatio; // Amount of rotations on the motor shaft
-        double rotationTicks = rotationCountMS * TalonConstants.ENCODER_TPR; // Amount of ticks to rotate
+        double rotationTicks = rotationCountMS * TalonUtils.ENCODER_TPR; // Amount of ticks to rotate
         return rotationTicks;
     }
 
@@ -57,7 +56,7 @@ public class TalonConstants {
         double spoolCircumerence = Math.PI * spoolDiameter;
         double rotationCountGS = distance / spoolCircumerence; // Amount of rotations on the gearbox shaft
         double rotationCountMS = rotationCountGS * gearRatio; // Amount of rotations on the motor shaft
-        double rotationTicks = rotationCountMS * TalonConstants.ENCODER_TPR; // Amount of ticks to rotate
+        double rotationTicks = rotationCountMS * TalonUtils.ENCODER_TPR; // Amount of ticks to rotate
         return rotationTicks;
     }
 

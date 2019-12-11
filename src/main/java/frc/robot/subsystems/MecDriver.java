@@ -155,7 +155,6 @@ public class MecDriver extends Subsystem {
             return;
         }
 
-        // TODO: Test that this does what the method description says it does
         Devices.mecDrive.drivePolar(magnitude, -90, zRotation);
     }
 
@@ -166,11 +165,9 @@ public class MecDriver extends Subsystem {
             return;
         }
 
-        // TODO: Test that this does what the method description says it does
         Devices.mecDrive.drivePolar(magnitude, 90, zRotation);
     }
 
-    // Drive using the cartesian method, using the current control orientation
     public void driveCartesian(double ySpeed, double xSpeed, double zRotation) {
         DriveOrientation orientation = Brain.getDriveOrientation();
         driveCartesian(ySpeed, xSpeed, zRotation, orientation);

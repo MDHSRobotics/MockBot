@@ -50,7 +50,7 @@ public class Robot extends TimedRobot {
     public static GameMode robotGameMode = GameMode.DELIVERY;
     // Delivery Mode is used to control vision processing actions, as well as xbox controller activation
     // TODO: We need to implement ways to set the Robot DeliveryMode, either manually, or automatically, or a combination
-    // TODO: Determine the best default. What's the first action the Robot will take during Sandstorm?
+    // TODO: Determine the best default.
     public static DeliveryMode robotDeliveryMode = DeliveryMode.GET_HATCH;
     // Climb Mode tells the climb commands which system needs to be activated next
     public static ClimbMode robotClimbMode = ClimbMode.HAB2;
@@ -61,7 +61,7 @@ public class Robot extends TimedRobot {
 
     // Subsystems
     public static MecDriver robotMecDriver;
-    public static TankDriver robotTankDriver;
+    public static DiffDriver robotDiffDriver;
 
     public static Hatcher robotHatcher;
     public static Baller robotBaller;
@@ -111,7 +111,7 @@ public class Robot extends TimedRobot {
 
         // Instantiate Subsystems FIFTH
         robotMecDriver = new MecDriver();
-        robotTankDriver = new TankDriver();
+        robotDiffDriver = new DiffDriver();
         
         robotHatcher = new Hatcher();
         robotBaller = new Baller();

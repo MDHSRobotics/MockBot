@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 
 import frc.robot.commands.reactive.BallHold;
 import frc.robot.consoles.Logger;
-import frc.robot.helpers.TalonConstants;
+import frc.robot.helpers.TalonUtils;
 import frc.robot.Brain;
 import frc.robot.Devices;
 
@@ -40,34 +40,34 @@ public class Baller extends Subsystem {
         else {
             Devices.talonSrxBaller.configFactoryDefault();
 
-            Devices.talonSrxBaller.configPeakCurrentDuration(TalonConstants.PEAK_AMPERAGE_DURATION, TalonConstants.TIMEOUT_MS);
-            Devices.talonSrxBaller.configPeakCurrentLimit(TalonConstants.PEAK_AMPERAGE, TalonConstants.TIMEOUT_MS);
-            Devices.talonSrxBaller.configContinuousCurrentLimit(TalonConstants.CONTINUOUS_AMPERAGE_LIMIT, TalonConstants.TIMEOUT_MS);
+            Devices.talonSrxBaller.configPeakCurrentDuration(TalonUtils.PEAK_AMPERAGE_DURATION, TalonUtils.TIMEOUT_MS);
+            Devices.talonSrxBaller.configPeakCurrentLimit(TalonUtils.PEAK_AMPERAGE, TalonUtils.TIMEOUT_MS);
+            Devices.talonSrxBaller.configContinuousCurrentLimit(TalonUtils.CONTINUOUS_AMPERAGE_LIMIT, TalonUtils.TIMEOUT_MS);
 
             Devices.talonSrxBaller.configNominalOutputForward(0);
             Devices.talonSrxBaller.configNominalOutputReverse(0);
             Devices.talonSrxBaller.configPeakOutputForward(0.4);
             Devices.talonSrxBaller.configPeakOutputReverse(-0.3);
 
-            Devices.talonSrxBaller.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, TalonConstants.PID_LOOP_PRIMARY, TalonConstants.TIMEOUT_MS);
+            Devices.talonSrxBaller.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, TalonUtils.PID_LOOP_PRIMARY, TalonUtils.TIMEOUT_MS);
             Devices.talonSrxBaller.setSensorPhase(SENSOR_PHASE);
             Devices.talonSrxBaller.setInverted(MOTOR_INVERT);
-            Devices.talonSrxBaller.configAllowableClosedloopError(0, TalonConstants.PID_LOOP_PRIMARY, TalonConstants.TIMEOUT_MS);
+            Devices.talonSrxBaller.configAllowableClosedloopError(0, TalonUtils.PID_LOOP_PRIMARY, TalonUtils.TIMEOUT_MS);
 
-            Devices.talonSrxBaller.config_kF(TalonConstants.PID_LOOP_PRIMARY, 0.0, TalonConstants.TIMEOUT_MS);
-            Devices.talonSrxBaller.config_kP(TalonConstants.PID_LOOP_PRIMARY, 0.2, TalonConstants.TIMEOUT_MS); //0.0125
-            Devices.talonSrxBaller.config_kI(TalonConstants.PID_LOOP_PRIMARY, 0.0, TalonConstants.TIMEOUT_MS);
-            Devices.talonSrxBaller.config_kD(TalonConstants.PID_LOOP_PRIMARY, 0.1, TalonConstants.TIMEOUT_MS);
+            Devices.talonSrxBaller.config_kF(TalonUtils.PID_LOOP_PRIMARY, 0.0, TalonUtils.TIMEOUT_MS);
+            Devices.talonSrxBaller.config_kP(TalonUtils.PID_LOOP_PRIMARY, 0.2, TalonUtils.TIMEOUT_MS); //0.0125
+            Devices.talonSrxBaller.config_kI(TalonUtils.PID_LOOP_PRIMARY, 0.0, TalonUtils.TIMEOUT_MS);
+            Devices.talonSrxBaller.config_kD(TalonUtils.PID_LOOP_PRIMARY, 0.1, TalonUtils.TIMEOUT_MS);
 
             // Reset Encoder Position 
-            Devices.talonSrxBaller.setSelectedSensorPosition(0, TalonConstants.PID_SLOT_0, TalonConstants.TIMEOUT_MS);
+            Devices.talonSrxBaller.setSelectedSensorPosition(0, TalonUtils.PID_SLOT_0, TalonUtils.TIMEOUT_MS);
             SensorCollection sensorCol = Devices.talonSrxBaller.getSensorCollection();
             int absolutePosition = sensorCol.getPulseWidthPosition();
             absolutePosition &= 0xFFF;
             if (SENSOR_PHASE) absolutePosition *= -1;
             if (MOTOR_INVERT) absolutePosition *= -1;
             // Set the quadrature (relative) sensor to match absolute
-            Devices.talonSrxBaller.setSelectedSensorPosition(absolutePosition, TalonConstants.PID_LOOP_PRIMARY, TalonConstants.TIMEOUT_MS);
+            Devices.talonSrxBaller.setSelectedSensorPosition(absolutePosition, TalonUtils.PID_LOOP_PRIMARY, TalonUtils.TIMEOUT_MS);
             
             Devices.talonSrxBaller.configMotionAcceleration(5000, 20);
             Devices.talonSrxBaller.configMotionCruiseVelocity(10000, 20);
@@ -109,7 +109,7 @@ public class Baller extends Subsystem {
     // Move the Baller flipper to toss the ball
     public void tossBall() {
         double angle = Brain.getBallTossAngle();
-        double ticks = TalonConstants.translateAngleToTicks(angle, GEAR_RATIO);
+        double ticks = TalonUtils.translateAngleToTicks(angle, GEAR_RATIO);
         Logger.info("Baller -> Set Position to TOSS: " + angle + " angle, " + ticks + " ticks");
 
         if (!m_talonsAreConnected) return;
