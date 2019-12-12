@@ -14,7 +14,7 @@ public class FrontPulleyStop extends Command {
         Logger.setup("Constructing Command: FrontPulleyStop...");
 
         // Declare subsystem dependencies
-        requires(Robot.robotFrontPulley);
+        //requires(Robot.robotFrontPulley);
     }
 
     @Override
@@ -24,7 +24,7 @@ public class FrontPulleyStop extends Command {
 
     @Override
     protected void execute() {
-        Robot.robotFrontPulley.stop();
+        //Robot.robotFrontPulley.stop();
     }
 
     // This command continues until interrupted

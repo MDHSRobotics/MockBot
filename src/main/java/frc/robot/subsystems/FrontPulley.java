@@ -21,20 +21,20 @@ public class FrontPulley extends Subsystem {
     public FrontPulley() {
         Logger.setup("Constructing Subsystem: FrontPulley...");
 
-        boolean talonAIsConnected = Devices.isConnected(Devices.talonSrxFrontPulleyA);
-        boolean talonBIsConnected = Devices.isConnected(Devices.talonSrxFrontPulleyB);
-        boolean talonCIsConnected = Devices.isConnected(Devices.talonSrxFrontPulleyC);
-        m_talonsAreConnected = (talonAIsConnected &&
-                                talonBIsConnected && 
-                                talonCIsConnected);
+       // boolean talonAIsConnected = Devices.isConnected(Devices.talonSrxFrontPulleyA);
+       // boolean talonBIsConnected = Devices.isConnected(Devices.talonSrxFrontPulleyB);
+       // boolean talonCIsConnected = Devices.isConnected(Devices.talonSrxFrontPulleyC);
+       // m_talonsAreConnected = (talonAIsConnected &&
+      //                          talonBIsConnected && 
+      //                          talonCIsConnected);
 
         if (!m_talonsAreConnected) {
             Logger.error("Pulley talons not all connected! Disabling FrontPulley...");
         }
         else {
-            Devices.talonSrxFrontPulleyA.configOpenloopRamp(SECONDS_FROM_NEUTRAL_TO_FULL, TIMEOUT_MS);
-            Devices.talonSrxFrontPulleyB.configOpenloopRamp(SECONDS_FROM_NEUTRAL_TO_FULL, TIMEOUT_MS);
-            Devices.talonSrxFrontPulleyC.configOpenloopRamp(SECONDS_FROM_NEUTRAL_TO_FULL, TIMEOUT_MS);
+           // Devices.talonSrxFrontPulleyA.configOpenloopRamp(SECONDS_FROM_NEUTRAL_TO_FULL, TIMEOUT_MS);
+            //Devices.talonSrxFrontPulleyB.configOpenloopRamp(SECONDS_FROM_NEUTRAL_TO_FULL, TIMEOUT_MS);
+           // Devices.talonSrxFrontPulleyC.configOpenloopRamp(SECONDS_FROM_NEUTRAL_TO_FULL, TIMEOUT_MS);
         }
     }
 
@@ -48,17 +48,17 @@ public class FrontPulley extends Subsystem {
     // Stop the Pulley motor
     public void stop() {
         if (!m_talonsAreConnected) return;
-        Devices.talonSrxFrontPulleyA.stopMotor();
-        Devices.talonSrxFrontPulleyB.stopMotor();
-        Devices.talonSrxFrontPulleyC.stopMotor();
+     //   Devices.talonSrxFrontPulleyA.stopMotor();
+     //   Devices.talonSrxFrontPulleyB.stopMotor();
+       // Devices.talonSrxFrontPulleyC.stopMotor();
     }
 
     // Set the Pulley motor speed explicitly
     public void setSpeed(double speed) {
         if (!m_talonsAreConnected) return;
-        Devices.talonSrxFrontPulleyA.set(speed);
-        Devices.talonSrxFrontPulleyB.set(speed);
-        Devices.talonSrxFrontPulleyC.set(speed);
+        //Devices.talonSrxFrontPulleyA.set(speed);
+        //Devices.talonSrxFrontPulleyB.set(speed);
+        //Devices.talonSrxFrontPulleyC.set(speed);
     }
 
     //---------//
@@ -67,7 +67,7 @@ public class FrontPulley extends Subsystem {
 
     public void testMotors() {
         if (!m_talonsAreConnected) return;
-        Devices.talonSrxFrontPulleyA.set(0.2);
+        //Devices.talonSrxFrontPulleyA.set(0.2);
     }
 
 }

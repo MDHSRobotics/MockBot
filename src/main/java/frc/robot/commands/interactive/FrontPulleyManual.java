@@ -14,7 +14,7 @@ public class FrontPulleyManual extends Command {
     public FrontPulleyManual() {
         Logger.setup("Constructing Command: FrontPulleyManual...");
 
-        requires(Robot.robotFrontPulley);
+        //requires(Robot.robotFrontPulley);
     }
 
     @Override
@@ -25,7 +25,7 @@ public class FrontPulleyManual extends Command {
     @Override
     protected void execute() {
         double speed = OI.getFrontPulleyLiftSpeed();
-        Robot.robotFrontPulley.setSpeed(speed);
+        //Robot.robotFrontPulley.setSpeed(speed);
     }
 
     // This command continues until interrupted
