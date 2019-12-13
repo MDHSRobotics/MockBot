@@ -51,4 +51,13 @@ public class TestLifter extends Subsystem {
         Devices.talonSrxTestLifter.set(-0.2);
     }
 
+    public boolean isUpLimitSwitchPushed() {
+        boolean isPushed = Devices.upLimitSwitch.get();
+        return isPushed;
+    }
+
+    public boolean isDownLimitSwitchPushed() {
+        boolean isPushed = Devices.downLimitSwitch.get();
+        return isPushed;
+    }
 }

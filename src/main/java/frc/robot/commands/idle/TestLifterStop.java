@@ -22,14 +22,12 @@ public class TestLifterStop extends Command {
 
     @Override
     protected void execute(){
-        // Robot.robotTestLifter.robotInit();
-        // Robot.robotTestLifter.checkLimitSwitch();
         Robot.robotTestLifter.stop();
     }
 
     @Override
     protected boolean isFinished(){
-        return false;
+        return true;
     }
     
     @Override

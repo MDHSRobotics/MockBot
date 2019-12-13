@@ -5,6 +5,7 @@ import edu.wpi.first.wpilibj.GenericHID.Hand;
 
 import frc.robot.commands.instant.*;
 import frc.robot.commands.interactive.*;
+import frc.robot.commands.reactive.TestLifterOscilate;
 import frc.robot.consoles.Logger;
 import frc.robot.helpers.*;
 import frc.robot.Brain;
@@ -58,6 +59,7 @@ public class OI {
         // Devices.driveXboxBtnB.whileHeld(new MecDriveSlowTurnRight());
         // Devices.driveXboxBtnX.whileHeld(new MecDriveSlowOrbitInwardClockwise());
         // Devices.driveXboxBtnY.whileHeld(new MecDriveSlowOrbitOutwardClockwise());
+        Devices.driveXboxBtnY.whileHeld(new TestLifterOscilate());
     }
 
     // Climb XBox Buttons
