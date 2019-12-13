@@ -5,12 +5,12 @@ import edu.wpi.first.wpilibj.GenericHID.Hand;
 
 import frc.robot.commands.instant.*;
 import frc.robot.commands.interactive.*;
-import frc.robot.commands.reactive.MecDriveTest;
 import frc.robot.consoles.Logger;
 import frc.robot.helpers.*;
 import frc.robot.Brain;
 
 import frc.robot.commands.test.MecDriveBoxGroup;
+import frc.robot.commands.test.MecDriveStraightDistance;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -53,7 +53,7 @@ public class OI {
         Devices.driveXboxBtnDpad.whileHeld(new MecDriveAlign());
         // Devices.driveXboxBtnA.whenPressed(new LiftPulleyRaise());
         // Devices.driveXboxBtnB.whenPressed(new LiftPulleyLower());
-        Devices.driveXboxBtnX.whenPressed(new MecDriveTest());
+        Devices.driveXboxBtnX.whenPressed(new MecDriveBoxGroup());
         // Test drive commands
         // Devices.driveXboxBtnA.whileHeld(new MecDriveSlowForward());
         // Devices.driveXboxBtnB.whileHeld(new MecDriveSlowTurnRight());
