@@ -1,6 +1,9 @@
 
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.LimitSwitchNormal;
+import com.ctre.phoenix.motorcontrol.LimitSwitchSource;
+
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 import frc.robot.Devices;
@@ -25,6 +28,10 @@ public class TestLifter extends Subsystem {
         m_talonsAreConnected = Devices.isConnected(Devices.talonSrxTestLifter);
         if (!m_talonsAreConnected) {
             Logger.error("TestLifter talons not all connected! Disabling TestLifter...");
+        }
+        else { 
+            Devices.talonSrxTestLifter.configForwardLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen);
+            Devices.talonSrxTestLifter.configReverseLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen);
         }
         goingUp = startsGoingUp;
     }
@@ -52,12 +59,12 @@ public class TestLifter extends Subsystem {
     }
 
     public boolean isUpLimitSwitchPushed() {
-        boolean isPushed = Devices.upLimitSwitch.get();
+        boolean isPushed = Devices.talonSrxTestLifter.getSensorCollection().isFwdLimitSwitchClosed();
         return isPushed;
     }
 
     public boolean isDownLimitSwitchPushed() {
-        boolean isPushed = Devices.downLimitSwitch.get();
+        boolean isPushed = Devices.talonSrxTestLifter.getSensorCollection().isRevLimitSwitchClosed();
         return isPushed;
     }
 }

@@ -85,11 +85,7 @@ public class Devices {
 
     // Gyros
     public static final AHRS gyro = new AHRS(SPI.Port.kMXP);
-
-    // Digital Inputs
-    public static final DigitalInput upLimitSwitch = new DigitalInput(1);
-    public static final DigitalInput downLimitSwitch = new DigitalInput(2);
-
+    
     // Relays
     public static final Relay lighterRelay = new Relay(1);
 
